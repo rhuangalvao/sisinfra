@@ -7,10 +7,6 @@ use Illuminate\Http\Request;
 
 class HostController extends Controller
 {
-    public function index(){
-        $host = Host::all();
-        return view('host.index',compact('host'));
-    }
     public function create(){
         return view('host.create');
     }

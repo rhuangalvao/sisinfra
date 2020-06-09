@@ -22,7 +22,7 @@ class CreateServicesTable extends Migration
             $table->integer('service_group_id');
             $table->timestamps();
 
-            $table->foreign('service_group_id')->references('id')->on('service_groups');
+//            $table->foreign('service_group_id')->references('id')->on('service_groups');
         });
     }
 

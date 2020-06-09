@@ -20,7 +20,7 @@ class CreateHostDnsTable extends Migration
             $table->integer('version');
             $table->timestamps();
 
-            $table->foreign('host_id')->references('id')->on('hosts');
+//            $table->foreign('host_id')->references('id')->on('hosts');
         });
     }
 

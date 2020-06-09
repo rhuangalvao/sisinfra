@@ -23,11 +23,11 @@ class CreateServiceInstancesTable extends Migration
             $table->integer('password_id');
             $table->timestamps();
 
-            $table->foreign('host_id')->references('id')->on('hosts');
-            $table->foreign('service_id')->references('id')->on('services');
-            $table->foreign('host_ip_id')->references('id')->on('host_ips');
-            $table->foreign('password_id')->references('id')->on('passwords');
-            $table->foreign('host_dns_id')->references('id')->on('host_dns');
+//            $table->foreign('host_id')->references('id')->on('hosts');
+//            $table->foreign('service_id')->references('id')->on('services');
+//            $table->foreign('host_ip_id')->references('id')->on('host_ips');
+//            $table->foreign('password_id')->references('id')->on('passwords');
+//            $table->foreign('host_dns_id')->references('id')->on('host_dns');
 
         });
     }

@@ -26,9 +26,9 @@ class CreateHostsTable extends Migration
             $table->String('chassis_id');
             $table->timestamps();
 
-            $table->foreign('status_id')->references('id')->on('host_statuses');
-            $table->foreign('host_type_id')->references('id')->on('host_types');
-            $table->foreign('os_id')->references('id')->on('operating_systems');
+//            $table->foreign('status_id')->references('id')->on('host_statuses');
+//            $table->foreign('host_type_id')->references('id')->on('host_types');
+//            $table->foreign('os_id')->references('id')->on('operating_systems');
         });
     }
 

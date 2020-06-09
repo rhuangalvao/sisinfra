@@ -23,7 +23,7 @@ class CreateHostIpsTable extends Migration
             $table->String('mac_address');
             $table->timestamps();
 
-            $table->foreign('host_id')->references('id')->on('hosts');
+//            $table->foreign('host_id')->references('id')->on('hosts');
         });
     }
 

@@ -20,7 +20,7 @@ class CreateServiceInstanceParamsTable extends Migration
             $table->String('param_value');
             $table->timestamps();
 
-            $table->foreign('service_instance_id')->references('id')->on('service_instances');
+//            $table->foreign('service_instance_id')->references('id')->on('service_instances');
         });
     }
 

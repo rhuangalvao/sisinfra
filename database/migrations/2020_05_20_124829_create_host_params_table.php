@@ -20,7 +20,7 @@ class CreateHostParamsTable extends Migration
             $table->String('param_value');
             $table->timestamps();
 
-            $table->foreign('host_id')->references('id')->on('hosts');
+//            $table->foreign('host_id')->references('id')->on('hosts');
         });
     }
 
