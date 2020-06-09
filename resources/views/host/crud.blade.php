@@ -12,7 +12,7 @@
     <div class="container offset-sm-2">
         <a style="margin: 19px;" href="{{ route('host.create')}}" class="btn btn-primary">Novo Host</a>
     </div>
-    <table class="table table-striped table-active table-sm table-bordered col-sm-8 offset-sm-2">
+    <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
             <td>ID Operating System</td>

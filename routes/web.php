@@ -20,7 +20,15 @@ Route::group(['prefix'=>'host_dns'], function (){
     Route::get('{id}/edit',['as'=>'host_dns.edit','uses'=> 'HostDnsController@edit']);
     Route::patch('{id}/update',['as'=>'host_dns.update','uses'=>'HostDnsController@update']);
 });
-
+Route::group(['prefix'=>'host_ip'], function (){
+    Route::get('',['as'=>'host_ip','uses'=>'HostIpController@index']);
+    Route::get('crud',['as'=>'host_ip.crud','uses'=>'HostIpController@crud']);
+    Route::get('create',['as'=>'host_ip.create','uses'=> 'HostIpController@create']);
+    Route::post('store',['as'=>'host_ip.store','uses'=> 'HostIpController@store']);
+    Route::delete('{id}/destroy',['as'=>'host_ip.destroy','uses'=> 'HostIpController@destroy']);
+    Route::get('{id}/edit',['as'=>'host_ip.edit','uses'=> 'HostIpController@edit']);
+    Route::patch('{id}/update',['as'=>'host_ip.update','uses'=>'HostIpController@update']);
+});
 
 Route::get('/', function () {
     return view('welcome');

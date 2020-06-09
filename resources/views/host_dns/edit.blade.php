@@ -23,7 +23,7 @@
             @endif
             <div class ="card">
                 <div class="card-body">
-                    <form method="post" action="{{ route('host_dns.update', $host->id) }}">
+                    <form method="post" action="{{ route('host_dns.update', $host_dns->id) }}">
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
