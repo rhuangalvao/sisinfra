@@ -219,13 +219,18 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
-            'text'        => 'hostdns',
+            'text'        => 'host_dns',
             'url'         => 'host_dns/crud',
             'icon'        => 'far fa-fw fa-file',
         ],
         [
-            'text'        => 'hostip',
+            'text'        => 'host_ip',
             'url'         => 'host_ip/crud',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
+            'text'        => 'operating_system',
+            'url'         => 'operating_system/crud',
             'icon'        => 'far fa-fw fa-file',
         ],
         ['header' => 'account_settings'],
