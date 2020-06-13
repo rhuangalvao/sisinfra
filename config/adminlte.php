@@ -233,6 +233,11 @@ return [
             'url'         => 'operating_system/crud',
             'icon'        => 'far fa-fw fa-file',
         ],
+        [
+            'text'        => 'ocs_map_os',
+            'url'         => 'ocs_map_os/crud',
+            'icon'        => 'far fa-fw fa-file',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',

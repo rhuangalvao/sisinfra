@@ -28,7 +28,7 @@
                         @csrf
                         <div class="form-group">
                             <label for="operating_system_id">Operating_system_id:</label>
-                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" name="name" value="{{ $ocs_map_os->operating_system_id }}" />
+                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" name="operating_system_id" value="{{ $ocs_map_os->operating_system_id }}" />
                         </div>
                         <div class="form-group">
                             <label for="ocs_os_name_match">Ocs_os_name_match: </label>

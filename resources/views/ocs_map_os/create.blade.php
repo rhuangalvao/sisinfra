@@ -5,7 +5,7 @@
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <head>
-    <title>Operating_system</title>
+    <title>Ocs_map_os</title>
 </head>
 @section('content')
     <div class="row">
