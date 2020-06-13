@@ -21,7 +21,7 @@
         </tr>
         </thead>
         <tbody>
-        @foreach($operating_system as $operating_system)
+        @foreach($ocs_map_os as $ocs_map_os)
             <tr>
                 <td>{{$ocs_map_os->operating_system_id}}</td>
                 <td>{{$ocs_map_os->ocs_os_name_match}}</td>
