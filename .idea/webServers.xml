@@ -3,11 +3,17 @@
   <component name="WebServers">
     <option name="servers">
       <webServer id="d439bd43-3a3e-46ad-888b-5fdbadb19e48" name="teste" url="http://cpdv0203.apps.uepg.br/">
-        <fileTransfer host="cpdv0204.apps.uepg.br" port="22" accessType="SFTP">
+        <fileTransfer accessType="SFTP" host="cpdv0204.apps.uepg.br" port="22" sshConfigId="7b87b386-6702-4041-8856-d799c362b9b0" sshConfig="teste">
           <advancedOptions>
             <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
           </advancedOptions>
-          <option name="port" value="22" />
+        </fileTransfer>
+      </webServer>
+      <webServer id="ce1be8c2-d39d-41e7-878b-6bf765701d4b" name="teste2" url="http://cpdv0203.apps.uepg.br/">
+        <fileTransfer accessType="SFTP" host="cpdv0204.apps.uepg.br" port="22" sshConfigId="7b87b386-6702-4041-8856-d799c362b9b0" sshConfig="teste">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
         </fileTransfer>
       </webServer>
     </option>

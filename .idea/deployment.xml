@@ -12,6 +12,16 @@
           </excludedPaths>
         </serverdata>
       </paths>
+      <paths name="teste2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/sistemas/niver" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
     </serverData>
     <option name="myAutoUpload" value="ON_EXPLICIT_SAVE" />
   </component>

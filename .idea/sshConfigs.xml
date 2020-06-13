@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="SshConfigs">
+    <configs>
+      <sshConfig authType="PASSWORD" host="cpdv0204.apps.uepg.br" id="7b87b386-6702-4041-8856-d799c362b9b0" port="22" customName="teste" nameFormat="CUSTOM" username="sis-niver-stage" />
+    </configs>
+  </component>
+</project>

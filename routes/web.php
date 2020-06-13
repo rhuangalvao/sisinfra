@@ -38,6 +38,15 @@ Route::group(['prefix'=>'operating_system'], function (){
     Route::get('{id}/edit',['as'=>'operating_system.edit','uses'=> 'OperatingSystemController@edit']);
     Route::patch('{id}/update',['as'=>'operating_system.update','uses'=>'OperatingSystemController@update']);
 });
+Route::group(['prefix'=>'ocs_map_os'], function (){
+    Route::get('',['as'=>'ocs_map_os','uses'=>'OcsMapOsController@index']);
+    Route::get('crud',['as'=>'ocs_map_os.crud','uses'=>'OcsMapOsController@crud']);
+    Route::get('create',['as'=>'ocs_map_os.create','uses'=> 'OcsMapOsController@create']);
+    Route::post('store',['as'=>'ocs_map_os.store','uses'=> 'OcsMapOsController@store']);
+    Route::delete('{id}/destroy',['as'=>'ocs_map_os.destroy','uses'=> 'OcsMapOsController@destroy']);
+    Route::get('{id}/edit',['as'=>'ocs_map_os.edit','uses'=> 'OcsMapOsController@edit']);
+    Route::patch('{id}/update',['as'=>'ocs_map_os.update','uses'=>'OcsMapOsController@update']);
+});
 
 Route::get('/', function () {
     return view('welcome');
