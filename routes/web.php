@@ -47,6 +47,15 @@ Route::group(['prefix'=>'host_status'], function (){
     Route::get('{id}/edit',['as'=>'host_status.edit','uses'=> 'HostStatusController@edit']);
     Route::patch('{id}/update',['as'=>'host_status.update','uses'=>'HostStatusController@update']);
 });
+Route::group(['prefix'=>'host_type'], function (){
+    Route::get('',['as'=>'host_type','uses'=>'HostTypeController@index']);
+    Route::get('crud',['as'=>'host_type.crud','uses'=>'HostTypeController@crud']);
+    Route::get('create',['as'=>'host_type.create','uses'=> 'HostTypeController@create']);
+    Route::post('store',['as'=>'host_type.store','uses'=> 'HostTypeController@store']);
+    Route::delete('{id}/destroy',['as'=>'host_type.destroy','uses'=> 'HostTypeController@destroy']);
+    Route::get('{id}/edit',['as'=>'host_type.edit','uses'=> 'HostTypeController@edit']);
+    Route::patch('{id}/update',['as'=>'host_type.update','uses'=>'HostTypeController@update']);
+});
 Route::group(['prefix'=>'operating_system'], function (){
     Route::get('',['as'=>'operating_system','uses'=>'OperatingSystemController@index']);
     Route::get('crud',['as'=>'operating_system.crud','uses'=>'OperatingSystemController@crud']);

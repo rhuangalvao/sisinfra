@@ -239,6 +239,11 @@ return [
             'icon'        => 'far fa-fw fa-file',
         ],
         [
+            'text'        => 'host_type',
+            'url'         => 'host_type/crud',
+            'icon'        => 'far fa-fw fa-file',
+        ],
+        [
             'text'        => 'operating_system',
             'url'         => 'operating_system/crud',
             'icon'        => 'far fa-fw fa-file',
