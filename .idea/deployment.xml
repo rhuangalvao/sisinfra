@@ -15,11 +15,8 @@
       <paths name="teste2">
         <serverdata>
           <mappings>
-            <mapping deploy="/sistemas/niver" local="$PROJECT_DIR$" web="/" />
+            <mapping local="$PROJECT_DIR$" web="/" />
           </mappings>
-          <excludedPaths>
-            <excludedPath local="true" path="$PROJECT_DIR$/vendor" />
-          </excludedPaths>
         </serverdata>
       </paths>
     </serverData>
