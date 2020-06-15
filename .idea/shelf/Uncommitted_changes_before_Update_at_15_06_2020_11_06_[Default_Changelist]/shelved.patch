@@ -1,0 +1,218 @@
+Index: routes/web.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nuse Illuminate\\Support\\Facades\\Route;\r\n\r\nRoute::group(['prefix'=>'host'], function (){\r\n    Route::get('',['as'=>'host','uses'=>'HostController@index']);\r\n    Route::get('crud',['as'=>'host.crud','uses'=>'HostController@crud']);\r\n    Route::get('create',['as'=>'host.create','uses'=> 'HostController@create']);\r\n    Route::post('store',['as'=>'host.store','uses'=> 'HostController@store']);\r\n    Route::delete('{id}/destroy',['as'=>'host.destroy','uses'=> 'HostController@destroy']);\r\n    Route::get('{id}/edit',['as'=>'host.edit','uses'=> 'HostController@edit']);\r\n    Route::patch('{id}/update',['as'=>'host.update','uses'=>'HostController@update']);\r\n});\r\nRoute::group(['prefix'=>'host_dns'], function (){\r\n    Route::get('',['as'=>'host_dns','uses'=>'HostDnsController@index']);\r\n    Route::get('crud',['as'=>'host_dns.crud','uses'=>'HostDnsController@crud']);\r\n    Route::get('create',['as'=>'host_dns.create','uses'=> 'HostDnsController@create']);\r\n    Route::post('store',['as'=>'host_dns.store','uses'=> 'HostDnsController@store']);\r\n    Route::delete('{id}/destroy',['as'=>'host_dns.destroy','uses'=> 'HostDnsController@destroy']);\r\n    Route::get('{id}/edit',['as'=>'host_dns.edit','uses'=> 'HostDnsController@edit']);\r\n    Route::patch('{id}/update',['as'=>'host_dns.update','uses'=>'HostDnsController@update']);\r\n});\r\nRoute::group(['prefix'=>'host_ip'], function (){\r\n    Route::get('',['as'=>'host_ip','uses'=>'HostIpController@index']);\r\n    Route::get('crud',['as'=>'host_ip.crud','uses'=>'HostIpController@crud']);\r\n    Route::get('create',['as'=>'host_ip.create','uses'=> 'HostIpController@create']);\r\n    Route::post('store',['as'=>'host_ip.store','uses'=> 'HostIpController@store']);\r\n    Route::delete('{id}/destroy',['as'=>'host_ip.destroy','uses'=> 'HostIpController@destroy']);\r\n    Route::get('{id}/edit',['as'=>'host_ip.edit','uses'=> 'HostIpController@edit']);\r\n    Route::patch('{id}/update',['as'=>'host_ip.update','uses'=>'HostIpController@update']);\r\n});\r\nRoute::group(['prefix'=>'operating_system'], function (){\r\n    Route::get('',['as'=>'operating_system','uses'=>'OperatingSystemController@index']);\r\n    Route::get('crud',['as'=>'operating_system.crud','uses'=>'OperatingSystemController@crud']);\r\n    Route::get('create',['as'=>'operating_system.create','uses'=> 'OperatingSystemController@create']);\r\n    Route::post('store',['as'=>'operating_system.store','uses'=> 'OperatingSystemController@store']);\r\n    Route::delete('{id}/destroy',['as'=>'operating_system.destroy','uses'=> 'OperatingSystemController@destroy']);\r\n    Route::get('{id}/edit',['as'=>'operating_system.edit','uses'=> 'OperatingSystemController@edit']);\r\n    Route::patch('{id}/update',['as'=>'operating_system.update','uses'=>'OperatingSystemController@update']);\r\n});\r\nRoute::group(['prefix'=>'ocs_map_os'], function (){\r\n    Route::get('',['as'=>'ocs_map_os','uses'=>'OcsMapOsController@index']);\r\n    Route::get('crud',['as'=>'ocs_map_os.crud','uses'=>'OcsMapOsController@crud']);\r\n    Route::get('create',['as'=>'ocs_map_os.create','uses'=> 'OcsMapOsController@create']);\r\n    Route::post('store',['as'=>'ocs_map_os.store','uses'=> 'OcsMapOsController@store']);\r\n    Route::delete('{id}/destroy',['as'=>'ocs_map_os.destroy','uses'=> 'OcsMapOsController@destroy']);\r\n    Route::get('{id}/edit',['as'=>'ocs_map_os.edit','uses'=> 'OcsMapOsController@edit']);\r\n    Route::patch('{id}/update',['as'=>'ocs_map_os.update','uses'=>'OcsMapOsController@update']);\r\n});\r\n\r\nRoute::get('/', function () {\r\n    return view('welcome');\r\n});\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- routes/web.php	(revision 894875ea22fc59a3687c7f6dceccc059199bbcaf)
++++ routes/web.php	(date 1592229114966)
+@@ -47,6 +47,15 @@
+     Route::get('{id}/edit',['as'=>'ocs_map_os.edit','uses'=> 'OcsMapOsController@edit']);
+     Route::patch('{id}/update',['as'=>'ocs_map_os.update','uses'=>'OcsMapOsController@update']);
+ });
++Route::group(['prefix'=>'oxidized_map_os'], function (){
++    Route::get('',['as'=>'oxidized_map_os','uses'=>'OxidizedMapOsController@index']);
++    Route::get('crud',['as'=>'oxidized_map_os.crud','uses'=>'OxidizedMapOsController@crud']);
++    Route::get('create',['as'=>'oxidized_map_os.create','uses'=> 'OxidizedMapOsController@create']);
++    Route::post('store',['as'=>'oxidized_map_os.store','uses'=> 'OxidizedMapOsController@store']);
++    Route::delete('{id}/destroy',['as'=>'oxidized_map_os.destroy','uses'=> 'OxidizedMapOsController@destroy']);
++    Route::get('{id}/edit',['as'=>'oxidized_map_os.edit','uses'=> 'OxidizedMapOsController@edit']);
++    Route::patch('{id}/update',['as'=>'oxidized_map_os.update','uses'=>'OxidizedMapOsController@update']);
++});
+ 
+ Route::get('/', function () {
+     return view('welcome');
+Index: config/adminlte.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?php\r\n\r\nreturn [\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Title\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here you can change the default title of your admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#61-title\r\n    |\r\n    */\r\n\r\n    'title' => 'AdminLTE 3',\r\n    'title_prefix' => '',\r\n    'title_postfix' => '',\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Favicon\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here you can activate the favicon.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#62-favicon\r\n    |\r\n    */\r\n\r\n    'use_ico_only' => false,\r\n    'use_full_favicon' => false,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Logo\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here you can change the logo of your admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#63-logo\r\n    |\r\n    */\r\n\r\n    'logo' => '<b>SISINFRA</b>',\r\n    'logo_img' => 'vendor/adminlte/dist/img/AdminLTELogo.png',\r\n    'logo_img_class' => 'brand-image img-circle elevation-3',\r\n    'logo_img_xl' => null,\r\n    'logo_img_xl_class' => 'brand-image-xs',\r\n    'logo_img_alt' => 'AdminLTE',\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | User Menu\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here you can activate and change the user menu.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#64-user-menu\r\n    |\r\n    */\r\n\r\n    'usermenu_enabled' => true,\r\n    'usermenu_header' => false,\r\n    'usermenu_header_class' => 'bg-primary',\r\n    'usermenu_image' => false,\r\n    'usermenu_desc' => false,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Layout\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we change the layout of your admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#65-layout\r\n    |\r\n    */\r\n\r\n    'layout_topnav' => null,\r\n    'layout_boxed' => null,\r\n    'layout_fixed_sidebar' => null,\r\n    'layout_fixed_navbar' => null,\r\n    'layout_fixed_footer' => null,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Extra Classes\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here you can change the look and behavior of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#66-classes\r\n    |\r\n    */\r\n\r\n    'classes_body' => '',\r\n    'classes_brand' => '',\r\n    'classes_brand_text' => '',\r\n    'classes_content_header' => '',\r\n    'classes_content' => '',\r\n    'classes_sidebar' => 'sidebar-dark-primary elevation-4',\r\n    'classes_sidebar_nav' => '',\r\n    'classes_topnav' => 'navbar-white navbar-light',\r\n    'classes_topnav_nav' => 'navbar-expand-md',\r\n    'classes_topnav_container' => 'container',\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Sidebar\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the sidebar of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#67-sidebar\r\n    |\r\n    */\r\n\r\n    'sidebar_mini' => true,\r\n    'sidebar_collapse' => false,\r\n    'sidebar_collapse_auto_size' => false,\r\n    'sidebar_collapse_remember' => false,\r\n    'sidebar_collapse_remember_no_transition' => true,\r\n    'sidebar_scrollbar_theme' => 'os-theme-light',\r\n    'sidebar_scrollbar_auto_hide' => 'l',\r\n    'sidebar_nav_accordion' => true,\r\n    'sidebar_nav_animation_speed' => 300,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Control Sidebar (Right Sidebar)\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the right sidebar aka control sidebar of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#68-control-sidebar-right-sidebar\r\n    |\r\n    */\r\n\r\n    'right_sidebar' => false,\r\n    'right_sidebar_icon' => 'fas fa-cogs',\r\n    'right_sidebar_theme' => 'dark',\r\n    'right_sidebar_slide' => true,\r\n    'right_sidebar_push' => true,\r\n    'right_sidebar_scrollbar_theme' => 'os-theme-light',\r\n    'right_sidebar_scrollbar_auto_hide' => 'l',\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | URLs\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the url settings of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#69-urls\r\n    |\r\n    */\r\n\r\n    'use_route_url' => false,\r\n\r\n    'dashboard_url' => '/',\r\n\r\n    'logout_url' => 'logout',\r\n\r\n    'login_url' => 'login',\r\n\r\n    'register_url' => 'register',\r\n\r\n    'password_reset_url' => 'password/reset',\r\n\r\n    'password_email_url' => 'password/email',\r\n\r\n    'profile_url' => false,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Laravel Mix\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can enable the Laravel Mix option for the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#610-laravel-mix\r\n    |\r\n    */\r\n\r\n    'enabled_laravel_mix' => false,\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Menu Items\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the sidebar/top navigation of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#611-menu\r\n    |\r\n    */\r\n\r\n    'menu' => [\r\n        [\r\n            'text' => 'blog',\r\n            'url'  => 'admin/blog',\r\n            'can'  => 'manage-blog',\r\n        ],\r\n        [\r\n            'text'        => 'host',\r\n            'url'         => 'host/crud',\r\n            'icon'        => 'far fa-fw fa-file',\r\n        ],\r\n        [\r\n            'text'        => 'host_dns',\r\n            'url'         => 'host_dns/crud',\r\n            'icon'        => 'far fa-fw fa-file',\r\n        ],\r\n        [\r\n            'text'        => 'host_ip',\r\n            'url'         => 'host_ip/crud',\r\n            'icon'        => 'far fa-fw fa-file',\r\n        ],\r\n        [\r\n            'text'        => 'operating_system',\r\n            'url'         => 'operating_system/crud',\r\n            'icon'        => 'far fa-fw fa-file',\r\n        ],\r\n        [\r\n            'text'        => 'ocs_map_os',\r\n            'url'         => 'ocs_map_os/crud',\r\n            'icon'        => 'far fa-fw fa-file',\r\n        ],\r\n        ['header' => 'account_settings'],\r\n        [\r\n            'text' => 'profile',\r\n            'url'  => 'admin/settings',\r\n            'icon' => 'fas fa-fw fa-user',\r\n        ],\r\n        [\r\n            'text' => 'change_password',\r\n            'url'  => 'admin/settings',\r\n            'icon' => 'fas fa-fw fa-lock',\r\n        ],\r\n    ],\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Menu Filters\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the menu filters of the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#612-menu-filters\r\n    |\r\n    */\r\n\r\n    'filters' => [\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\HrefFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\SearchFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\ActiveFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\SubmenuFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\ClassesFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\GateFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\LangFilter::class,\r\n        JeroenNoten\\LaravelAdminLte\\Menu\\Filters\\DataFilter::class,\r\n    ],\r\n\r\n    /*\r\n    |--------------------------------------------------------------------------\r\n    | Plugins Initialization\r\n    |--------------------------------------------------------------------------\r\n    |\r\n    | Here we can modify the plugins used inside the admin panel.\r\n    |\r\n    | For more detailed instructions you can look here:\r\n    | https://github.com/jeroennoten/Laravel-AdminLTE/#613-plugins\r\n    |\r\n    */\r\n\r\n    'plugins' => [\r\n        [\r\n            'name' => 'Datatables',\r\n            'active' => false,\r\n            'files' => [\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js',\r\n                ],\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdn.datatables.net/1.10.19/js/dataTables.bootstrap4.min.js',\r\n                ],\r\n                [\r\n                    'type' => 'css',\r\n                    'asset' => false,\r\n                    'location' => '//cdn.datatables.net/1.10.19/css/dataTables.bootstrap4.min.css',\r\n                ],\r\n            ],\r\n        ],\r\n        [\r\n            'name' => 'Select2',\r\n            'active' => false,\r\n            'files' => [\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/js/select2.min.js',\r\n                ],\r\n                [\r\n                    'type' => 'css',\r\n                    'asset' => false,\r\n                    'location' => '//cdnjs.cloudflare.com/ajax/libs/select2/4.0.3/css/select2.css',\r\n                ],\r\n            ],\r\n        ],\r\n        [\r\n            'name' => 'Chartjs',\r\n            'active' => false,\r\n            'files' => [\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.0/Chart.bundle.min.js',\r\n                ],\r\n            ],\r\n        ],\r\n        [\r\n            'name' => 'Sweetalert2',\r\n            'active' => false,\r\n            'files' => [\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdn.jsdelivr.net/npm/sweetalert2@8',\r\n                ],\r\n            ],\r\n        ],\r\n        [\r\n            'name' => 'Pace',\r\n            'active' => false,\r\n            'files' => [\r\n                [\r\n                    'type' => 'css',\r\n                    'asset' => false,\r\n                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/themes/blue/pace-theme-center-radar.min.css',\r\n                ],\r\n                [\r\n                    'type' => 'js',\r\n                    'asset' => false,\r\n                    'location' => '//cdnjs.cloudflare.com/ajax/libs/pace/1.0.2/pace.min.js',\r\n                ],\r\n            ],\r\n        ],\r\n    ],\r\n];\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- config/adminlte.php	(revision 894875ea22fc59a3687c7f6dceccc059199bbcaf)
++++ config/adminlte.php	(date 1592229728259)
+@@ -238,6 +238,11 @@
+             'url'         => 'ocs_map_os/crud',
+             'icon'        => 'far fa-fw fa-file',
+         ],
++        [
++            'text'        => 'oxidized_map_os',
++            'url'         => 'oxidized_map_os/crud',
++            'icon'        => 'far fa-fw fa-file',
++        ],
+         ['header' => 'account_settings'],
+         [
+             'text' => 'profile',
+Index: resources/views/oxidized_map_os/edit.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/oxidized_map_os/edit.blade.php	(date 1592229648546)
++++ resources/views/oxidized_map_os/edit.blade.php	(date 1592229648546)
+@@ -0,0 +1,51 @@
++@extends('adminlte::page')
++
++<script src="{{asset('js/jquery-3.4.1.js')}}"></script>
++<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
++<script src="{{asset('js/popper.min.js')}}"></script>
++<script src="{{asset('js/bootstrap.js')}}"></script>
++<head>
++    <title>Oxidized_map_os</title>
++</head>
++@section('content')
++    <div class="row">
++        <div class="col-sm-8 offset-sm-2">
++            <h1 class="display-3">Editar Oxidized_map_os</h1>
++            @if ($errors->any())
++                <div class="alert alert-danger">
++                    <ul>
++                        @foreach ($errors->all() as $error)
++                            <li>{{ $error }}</li>
++                        @endforeach
++                    </ul>
++                </div>
++                <br />
++            @endif
++            <div class ="card">
++                <div class="card-body">
++                    <form method="post" action="{{ route('oxidized_map_os.update', $oxidized_map_os->id) }}">
++                        @method('PATCH')
++                        @csrf
++                        <div class="form-group">
++                            <label for="oxidized_instance_id">Oxidized_instance_id:</label>
++                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" name="oxidized_instance_id" value="{{ $oxidized_map_os->oxidized_instance_id }}" />
++                        </div>
++                        <div class="form-group">
++                            <label for="operating_system_id">Operating_system_id:</label>
++                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" class="form-control" name="operating_system_id" value="{{ $oxidized_map_os->operating_system_id }}" />
++                        </div>
++                        <div class="form-group">
++                            <label for="oxidized_os">Oxidized_os: </label>
++                            <input type="text" maxlength="30" class="form-control" name="oxidized_os" value="{{ $oxidized_map_os->oxidized_os }}"/>
++                        </div>
++
++                        <button type="submit" class="btn btn-primary">Editar</button>
++                        <form>
++                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
++                        </form>
++                    </form>
++                </div>
++            </div>
++        </div>
++    </div>
++@endsection
+Index: resources/views/oxidized_map_os/crud.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/oxidized_map_os/crud.blade.php	(date 1592229590994)
++++ resources/views/oxidized_map_os/crud.blade.php	(date 1592229590994)
+@@ -0,0 +1,46 @@
++@extends('adminlte::page')
++{{--<script src="{{asset('js/jquery-3.4.1.js')}}"></script>--}}
++{{--<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">--}}
++{{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
++{{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
++<head>
++    <title>Oxidized_map_os</title>
++</head>
++
++@section('content')
++    @include('cabecalho',['tituloPagina'=>'Oxidized_map_os'])
++    <div class="container offset-sm-2">
++        <a style="margin: 19px;" href="{{ route('oxidized_map_os.create')}}" class="btn btn-primary">Novo Oxidized_map_os</a>
++    </div>
++    <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
++        <thead>
++        <tr>
++            <td>Oxidized_instance_id</td>
++            <td>Operating_system_id</td>
++            <td>Oxidized_os</td>
++            <td colspan = 2>Ações</td>
++        </tr>
++        </thead>
++        <tbody>
++        @foreach($oxidized_map_os as $oxidized_map_os)
++            <tr>
++                <td>{{$oxidized_map_os->oxidized_instance_id}}</td>
++                <td>{{$oxidized_map_os->operating_system_id}}</td>
++                <td>{{$oxidized_map_os->oxidized_os}}</td>
++                <td>
++                    <a href="{{ route('oxidized_map_os.edit',$oxidized_map_os->id)}}" class="btn btn-primary">Editar</a>
++                </td>
++                <td>
++                    <form action="{{ route('oxidized_map_os.destroy', $oxidized_map_os->id)}}" method="post">
++                        @csrf
++                        @method('DELETE')
++                        <button class="btn btn-danger" type="submit">Apagar</button>
++                    </form>
++                </td>
++            </tr>
++        @endforeach
++        </tbody>
++    </table>
++    <br/>
++@endsection
++
+Index: resources/views/oxidized_map_os/create.blade.php
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- resources/views/oxidized_map_os/create.blade.php	(date 1592229366921)
++++ resources/views/oxidized_map_os/create.blade.php	(date 1592229366921)
+@@ -0,0 +1,51 @@
++@extends('adminlte::page')
++
++<script src="{{asset('js/jquery-3.4.1.js')}}"></script>
++<link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
++<script src="{{asset('js/popper.min.js')}}"></script>
++<script src="{{asset('js/bootstrap.js')}}"></script>
++<head>
++    <title>Oxidized_map_os</title>
++</head>
++@section('content')
++    <div class="row">
++        <div class="col-sm-8 offset-sm-2">
++            <h1 class="display-3">Adicionar Oxidized_map_os</h1>
++            <div>
++                @if ($errors->any())
++                    <div class="alert alert-danger">
++                        <ul>
++                            @foreach ($errors->all() as $error)
++                                <li>{{ $error }}</li>
++                            @endforeach
++                        </ul>
++                    </div><br />
++                @endif
++                <div class ="card">
++                    <div class="card-body">
++                        <form method="post" action="{{ route('oxidized_map_os.store') }}">
++                            @csrf
++                            <div class="form-group">
++                                <label for="oxidized_instance_id">Oxidized_instance_id: </label>
++                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="oxidized_instance_id"/>
++                            </div>
++                            <div class="form-group">
++                                <label for="operating_system_id">Operating_system_id: </label>
++                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="operating_system_id"/>
++                            </div>
++                            <div class="form-group">
++                                <label for="oxidized_os">Oxidized_os: </label>
++                                <input type="text" maxlength="30" class="form-control" name="oxidized_os"/>
++                            </div>
++
++                            <button type="submit" class="btn btn-primary">Adicionar oxidized_map_os</button>
++                            <form>
++                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
++                            </form>
++                        </form>
++                    </div>
++                </div>
++            </div>
++        </div>
++    </div>
++@endsection

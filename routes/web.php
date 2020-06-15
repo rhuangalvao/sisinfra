@@ -74,6 +74,15 @@ Route::group(['prefix'=>'ocs_map_os'], function (){
     Route::get('{id}/edit',['as'=>'ocs_map_os.edit','uses'=> 'OcsMapOsController@edit']);
     Route::patch('{id}/update',['as'=>'ocs_map_os.update','uses'=>'OcsMapOsController@update']);
 });
+Route::group(['prefix'=>'oxidized_map_os'], function (){
+    Route::get('',['as'=>'oxidized_map_os','uses'=>'OxidizedMapOsController@index']);
+    Route::get('crud',['as'=>'oxidized_map_os.crud','uses'=>'OxidizedMapOsController@crud']);
+    Route::get('create',['as'=>'oxidized_map_os.create','uses'=> 'OxidizedMapOsController@create']);
+    Route::post('store',['as'=>'oxidized_map_os.store','uses'=> 'OxidizedMapOsController@store']);
+    Route::delete('{id}/destroy',['as'=>'oxidized_map_os.destroy','uses'=> 'OxidizedMapOsController@destroy']);
+    Route::get('{id}/edit',['as'=>'oxidized_map_os.edit','uses'=> 'OxidizedMapOsController@edit']);
+    Route::patch('{id}/update',['as'=>'oxidized_map_os.update','uses'=>'OxidizedMapOsController@update']);
+});
 
 Route::get('/', function () {
     return view('welcome');

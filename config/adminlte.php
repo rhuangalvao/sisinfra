@@ -253,6 +253,11 @@ return [
             'url'         => 'ocs_map_os/crud',
             'icon'        => 'far fa-fw fa-file',
         ],
+        [
+            'text'        => 'oxidized_map_os',
+            'url'         => 'oxidized_map_os/crud',
+            'icon'        => 'far fa-fw fa-file',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
