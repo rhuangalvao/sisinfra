@@ -83,6 +83,15 @@ Route::group(['prefix'=>'oxidized_map_os'], function (){
     Route::get('{id}/edit',['as'=>'oxidized_map_os.edit','uses'=> 'OxidizedMapOsController@edit']);
     Route::patch('{id}/update',['as'=>'oxidized_map_os.update','uses'=>'OxidizedMapOsController@update']);
 });
+Route::group(['prefix'=>'oxidized_instance'], function (){
+    Route::get('',['as'=>'oxidized_instance','uses'=>'OxidizedInstanceController@index']);
+    Route::get('crud',['as'=>'oxidized_instance.crud','uses'=>'OxidizedInstanceController@crud']);
+    Route::get('create',['as'=>'oxidized_instance.create','uses'=> 'OxidizedInstanceController@create']);
+    Route::post('store',['as'=>'oxidized_instance.store','uses'=> 'OxidizedInstanceController@store']);
+    Route::delete('{id}/destroy',['as'=>'oxidized_instance.destroy','uses'=> 'OxidizedInstanceController@destroy']);
+    Route::get('{id}/edit',['as'=>'oxidized_instance.edit','uses'=> 'OxidizedInstanceController@edit']);
+    Route::patch('{id}/update',['as'=>'oxidized_instance.update','uses'=>'OxidizedInstanceController@update']);
+});
 
 Route::get('/', function () {
     return view('welcome');

@@ -258,6 +258,11 @@ return [
             'url'         => 'oxidized_map_os/crud',
             'icon'        => 'far fa-fw fa-file',
         ],
+        [
+            'text'        => 'oxidized_instance',
+            'url'         => 'oxidized_instance/crud',
+            'icon'        => 'far fa-fw fa-file',
+        ],
         ['header' => 'account_settings'],
         [
             'text' => 'profile',
