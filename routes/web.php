@@ -29,6 +29,15 @@ Route::group(['prefix'=>'host_ip'], function (){
     Route::get('{id}/edit',['as'=>'host_ip.edit','uses'=> 'HostIpController@edit']);
     Route::patch('{id}/update',['as'=>'host_ip.update','uses'=>'HostIpController@update']);
 });
+Route::group(['prefix'=>'host_param'], function (){
+    Route::get('',['as'=>'host_param','uses'=>'HostParamController@index']);
+    Route::get('crud',['as'=>'host_param.crud','uses'=>'HostParamController@crud']);
+    Route::get('create',['as'=>'host_param.create','uses'=> 'HostParamController@create']);
+    Route::post('store',['as'=>'host_param.store','uses'=> 'HostParamController@store']);
+    Route::delete('{id}/destroy',['as'=>'host_param.destroy','uses'=> 'HostParamController@destroy']);
+    Route::get('{id}/edit',['as'=>'host_param.edit','uses'=> 'HostParamController@edit']);
+    Route::patch('{id}/update',['as'=>'host_param.update','uses'=>'HostParamController@update']);
+});
 Route::group(['prefix'=>'operating_system'], function (){
     Route::get('',['as'=>'operating_system','uses'=>'OperatingSystemController@index']);
     Route::get('crud',['as'=>'operating_system.crud','uses'=>'OperatingSystemController@crud']);
