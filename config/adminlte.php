@@ -214,34 +214,51 @@ return [
             'can'  => 'manage-blog',
         ],
         [
-            'text'        => 'host',
-            'url'         => 'host/crud',
-            'icon'        => 'far fa-fw fa-file',
+            'text'    => 'hosts',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                [
+                    'text'        => 'host',
+                    'url'         => 'host/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'host_dns',
+                    'url'         => 'host_dns/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'host_ip',
+                    'url'         => 'host_ip/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'host_param',
+                    'url'         => 'host_param/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'host_status',
+                    'url'         => 'host_status/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'host_type',
+                    'url'         => 'host_type/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+            ],
         ],
         [
-            'text'        => 'host_dns',
-            'url'         => 'host_dns/crud',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'host_ip',
-            'url'         => 'host_ip/crud',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'host_param',
-            'url'         => 'host_param/crud',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'host_status',
-            'url'         => 'host_status/crud',
-            'icon'        => 'far fa-fw fa-file',
-        ],
-        [
-            'text'        => 'host_type',
-            'url'         => 'host_type/crud',
-            'icon'        => 'far fa-fw fa-file',
+            'text'    => 'services',
+            'icon'    => 'fas fa-fw fa-share',
+            'submenu' => [
+                    [
+                        'text'        => 'service_instance',
+                        'url'         => 'service_instance/crud',
+                        'icon'        => 'far fa-fw fa-file',
+                    ],
+            ],
         ],
         [
             'text'        => 'operating_system',
