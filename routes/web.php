@@ -65,6 +65,15 @@ Route::group(['prefix'=>'service_instance'], function (){
     Route::get('{id}/edit',['as'=>'service_instance.edit','uses'=> 'ServiceInstanceController@edit']);
     Route::patch('{id}/update',['as'=>'service_instance.update','uses'=>'ServiceInstanceController@update']);
 });
+Route::group(['prefix'=>'service_instance_param'], function (){
+    Route::get('',['as'=>'service_instance_param','uses'=>'ServiceInstanceParamController@index']);
+    Route::get('crud',['as'=>'service_instance_param.crud','uses'=>'ServiceInstanceParamController@crud']);
+    Route::get('create',['as'=>'service_instance_param.create','uses'=> 'ServiceInstanceParamController@create']);
+    Route::post('store',['as'=>'service_instance_param.store','uses'=> 'ServiceInstanceParamController@store']);
+    Route::delete('{id}/destroy',['as'=>'service_instance_param.destroy','uses'=> 'ServiceInstanceParamController@destroy']);
+    Route::get('{id}/edit',['as'=>'service_instance_param.edit','uses'=> 'ServiceInstanceParamController@edit']);
+    Route::patch('{id}/update',['as'=>'service_instance_param.update','uses'=>'ServiceInstanceParamController@update']);
+});
 Route::group(['prefix'=>'operating_system'], function (){
     Route::get('',['as'=>'operating_system','uses'=>'OperatingSystemController@index']);
     Route::get('crud',['as'=>'operating_system.crud','uses'=>'OperatingSystemController@crud']);

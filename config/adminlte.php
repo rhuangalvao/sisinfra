@@ -258,6 +258,11 @@ return [
                         'url'         => 'service_instance/crud',
                         'icon'        => 'far fa-fw fa-file',
                     ],
+                [
+                    'text'        => 'service_instance_param',
+                    'url'         => 'service_instance_param/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
             ],
         ],
         [

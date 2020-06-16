@@ -17,12 +17,12 @@ class ServiceInstanceController extends Controller
     public function store(Request $request){
 
         $request->validate([
-            'host_id',
-            'service_id',
-            'host_ip_id',
-            'host_dns_id',
-            'descr',
-            'password_id',
+            'host_id'=>'required',
+            'service_id'=>'required',
+            'host_ip_id'=>'required',
+            'host_dns_id'=>'required',
+            'descr'=>'required',
+            'password_id'=>'required',
         ]);
         $service_instance = new service_instance([
             'host_id' => $request->get('host_id'),
@@ -47,12 +47,12 @@ class ServiceInstanceController extends Controller
     }
     public function update(Request $request, $id){
         $request->validate([
-            'host_id',
-            'service_id',
-            'host_ip_id',
-            'host_dns_id',
-            'descr',
-            'password_id',
+            'host_id'=>'required',
+            'service_id'=>'required',
+            'host_ip_id'=>'required',
+            'host_dns_id'=>'required',
+            'descr'=>'required',
+            'password_id'=>'required',
         ]);
 
         $service_instance = Service_instance::find($id);
