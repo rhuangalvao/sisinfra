@@ -273,6 +273,11 @@ return [
                     'url'         => 'service_instance_param/crud',
                     'icon'        => 'far fa-fw fa-file',
                 ],
+                [
+                    'text'        => 'service_dependency',
+                    'url'         => 'service_dependency/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
             ],
         ],
         [
