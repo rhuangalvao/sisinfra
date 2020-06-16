@@ -110,6 +110,33 @@ Route::group(['prefix'=>'oxidized_instance'], function (){
     Route::get('{id}/edit',['as'=>'oxidized_instance.edit','uses'=> 'OxidizedInstanceController@edit']);
     Route::patch('{id}/update',['as'=>'oxidized_instance.update','uses'=>'OxidizedInstanceController@update']);
 });
+Route::group(['prefix'=>'oxidized_instance'], function (){
+    Route::get('',['as'=>'oxidized_instance','uses'=>'OxidizedInstanceController@index']);
+    Route::get('crud',['as'=>'oxidized_instance.crud','uses'=>'OxidizedInstanceController@crud']);
+    Route::get('create',['as'=>'oxidized_instance.create','uses'=> 'OxidizedInstanceController@create']);
+    Route::post('store',['as'=>'oxidized_instance.store','uses'=> 'OxidizedInstanceController@store']);
+    Route::delete('{id}/destroy',['as'=>'oxidized_instance.destroy','uses'=> 'OxidizedInstanceController@destroy']);
+    Route::get('{id}/edit',['as'=>'oxidized_instance.edit','uses'=> 'OxidizedInstanceController@edit']);
+    Route::patch('{id}/update',['as'=>'oxidized_instance.update','uses'=>'OxidizedInstanceController@update']);
+});
+Route::group(['prefix'=>'service'], function (){
+    Route::get('',['as'=>'service','uses'=>'ServiceController@index']);
+    Route::get('crud',['as'=>'service.crud','uses'=>'ServiceController@crud']);
+    Route::get('create',['as'=>'service.create','uses'=> 'ServiceController@create']);
+    Route::post('store',['as'=>'service.store','uses'=> 'ServiceController@store']);
+    Route::delete('{id}/destroy',['as'=>'service.destroy','uses'=> 'ServiceController@destroy']);
+    Route::get('{id}/edit',['as'=>'service.edit','uses'=> 'ServiceController@edit']);
+    Route::patch('{id}/update',['as'=>'service.update','uses'=>'ServiceController@update']);
+});
+Route::group(['prefix'=>'service_group'], function (){
+    Route::get('',['as'=>'service_group','uses'=>'ServiceGroupController@index']);
+    Route::get('crud',['as'=>'service_group.crud','uses'=>'ServiceGroupController@crud']);
+    Route::get('create',['as'=>'service_group.create','uses'=> 'ServiceGroupController@create']);
+    Route::post('store',['as'=>'service_group.store','uses'=> 'ServiceGroupController@store']);
+    Route::delete('{id}/destroy',['as'=>'service_group.destroy','uses'=> 'ServiceGroupController@destroy']);
+    Route::get('{id}/edit',['as'=>'service_group.edit','uses'=> 'ServiceGroupController@edit']);
+    Route::patch('{id}/update',['as'=>'service_group.update','uses'=>'ServiceGroupController@update']);
+});
 
 Route::get('/', function () {
     return view('welcome');

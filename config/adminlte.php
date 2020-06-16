@@ -253,11 +253,21 @@ return [
             'text'    => 'services',
             'icon'    => 'fas fa-fw fa-share',
             'submenu' => [
-                    [
-                        'text'        => 'service_instance',
-                        'url'         => 'service_instance/crud',
-                        'icon'        => 'far fa-fw fa-file',
-                    ],
+                [
+                    'text'        => 'service',
+                    'url'         => 'service/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'service_group',
+                    'url'         => 'service_group/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'service_instance',
+                    'url'         => 'service_instance/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
                 [
                     'text'        => 'service_instance_param',
                     'url'         => 'service_instance_param/crud',
