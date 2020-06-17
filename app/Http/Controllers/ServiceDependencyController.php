@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Model\Service_dependency;
+use App\Service_instance;
 use Illuminate\Http\Request;
 
 class ServiceDependencyController extends Controller
 {
     public function create(){
-        return view('service_dependency.create');
+        $service_instance = Service_instance::all();
+        return view('service_dependency.create',compact('service_instance'));
     }
     public function crud(){
         $service_dependency = Service_dependency::all();
@@ -34,8 +36,9 @@ class ServiceDependencyController extends Controller
         return redirect('/service_dependency/crud')->with('success', 'Service_dependency deletado!');
     }
     public function edit($id){
+        $service_instance = Service_instance::all();
         $service_dependency = Service_dependency::find($id);
-        return view('service_dependency.edit', compact('service_dependency'));
+        return view('service_dependency.edit', compact('service_dependency', 'service_instance'));
     }
     public function update(Request $request, $id){
         $request->validate([

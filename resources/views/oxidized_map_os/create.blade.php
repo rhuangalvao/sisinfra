@@ -27,11 +27,23 @@
                             @csrf
                             <div class="form-group">
                                 <label for="oxidized_instance_id">Oxidized_instance_id: </label>
-                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="oxidized_instance_id"/>
+                                <select id="oxidized_instance_id" name="oxidized_instance_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do oxidized_instance</option>
+                                    @foreach($oxidized_instance as $oi)
+                                        <option value={{$oi->id}}> {{$oi->name}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="oxidized_instance_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="operating_system_id">Operating_system_id: </label>
-                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="operating_system_id"/>
+                                <select id="operating_system_id" name="operating_system_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do operating_system</option>
+                                    @foreach($operating_system as $os)
+                                        <option value={{$os->id}}> {{$os->name}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="operating_system_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="oxidized_os">Oxidized_os: </label>

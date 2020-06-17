@@ -18,6 +18,7 @@ class CreateHostParamsTable extends Migration
             $table->integer('host_id');
             $table->String('param_name');
             $table->String('param_value');
+            $table->boolean('enabled');
             $table->timestamps();
 
 //            $table->foreign('host_id')->references('id')->on('hosts');

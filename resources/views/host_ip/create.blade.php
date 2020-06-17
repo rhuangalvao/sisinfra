@@ -49,6 +49,11 @@
                                 <label for="mac_address">mac_address:</label>
                                 <input type="text" maxlength="30" class="form-control" name="mac_address"/>
                             </div>
+                            <div>
+                                <input type="checkbox" id="is_main" name="is_main">
+                                <label for="is_main">is_main</label>
+                            </div>
+
                             <button type="submit" class="btn btn-primary">Adicionar Host_ip</button>
                             <form>
                                 <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">

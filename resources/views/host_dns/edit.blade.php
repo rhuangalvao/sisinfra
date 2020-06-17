@@ -38,6 +38,10 @@
                             <label for="version">version:</label>
                             <input type="text" maxlength="30" class="form-control" name="version" value="{{ $host_dns->version }}"/>
                         </div>
+                        <div>
+                            <input type="checkbox" id="is_main" name="is_main" value="{{ $host_dns->is_main }}">
+                            <label for="is_main">is_main</label>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>
                         <form>

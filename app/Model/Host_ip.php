@@ -13,5 +13,6 @@ class Host_ip extends Model
         'gateway',
         'version',
         'mac_address',
+        'is_main',
     ];
 }

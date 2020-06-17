@@ -21,6 +21,7 @@ class CreateHostIpsTable extends Migration
             $table->String('gateway');
             $table->integer('version');
             $table->String('mac_address');
+            $table->boolean('is_main');
             $table->timestamps();
 
 //            $table->foreign('host_id')->references('id')->on('hosts');

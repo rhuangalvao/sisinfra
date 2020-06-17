@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Model\Ocs_map_os;
+use App\Model\Operating_system;
 use Illuminate\Http\Request;
 
 class OcsMapOsController extends Controller
@@ -11,7 +12,8 @@ class OcsMapOsController extends Controller
 
     }
     public function create(){
-        return view('ocs_map_os.create');
+        $operating_system = Operating_system::all();
+        return view('ocs_map_os.create',compact('operating_system'));
     }
     public function crud(){
         $ocs_map_os = Ocs_map_os::all();
@@ -37,8 +39,9 @@ class OcsMapOsController extends Controller
         return redirect('/ocs_map_os/crud')->with('success', 'Ocs_map_os deletado!');
     }
     public function edit($id){
+        $operating_system = Operating_system::all();
         $ocs_map_os = Ocs_map_os::find($id);
-        return view('ocs_map_os.edit', compact('ocs_map_os'));
+        return view('ocs_map_os.edit', compact('ocs_map_os','operating_system'));
     }
     public function update(Request $request, $id){
         $request->validate([

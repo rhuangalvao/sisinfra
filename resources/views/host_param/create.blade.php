@@ -37,6 +37,10 @@
                                 <label for="param_value">param_value:</label>
                                 <input type="text" maxlength="30" class="form-control" name="param_value" />
                             </div>
+                            <div>
+                                <input type="checkbox" id="enabled" name="enabled">
+                                <label for="enabled">enabled</label>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar host_param</button>
                             <form>

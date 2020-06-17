@@ -24,6 +24,8 @@ class CreateHostsTable extends Migration
             $table->String('descr');
             $table->String('obs');
             $table->String('chassis_id');
+            $table->boolean('monitoring');
+            $table->boolean('enabled');
             $table->timestamps();
 
 //            $table->foreign('status_id')->references('id')->on('host_statuses');

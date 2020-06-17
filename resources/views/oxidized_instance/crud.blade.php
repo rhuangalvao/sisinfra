@@ -17,6 +17,7 @@
         <tr>
             <td>Name</td>
             <td>Url</td>
+            <td>enabled</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -25,6 +26,7 @@
             <tr>
                 <td>{{$oxidized_instance->name}}</td>
                 <td>{{$oxidized_instance->url}}</td>
+                <td>{{$oxidized_instance->enabled}}</td>
                 <td>
                     <a href="{{ route('oxidized_instance.edit',$oxidized_instance->id)}}" class="btn btn-primary">Editar</a>
                 </td>

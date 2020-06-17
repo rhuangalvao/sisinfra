@@ -21,6 +21,7 @@
             <td>gateway</td>
             <td>version</td>
             <td>mac_address</td>
+            <td>is_main</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{$host_ip->gateway}}</td>
                 <td>{{$host_ip->version}}</td>
                 <td>{{$host_ip->mac_address}}</td>
+                <td>{{$host_ip->is_main}}</td>
                 <td>
                     <a href="{{ route('host_ip.edit',$host_ip->id)}}" class="btn btn-primary">Editar</a>
                 </td>

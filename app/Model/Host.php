@@ -15,7 +15,9 @@ class Host extends Model
         'domain_suffix',
         'descr',
         'obs',
-        'chassis_id'
+        'chassis_id',
+        'monitoring',
+        'enabled',
     ];
 
 }

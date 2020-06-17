@@ -20,11 +20,13 @@ class HostParamController extends Controller
             'host_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
+            'enabled'=>'required',
         ]);
         $host_param = new host_param([
             'host_id' => $request->get('host_id'),
             'param_name' => $request->get('param_name'),
             'param_value' => $request->get('param_value'),
+            'enabled' => $request->get('enabled'),
         ]);
         $host_param->save();
         return redirect('/host_param/crud')->with('success', 'host_param salvo!');
@@ -44,6 +46,7 @@ class HostParamController extends Controller
             'host_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
+            'enabled'=>'required',
         ]);
 
         $host_param = Host_param::find($id);
@@ -51,6 +54,7 @@ class HostParamController extends Controller
         $host_param->host_id = $request->get('host_id');
         $host_param->param_name = $request->get('param_name');
         $host_param->param_value = $request->get('param_value');
+        $host_param->enabled = $request->get('enabled');
 
         $host_param->save();
 

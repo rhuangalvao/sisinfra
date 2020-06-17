@@ -17,6 +17,7 @@ class CreateOxidizedInstancesTable extends Migration
             $table->id('id');
             $table->String('name');
             $table->String('url');
+            $table->boolean('enabled');
             $table->timestamps();
         });
     }

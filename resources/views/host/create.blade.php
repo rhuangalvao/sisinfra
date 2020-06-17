@@ -61,6 +61,14 @@
                                 <label for="chassis_id">chassis_id: </label>
                                 <input type="text" maxlength="30" class="form-control" name="chassis_id"/>
                             </div>
+                            <div>
+                                <input type="checkbox" id="monitoring" name="monitoring">
+                                <label for="monitoring">monitoring</label>
+                            </div>
+                            <div>
+                                <input type="checkbox" id="enabled" name="enabled">
+                                <label for="enabled">enabled</label>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Host</button>
                             <form>

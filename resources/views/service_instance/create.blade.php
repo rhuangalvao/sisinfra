@@ -27,19 +27,43 @@
                             @csrf
                             <div class="form-group">
                                 <label for="host_id">ID Host: </label>
-                                <input type="text" maxlength="30" class="form-control" name="host_id"/>
+                                <select id="host_id" name="host_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do host_id</option>
+                                    @foreach($host as $h)
+                                        <option value={{$h->id}}> {{$h->hostname}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="service_id">service_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="service_id"/>
+                                <select id="service_id" name="service_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do service_id</option>
+                                    @foreach($service as $s)
+                                        <option value={{$s->id}}> {{$s->name}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="service_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="host_ip_id">host_ip_id:</label>
-                                <input type="text" maxlength="30" class="form-control" name="host_ip_id" />
+                                <select id="host_ip_id" name="host_ip_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Endereço do host_ip_id</option>
+                                    @foreach($host_ip as $hi)
+                                        <option value={{$hi->id}}> {{$hi->ip_address}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="host_ip_id" />--}}
                             </div>
                             <div class="form-group">
                                 <label for="host_dns_id">host_dns_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="host_dns_id"/>
+                                <select id="host_dns_id" name="host_dns_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do host_dns_id</option>
+                                    @foreach($host_dns as $hd)
+                                        <option value={{$hd->id}}> {{$hd->name}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="host_dns_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="descr">descr: </label>
@@ -48,6 +72,10 @@
                             <div class="form-group">
                                 <label for="password_id">password_id:</label>
                                 <input type="text" maxlength="30" class="form-control" name="password_id" />
+                            </div>
+                            <div>
+                                <input type="checkbox" id="monitoring" name="monitoring">
+                                <label for="monitoring">monitoring</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar service_instance</button>

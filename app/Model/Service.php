@@ -13,4 +13,10 @@ class Service extends Model
         'port',
         'service_group_id'
     ];
+
+    public function service_group_id()
+    {
+        return $this->belongsTo('App\Model\Service_group', 'service_group_id', 'id');
+    }
+
 }

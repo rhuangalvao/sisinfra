@@ -21,6 +21,7 @@
             <td>host_dns_id</td>
             <td>descr</td>
             <td>password_id</td>
+            <td>monitoring</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -33,6 +34,7 @@
                 <td>{{$service_instance->host_dns_id}}</td>
                 <td>{{$service_instance->descr}}</td>
                 <td>{{$service_instance->password_id}}</td>
+                <td>{{$service_instance->monitoring}}</td>
                 <td>
                     <a href="{{ route('service_instance.edit',$service_instance->id)}}" class="btn btn-primary">Editar</a>
                 </td>

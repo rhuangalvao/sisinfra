@@ -21,6 +21,7 @@ class CreateServiceInstancesTable extends Migration
             $table->integer('host_dns_id');
             $table->String('descr');
             $table->integer('password_id');
+            $table->boolean('monitoring');
             $table->timestamps();
 
 //            $table->foreign('host_id')->references('id')->on('hosts');

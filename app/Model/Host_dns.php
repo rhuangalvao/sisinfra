@@ -9,6 +9,7 @@ class Host_dns extends Model
     protected $fillable = [
         'host_id',
         'name',
-        'version'
+        'version',
+        'is_main'
     ];
 }

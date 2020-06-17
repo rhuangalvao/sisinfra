@@ -33,6 +33,10 @@
                                 <label for="url">Url: </label>
                                 <input type="text" maxlength="30" class="form-control" name="url"/>
                             </div>
+                            <div>
+                                <input type="checkbox" id="enabled" name="enabled">
+                                <label for="enabled">enabled</label>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Oxidized_instance</button>
                             <form>

@@ -4,6 +4,7 @@
 <link rel="stylesheet" href="{{asset('css/bootstrap.css')}}">
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
+
 <head>
     <title>Service_instance_param</title>
 </head>
@@ -27,7 +28,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="service_instance_id">service_instance_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="service_instance_id"/>
+                                <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do service_instance</option>
+                                    @foreach($service_instance as $si)
+                                        <option value={{$si->id}}> {{$si->descr}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="service_instance_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="param_name">param_name: </label>
@@ -36,6 +43,10 @@
                             <div class="form-group">
                                 <label for="param_value">param_value:</label>
                                 <input type="text" maxlength="30" class="form-control" name="param_value" />
+                            </div>
+                            <div>
+                                <input type="checkbox" id="enabled" name="enabled">
+                                <label for="enabled">enabled</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar service_instance_param</button>

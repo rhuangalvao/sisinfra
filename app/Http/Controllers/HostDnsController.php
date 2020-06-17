@@ -20,11 +20,13 @@ class HostDnsController extends Controller
             'host_id'=>'required',
             'name'=>'required',
             'version'=>'required',
+            'is_main'=>'required',
         ]);
         $host_dns = new Host_dns([
             'host_id' => $request->get('host_id'),
             'name' => $request->get('name'),
             'version' => $request->get('version'),
+            'is_main' => $request->get('is_main'),
         ]);
         $host_dns->save();
         return redirect('/host_dns/crud')->with('success', 'host_dns salvo!');
@@ -44,6 +46,7 @@ class HostDnsController extends Controller
             'host_id'=>'required',
             'name'=>'required',
             'version'=>'required',
+            'is_main'=>'required',
         ]);
 
         $host_dns = Host_dns::find($id);
@@ -51,6 +54,7 @@ class HostDnsController extends Controller
         $host_dns->host_id = $request->get('host_id');
         $host_dns->name = $request->get('name');
         $host_dns->version = $request->get('version');
+        $host_dns->is_main = $request->get('is_main');
 
         $host_dns->save();
 

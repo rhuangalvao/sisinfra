@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Model\Service;
+use App\Model\Service_group;
 use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
     public function create(){
-        return view('service.create');
+        $service_group = Service_group::all();
+        return view('service.create',compact('service_group'));
     }
     public function crud(){
         $service = Service::all();
@@ -40,8 +42,9 @@ class ServiceController extends Controller
         return redirect('/service/crud')->with('success', 'Service deletado!');
     }
     public function edit($id){
+        $service_group = Service_group::all();
         $service = Service::find($id);
-        return view('service.edit', compact('service'));
+        return view('service.edit', compact('service','service_group'));
     }
     public function update(Request $request, $id){
         $request->validate([

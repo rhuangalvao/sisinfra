@@ -2,13 +2,17 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\Operating_system;
+use App\Model\Oxidized_instance;
 use App\Model\Oxidized_map_os;
 use Illuminate\Http\Request;
 
 class OxidizedMapOsController extends Controller
 {
     public function create(){
-        return view('oxidized_map_os.create');
+        $oxidized_instance = Oxidized_instance::all();
+        $operating_system = Operating_system::all();
+        return view('oxidized_map_os.create',compact('oxidized_instance','operating_system'));
     }
     public function crud(){
         $oxidized_map_os = Oxidized_map_os::all();
@@ -36,8 +40,10 @@ class OxidizedMapOsController extends Controller
         return redirect('/oxidized_map_os/crud')->with('success', 'Oxidized_map_os deletado!');
     }
     public function edit($id){
+        $oxidized_instance = Oxidized_instance::all();
+        $operating_system = Operating_system::all();
         $oxidized_map_os = Oxidized_map_os::find($id);
-        return view('oxidized_map_os.edit', compact('oxidized_map_os'));
+        return view('oxidized_map_os.edit', compact('oxidized_map_os','oxidized_instance','operating_system'));
     }
     public function update(Request $request, $id){
         $request->validate([

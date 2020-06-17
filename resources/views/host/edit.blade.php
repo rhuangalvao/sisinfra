@@ -62,6 +62,14 @@
                             <label for="chassis_id">chassis_id: </label>
                             <input type="text" maxlength="30" class="form-control" name="chassis_id" value="{{ $host->chassis_id }}"/>
                         </div>
+                        <div>
+                            <input type="checkbox" id="monitoring" name="monitoring" value="{{ $host->monitoring }}">
+                            <label for="monitoring">monitoring</label>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="enabled" name="enabled" value="{{ $host->enabled }}">
+                            <label for="enabled">enabled</label>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>
                         <form>

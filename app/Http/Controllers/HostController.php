@@ -25,7 +25,9 @@ class HostController extends Controller
             'domain_suffix'=>'required',
             'descr'=>'required',
             'obs'=>'required',
-            'chassis_id'=>'required'
+            'chassis_id'=>'required',
+            'monitoring'=>'required',
+            'enabled'=>'required',
         ]);
         $host = new Host([
             'os_id' => $request->get('os_id'),
@@ -36,7 +38,9 @@ class HostController extends Controller
             'domain_suffix' => $request->get('domain_suffix'),
             'descr' => $request->get('descr'),
             'obs' => $request->get('obs'),
-            'chassis_id' => $request->get('chassis_id')
+            'chassis_id' => $request->get('chassis_id'),
+            'monitoring' => $request->get('monitoring'),
+            'enabled' => $request->get('enabled'),
         ]);
         $host->save();
         return redirect('/host/crud')->with('success', 'Host salvo!');
@@ -61,7 +65,9 @@ class HostController extends Controller
             'domain_suffix'=>'required',
             'descr'=>'required',
             'obs'=>'required',
-            'chassis_id'=>'required'
+            'chassis_id'=>'required',
+            'monitoring'=>'required',
+            'enabled'=>'required',
         ]);
 
         $host = Host::find($id);
@@ -75,6 +81,8 @@ class HostController extends Controller
         $host->descr = $request->get('descr');
         $host->obs = $request->get('obs');
         $host->chassis_id = $request->get('chassis_id');
+        $host->monitoring = $request->get('monitoring');
+        $host->enabled = $request->get('enabled');
 
         $host->save();
 

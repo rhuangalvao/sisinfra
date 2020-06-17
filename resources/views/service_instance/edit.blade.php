@@ -50,6 +50,10 @@
                             <label for="password_id">password_id:</label>
                             <input type="text" maxlength="30" class="form-control" name="password_id" value="{{ $service_instance->password_id }}"/>
                         </div>
+                        <div>
+                            <input type="checkbox" id="monitoring" name="monitoring" value="{{ $service_instance->monitoring }}">
+                            <label for="monitoring">monitoring</label>
+                        </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>
                         <form>

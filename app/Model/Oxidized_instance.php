@@ -8,6 +8,7 @@ class Oxidized_instance extends Model
 {
     protected $fillable = [
         'name',
-        'url'
+        'url',
+        'enabled',
     ];
 }

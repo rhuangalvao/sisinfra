@@ -18,6 +18,7 @@
             <td>service_instance_id</td>
             <td>param_name</td>
             <td>param_value</td>
+            <td>enabled</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{$service_instance_param->service_instance_id}}</td>
                 <td>{{$service_instance_param->param_name}}</td>
                 <td>{{$service_instance_param->param_value}}</td>
+                <td>{{$service_instance_param->enabled}}</td>
                 <td>
                     <a href="{{ route('service_instance_param.edit',$service_instance_param->id)}}" class="btn btn-primary">Editar</a>
                 </td>

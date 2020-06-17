@@ -18,6 +18,7 @@ class CreateServiceInstanceParamsTable extends Migration
             $table->integer('service_instance_id');
             $table->String('param_name');
             $table->String('param_value');
+            $table->boolean('enabled');
             $table->timestamps();
 
 //            $table->foreign('service_instance_id')->references('id')->on('service_instances');

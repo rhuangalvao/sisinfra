@@ -28,7 +28,13 @@
                         @csrf
                         <div class="form-group">
                             <label for="service_instance_id">service_instance_id: </label>
-                            <input type="text" maxlength="30" class="form-control" name="service_instance_id" value="{{ $service_instance_param->service_instance_id }}"/>
+                            <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
+                                <option disabled value="" selected>Nome do service_instance</option>
+                                @foreach($service_instance as $si)
+                                    <option value={{$si->id}}> {{$si->descr}} </option>
+                                @endforeach
+                            </select>
+{{--                            <input type="text" maxlength="30" class="form-control" name="service_instance_id" value="{{ $service_instance_param->service_instance_id }}"/>--}}
                         </div>
                         <div class="form-group">
                             <label for="param_name">param_name: </label>
@@ -37,6 +43,10 @@
                         <div class="form-group">
                             <label for="param_value">param_value:</label>
                             <input type="text" maxlength="30" class="form-control" name="param_value" value="{{ $service_instance_param->param_value }}"/>
+                        </div>
+                        <div>
+                            <input type="checkbox" id="enabled" name="enabled" value="{{ $service_instance_param->enabled }}">
+                            <label for="enabled">enabled</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>

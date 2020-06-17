@@ -23,6 +23,7 @@ class HostIpController extends Controller
             'gateway'=>'required',
             'version'=>'required',
             'mac_address'=>'required',
+            'is_main'=>'required',
         ]);
         $host_ip = new Host_ip([
             'host_id' => $request->get('host_id'),
@@ -31,6 +32,7 @@ class HostIpController extends Controller
             'gateway' => $request->get('gateway'),
             'version' => $request->get('version'),
             'mac_address' => $request->get('mac_address'),
+            'is_main' => $request->get('is_main'),
         ]);
         $host_ip->save();
         return redirect('/host_ip/crud')->with('success', 'host_ip salvo!');
@@ -53,6 +55,7 @@ class HostIpController extends Controller
             'gateway'=>'required',
             'version'=>'required',
             'mac_address'=>'required',
+            'is_main'=>'required',
         ]);
 
         $host_ip = Host_ip::find($id);
@@ -63,6 +66,7 @@ class HostIpController extends Controller
         $host_ip->gateway = $request->get('gateway');
         $host_ip->version = $request->get('version');
         $host_ip->mac_address = $request->get('mac_address');
+        $host_ip->is_main = $request->get('is_main');
 
         $host_ip->save();
 

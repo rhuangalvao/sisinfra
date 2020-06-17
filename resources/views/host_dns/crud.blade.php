@@ -18,6 +18,7 @@
             <td>ID Host</td>
             <td>Name</td>
             <td>Version</td>
+            <td>is_main</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{$host_dns->host_id}}</td>
                 <td>{{$host_dns->name}}</td>
                 <td>{{$host_dns->version}}</td>
+                <td>{{$host_dns->is_main}}</td>
                 <td>
                     <a href="{{ route('host_dns.edit',$host_dns->id)}}" class="btn btn-primary">Editar</a>
                 </td>

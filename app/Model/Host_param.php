@@ -10,5 +10,6 @@ class Host_param extends Model
         'host_id',
         'param_name',
         'param_value',
+        'enabled',
     ];
 }

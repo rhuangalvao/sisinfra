@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class OxidizedInstanceController extends Controller
 {
     public function create(){
+
         return view('oxidized_instance.create');
     }
     public function crud(){
@@ -18,11 +19,13 @@ class OxidizedInstanceController extends Controller
 
         $request->validate([
             'name'=>'required',
-            'url'=>'required'
+            'url'=>'required',
+            'enabled'=>'required',
         ]);
         $oxidized_instance = new Oxidized_instance([
             'name' => $request->get('name'),
             'url' => $request->get('url'),
+            'enabled' => $request->get('enabled'),
         ]);
         $oxidized_instance->save();
         return redirect('/oxidized_instance/crud')->with('success', 'Oxidized_instance salvo!');
@@ -40,13 +43,15 @@ class OxidizedInstanceController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-            'url'=>'required'
+            'url'=>'required',
+            'enabled'=>'required',
         ]);
 
         $oxidized_instance = Oxidized_instance::find($id);
 
         $oxidized_instance->name = $request->get('name');
         $oxidized_instance->url = $request->get('url');
+        $oxidized_instance->enabled = $request->get('enabled');
 
         $oxidized_instance->save();
 

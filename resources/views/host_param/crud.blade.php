@@ -18,6 +18,7 @@
             <td>host_id</td>
             <td>param_name</td>
             <td>param_value</td>
+            <td>enabled</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -27,6 +28,7 @@
                 <td>{{$host_param->host_id}}</td>
                 <td>{{$host_param->param_name}}</td>
                 <td>{{$host_param->param_value}}</td>
+                <td>{{$host_param->enabled}}</td>
                 <td>
                     <a href="{{ route('host_param.edit',$host_param->id)}}" class="btn btn-primary">Editar</a>
                 </td>

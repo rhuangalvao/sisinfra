@@ -24,6 +24,8 @@
             <td>descr</td>
             <td>obs</td>
             <td>chassis_id</td>
+            <td>monitoring</td>
+            <td>enabled</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -39,6 +41,8 @@
                 <td>{{$host->descr}}</td>
                 <td>{{$host->obs}}</td>
                 <td>{{$host->chassis_id}}</td>
+                <td>{{$host->monitoring}}</td>
+                <td>{{$host->enabled}}</td>
                 <td>
                     <a href="{{ route('host.edit',$host->id)}}" class="btn btn-primary">Editar</a>
                 </td>

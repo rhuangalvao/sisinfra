@@ -27,7 +27,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="operating_system_id">Operating_system_id: </label>
-                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="operating_system_id"/>
+                                <select id="operating_system_id" name="operating_system_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do operating_system</option>
+                                    @foreach($operating_system as $os)
+                                        <option value={{$os->id}}> {{$os->name}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="operating_system_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="ocs_os_name_match">Ocs_os_name_match: </label>
