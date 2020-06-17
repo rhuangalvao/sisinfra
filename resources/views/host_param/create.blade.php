@@ -27,7 +27,13 @@
                             @csrf
                             <div class="form-group">
                                 <label for="host_id">host_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="host_id"/>
+                                <select id="host_id" name="host_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do host_id</option>
+                                    @foreach($host as $h)
+                                        <option value={{$h->id}}> {{$h->hostname}} </option>
+                                    @endforeach
+                                </select>
+{{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="param_name">param_name: </label>

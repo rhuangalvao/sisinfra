@@ -12,4 +12,9 @@ class Host_param extends Model
         'param_value',
         'enabled',
     ];
+
+    public function host_id()
+    {
+        return $this->belongsTo('App\Model\Host', 'host_id', 'id');
+    }
 }

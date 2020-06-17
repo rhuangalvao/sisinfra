@@ -28,15 +28,33 @@
                         @csrf
                         <div class="form-group">
                             <label for="os_id">ID Operating System:</label>
-                            <input type="text" class="form-control" name="os_id" value="{{ $host->os_id }}" />
+                            <select id="os_id" name="os_id" class="select2ex form-control">
+                                <option disabled value="" selected>Nome do operating_system_id</option>
+                                @foreach($operating_system as $os)
+                                    <option value={{$os->id}}> {{$os->name}} </option>
+                                @endforeach
+                            </select>
+{{--                            <input type="text" maxlength="30" class="form-control" name="os_id" value="{{ $host->os_id }}" />--}}
                         </div>
                         <div class="form-group">
                             <label for="host_type_id">host_type_id: </label>
-                            <input type="text" maxlength="30" class="form-control" name="host_type_id" value="{{ $host->host_type_id }}"/>
+                            <select id="host_type_id" name="host_type_id" class="select2ex form-control">
+                                <option disabled value="" selected>Nome do host_type_id</option>
+                                @foreach($host_type as $ht)
+                                    <option value={{$ht->id}}> {{$ht->name}} </option>
+                                @endforeach
+                            </select>
+{{--                            <input type="text" maxlength="30" class="form-control" name="host_type_id" value="{{ $host->host_type_id }}"/>--}}
                         </div>
                         <div class="form-group">
                             <label for="status_id">status_id:</label>
-                            <input type="text" maxlength="30" class="form-control" name="status_id" value="{{ $host->status_id }}" />
+                            <select id="status_id" name="status_id" class="select2ex form-control">
+                                <option disabled value="" selected>Nome do status_id</option>
+                                @foreach($host_status as $hs)
+                                    <option value={{$hs->id}}> {{$hs->status}} </option>
+                                @endforeach
+                            </select>
+{{--                            <input type="text" maxlength="30" class="form-control" name="status_id" value="{{ $host->status_id }}" />--}}
                         </div>
                         <div class="form-group">
                             <label for="tag">TAG: </label>

@@ -20,4 +20,17 @@ class Host extends Model
         'enabled',
     ];
 
+    public function os_id()
+    {
+        return $this->belongsTo('App\Model\Operating_system', 'os_id', 'id');
+    }
+    public function host_type_id()
+    {
+        return $this->belongsTo('App\Model\Host_type', 'host_type_id', 'id');
+    }
+    public function status_id()
+    {
+        return $this->belongsTo('App\Model\Host_status', 'status_id', 'id');
+    }
+
 }

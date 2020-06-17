@@ -3,12 +3,18 @@
 namespace App\Http\Controllers;
 
 use App\Host;
+use App\Model\Operating_system;
+use App\Host_type;
+use App\Host_status;
 use Illuminate\Http\Request;
 
 class HostController extends Controller
 {
     public function create(){
-        return view('host.create');
+        $operating_system = Operating_system::all();
+        $host_type = Host_type::all();
+        $host_status = Host_status::all();
+        return view('host.create',compact('operating_system','host_type','','host_status'));
     }
     public function crud(){
         $host = Host::all();
@@ -52,8 +58,11 @@ class HostController extends Controller
         return redirect('/host/crud')->with('success', 'Host deletado!');
     }
     public function edit($id){
+        $operating_system = Operating_system::all();
+        $host_type = Host_type::all();
+        $host_status = Host_status::all();
         $host = Host::find($id);
-        return view('host.edit', compact('host'));
+        return view('host.edit', compact('host','operating_system','host_type','host_status'));
     }
     public function update(Request $request, $id){
         $request->validate([

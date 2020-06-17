@@ -12,4 +12,9 @@ class Host_dns extends Model
         'version',
         'is_main'
     ];
+
+    public function host_id()
+    {
+        return $this->belongsTo('App\Model\Host', 'host_id', 'id');
+    }
 }

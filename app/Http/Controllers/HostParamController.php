@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Host;
 use App\Host_param;
 use Illuminate\Http\Request;
 
 class HostParamController extends Controller
 {
     public function create(){
-        return view('host_param.create');
+        $host = Host::all();
+        return view('host_param.create',compact('host'));
     }
     public function crud(){
         $host_param = Host_param::all();
@@ -38,8 +40,9 @@ class HostParamController extends Controller
         return redirect('/host_param/crud')->with('success', 'host_param deletado!');
     }
     public function edit($id){
+        $host = Host::all();
         $host_param = Host_param::find($id);
-        return view('host_param.edit', compact('host_param'));
+        return view('host_param.edit', compact('host_param','host'));
     }
     public function update(Request $request, $id){
         $request->validate([

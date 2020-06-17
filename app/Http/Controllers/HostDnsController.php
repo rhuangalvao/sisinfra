@@ -3,12 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Host_dns;
+use App\Host;
 use Illuminate\Http\Request;
 
 class HostDnsController extends Controller
 {
     public function create(){
-        return view('host_dns.create');
+        $host = Host::all();
+        return view('host_dns.create',compact('host_id'));
     }
     public function crud(){
         $host_dns = Host_dns::all();
@@ -38,8 +40,9 @@ class HostDnsController extends Controller
         return redirect('/host_dns/crud')->with('success', 'host_dns deletado!');
     }
     public function edit($id){
+        $host = Host::all();
         $host_dns = Host_dns::find($id);
-        return view('host_dns.edit', compact('host_dns'));
+        return view('host_dns.edit', compact('host_dns','host'));
     }
     public function update(Request $request, $id){
         $request->validate([

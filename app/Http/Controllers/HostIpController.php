@@ -2,13 +2,15 @@
 
 namespace App\Http\Controllers;
 
+use App\Host;
 use App\Host_ip;
 use Illuminate\Http\Request;
 
 class HostIpController extends Controller
 {
     public function create(){
-        return view('host_ip.create');
+        $host = Host::all();
+        return view('host_ip.create',compact('host'));
     }
     public function crud(){
         $host_ip = Host_ip::all();
@@ -44,8 +46,9 @@ class HostIpController extends Controller
         return redirect('/host_ip/crud')->with('success', 'host_ip deletado!');
     }
     public function edit($id){
+        $host = Host::all();
         $host_ip = Host_ip::find($id);
-        return view('host_ip.edit', compact('host_ip'));
+        return view('host_ip.edit', compact('host_ip','host'));
     }
     public function update(Request $request, $id){
         $request->validate([
