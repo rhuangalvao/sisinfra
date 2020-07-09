@@ -20,7 +20,6 @@ class OxidizedInstanceController extends Controller
         $request->validate([
             'name'=>'required',
             'url'=>'required',
-            'enabled'=>'required',
         ]);
         $oxidized_instance = new Oxidized_instance([
             'name' => $request->get('name'),
@@ -44,7 +43,6 @@ class OxidizedInstanceController extends Controller
         $request->validate([
             'name'=>'required',
             'url'=>'required',
-            'enabled'=>'required',
         ]);
 
         $oxidized_instance = Oxidized_instance::find($id);

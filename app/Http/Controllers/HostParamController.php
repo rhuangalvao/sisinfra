@@ -22,7 +22,6 @@ class HostParamController extends Controller
             'host_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
-            'enabled'=>'required',
         ]);
         $host_param = new host_param([
             'host_id' => $request->get('host_id'),
@@ -49,7 +48,6 @@ class HostParamController extends Controller
             'host_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
-            'enabled'=>'required',
         ]);
 
         $host_param = Host_param::find($id);

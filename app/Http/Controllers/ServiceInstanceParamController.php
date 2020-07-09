@@ -22,7 +22,6 @@ class ServiceInstanceParamController extends Controller
             'service_instance_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
-            'enabled'=>'required',
         ]);
         $service_instance_param = new service_instance_param([
             'service_instance_id' => $request->get('service_instance_id'),
@@ -49,7 +48,6 @@ class ServiceInstanceParamController extends Controller
             'service_instance_id'=>'required',
             'param_name'=>'required',
             'param_value'=>'required',
-            'enabled'=>'required',
         ]);
 
         $service_instance_param = Service_instance_param::find($id);

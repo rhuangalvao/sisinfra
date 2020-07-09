@@ -14,7 +14,7 @@ class HostController extends Controller
         $operating_system = Operating_system::all();
         $host_type = Host_type::all();
         $host_status = Host_status::all();
-        return view('host.create',compact('operating_system','host_type','','host_status'));
+        return view('host.create',compact('operating_system','host_type','host_status'));
     }
     public function crud(){
         $host = Host::all();
@@ -32,8 +32,6 @@ class HostController extends Controller
             'descr'=>'required',
             'obs'=>'required',
             'chassis_id'=>'required',
-            'monitoring'=>'required',
-            'enabled'=>'required',
         ]);
         $host = new Host([
             'os_id' => $request->get('os_id'),
@@ -75,8 +73,6 @@ class HostController extends Controller
             'descr'=>'required',
             'obs'=>'required',
             'chassis_id'=>'required',
-            'monitoring'=>'required',
-            'enabled'=>'required',
         ]);
 
         $host = Host::find($id);

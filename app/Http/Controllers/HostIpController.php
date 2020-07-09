@@ -25,7 +25,6 @@ class HostIpController extends Controller
             'gateway'=>'required',
             'version'=>'required',
             'mac_address'=>'required',
-            'is_main'=>'required',
         ]);
         $host_ip = new Host_ip([
             'host_id' => $request->get('host_id'),
@@ -58,7 +57,6 @@ class HostIpController extends Controller
             'gateway'=>'required',
             'version'=>'required',
             'mac_address'=>'required',
-            'is_main'=>'required',
         ]);
 
         $host_ip = Host_ip::find($id);

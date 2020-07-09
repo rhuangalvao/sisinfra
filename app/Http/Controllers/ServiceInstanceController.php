@@ -31,7 +31,6 @@ class ServiceInstanceController extends Controller
             'host_dns_id'=>'required',
             'descr'=>'required',
             'password_id'=>'required',
-            'monitoring'=>'required',
         ]);
         $service_instance = new service_instance([
             'host_id' => $request->get('host_id'),
@@ -67,7 +66,6 @@ class ServiceInstanceController extends Controller
             'host_dns_id'=>'required',
             'descr'=>'required',
             'password_id'=>'required',
-            'monitoring'=>'required',
         ]);
 
         $service_instance = Service_instance::find($id);

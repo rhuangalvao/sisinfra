@@ -147,6 +147,7 @@ Route::group(['prefix'=>'oxidized_instance'], function (){
     Route::patch('{id}/update',['as'=>'oxidized_instance.update','uses'=>'OxidizedInstanceController@update']);
 });
 
-Route::get('/', function () {
-    return view('welcome');
-});
+//Route::get('/', function () {
+//    return view('welcome');
+//});
+Route::get('/','Controller@welcome')->name('/');

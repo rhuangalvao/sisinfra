@@ -22,7 +22,6 @@ class HostDnsController extends Controller
             'host_id'=>'required',
             'name'=>'required',
             'version'=>'required',
-            'is_main'=>'required',
         ]);
         $host_dns = new Host_dns([
             'host_id' => $request->get('host_id'),
@@ -49,7 +48,6 @@ class HostDnsController extends Controller
             'host_id'=>'required',
             'name'=>'required',
             'version'=>'required',
-            'is_main'=>'required',
         ]);
 
         $host_dns = Host_dns::find($id);
