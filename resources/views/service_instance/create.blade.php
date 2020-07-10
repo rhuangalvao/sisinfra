@@ -73,9 +73,11 @@
                                 <label for="password_id">password_id:</label>
                                 <input type="text" maxlength="30" class="form-control" name="password_id" />
                             </div>
-                            <div>
-                                <input type="checkbox" id="monitoring" name="monitoring">
-                                <label for="monitoring">monitoring</label>
+
+                            <div class="form-group form-check">
+                                <input type="hidden" name="monitoring" value="off">
+                                <input type="checkbox" class="form-check-input" name="monitoring">
+                                <label class="form-check-label" for="monitoring">monitoring</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar service_instance</button>

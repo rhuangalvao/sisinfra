@@ -15,6 +15,14 @@
             margin: 0 auto;
         }
     </style>
+    <style type="text/css">
+        #mynetwork2 {
+            width: 600px;
+            height: 400px;
+            border: 1px solid lightgray;
+            margin: 0 auto;
+        }
+    </style>
 </head>
 
 @section('content')
@@ -44,7 +52,7 @@
                 nodes.push({
                     id: "{{$si->id}}",
                     label: "{{$si->descr}}",
-                    image: DIR + "icons8-computador-80.png",
+                    image: DIR + "Desktop.png",
                     shape: "image"
                 });
             @endforeach
@@ -67,31 +75,6 @@
             draw();
         });
 
-        {{--// create an array with nodes--}}
-        {{--var nodes = new vis.DataSet([--}}
-
-        {{--    @foreach($service_instance as $si)--}}
-        {{--    {id: "{{$si->id}}", label: "{{$si->descr}}"},--}}
-        {{--        @endforeach--}}
-        {{--    // {id: 1, label: 'Node 1'},--}}
-        {{--]);--}}
-
-        {{--// create an array with edges--}}
-        {{--var edges = new vis.DataSet([--}}
-        {{--        @foreach($service_dependency as $sd)--}}
-        {{--            {from: "{{$sd->service_instance_id}}", to: "{{$sd->service_instance_id_dep}}"},--}}
-        {{--        @endforeach--}}
-        {{--    // {from: 1, to: 2},--}}
-        {{--]);--}}
-
-        {{--// create a network--}}
-        {{--var container = document.getElementById('mynetwork');--}}
-        {{--var data = {--}}
-        {{--    nodes: nodes,--}}
-        {{--    edges: edges--}}
-        {{--};--}}
-        {{--var options = {};--}}
-        {{--var network = new vis.Network(container, data, options);--}}
     </script>
     </body>
 

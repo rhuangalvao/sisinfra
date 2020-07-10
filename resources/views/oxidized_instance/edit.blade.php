@@ -34,9 +34,10 @@
                             <label for="url">Url:</label>
                             <input type="text" class="form-control" name="url" value="{{ $oxidized_instance->url }}" />
                         </div>
-                        <div>
-                            <input type="checkbox" id="enabled" name="enabled" value="{{ $oxidized_instance->enabled }}">
-                            <label for="enabled">enabled</label>
+                        <div class="form-group form-check">
+                            <input type="hidden" name="enabled" value="off">
+                            <input type="checkbox" class="form-check-input" name="enabled">
+                            <label class="form-check-label" for="enabled">enabled</label>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>

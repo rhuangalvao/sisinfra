@@ -43,9 +43,10 @@
                                 <label for="version">version:</label>
                                 <input type="text" maxlength="30" class="form-control" name="version" />
                             </div>
-                            <div>
-                                <input type="checkbox" id="is_main" name="is_main">
-                                <label for="is_main">is_main</label>
+                            <div class="form-group form-check">
+                                <input type="hidden" name="is_main" value="off">
+                                <input type="checkbox" class="form-check-input" name="is_main">
+                                <label class="form-check-label" for="is_main">is_main</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Host_dns</button>

@@ -175,7 +175,7 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
-        Pjeutr\LaravelVisJs\Providers\VisjsServiceProvider::class,
+//        Pjeutr\LaravelVisJs\Providers\VisjsServiceProvider::class,
 
     ],
 

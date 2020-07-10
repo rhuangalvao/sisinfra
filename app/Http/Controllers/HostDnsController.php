@@ -10,7 +10,7 @@ class HostDnsController extends Controller
 {
     public function create(){
         $host = Host::all();
-        return view('host_dns.create',compact('host_id'));
+        return view('host_dns.create',compact('host'));
     }
     public function crud(){
         $host_dns = Host_dns::all();

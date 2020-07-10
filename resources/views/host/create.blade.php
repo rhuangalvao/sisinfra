@@ -79,13 +79,15 @@
                                 <label for="chassis_id">chassis_id: </label>
                                 <input type="text" maxlength="30" class="form-control" name="chassis_id"/>
                             </div>
-                            <div>
-                                <input type="checkbox" id="monitoring" name="monitoring">
-                                <label for="monitoring">monitoring</label>
+                            <div class="form-group form-check">
+                                <input type="hidden" name="monitoring" value="off">
+                                <input type="checkbox" class="form-check-input" name="monitoring">
+                                <label class="form-check-label" for="monitoring">monitoring</label>
                             </div>
-                            <div>
-                                <input type="checkbox" id="enabled" name="enabled">
-                                <label for="enabled">enabled</label>
+                            <div class="form-group form-check">
+                                <input type="hidden" name="enabled" value="off">
+                                <input type="checkbox" class="form-check-input" name="enabled">
+                                <label class="form-check-label" for="enabled">enabled</label>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Host</button>
