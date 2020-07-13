@@ -151,3 +151,6 @@ Route::group(['prefix'=>'oxidized_instance'], function (){
 //    return view('welcome');
 //});
 Route::get('/','Controller@welcome')->name('/');
+Route::post('/search', 'Controller@search')->name('search');
+
+

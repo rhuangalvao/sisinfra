@@ -28,13 +28,6 @@
 @section('content')
     @include('cabecalho',['tituloPagina'=>'SISINFRA'])
     <body>
-    <br>
-    <form method="post" action="{{ route('search') }}">
-        @csrf
-        <input type="text" class = "form-control col-sm-2" name="pesquisa" placeholder="Pesquisar dispositivo">
-        <button type="submit" class="btn btn-primary mt-2">Pesquisar</button>
-    </form>
-
 
     <div id="mynetwork"></div>
     <script type="text/javascript">
@@ -55,17 +48,48 @@
             // Create a data table with links.
             edges = [];
 
+            var buscando = "{{$busca}}";
             @foreach($service_instance as $si)
-                nodes.push({
-                    id: "{{$si->id}}",
-                    label: "{{$si->descr}}",
-                    image: DIR + "Desktop.png",
-                    shape: "image"
-                });
+                if("{{$si->descr}}" === buscando){
+                    nodes.push({
+                        id: "{{$si->id}}",
+                        label: "{{$si->descr}}",
+                        image: DIR + "Desktop.png",
+                        shape: "image"
+                    });
+                    var raiz = "{{$si->id}}";
+                }
             @endforeach
 
+            function busca(raiz) {
+                @foreach($service_dependency as $sd)
+                    if ("{{$sd->service_instance_id}}" === raiz){
+                        var folha = "{{$sd->service_instance_id_dep}}"
+                        @foreach($service_instance as $si)
+                            if("{{$si->id}}" === folha){
+                                nodes.push({
+                                    id: "{{$si->id}}",
+                                    label: "{{$si->descr}}",
+                                    image: DIR + "Desktop.png",
+                                    shape: "image"
+                                });
+                            }
+                        @endforeach
+                        busca(folha);
+                    }
+                @endforeach
+            }
+            busca(raiz);
+
+            {{--nodes.push({--}}
+            {{--    id: "{{$si->id}}",--}}
+            {{--    label: "{{$si->descr}}",--}}
+            {{--    image: DIR + "Desktop.png",--}}
+            {{--    shape: "image"--}}
+            {{--});--}}
+
             @foreach($service_dependency as $sd)
-                edges.push({ from: "{{$sd->service_instance_id}}", to: "{{$sd->service_instance_id_dep}}"});
+            edges.push({ from: "{{$sd->service_instance_id}}", to: "{{$sd->service_instance_id_dep}}"});
             @endforeach
 
             // create a network

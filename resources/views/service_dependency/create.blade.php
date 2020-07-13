@@ -19,7 +19,7 @@
 <script>
     $(document).ready(function(){
         $('.select2ex').select2({
-            minimumInputLength: 2,
+            // minimumInputLength: 2,
         });
     });
 </script>

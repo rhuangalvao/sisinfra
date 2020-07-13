@@ -15,6 +15,7 @@
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
+            <td>ID</td>
             <td>ID Host</td>
             <td>service_id</td>
             <td>host_ip_id</td>
@@ -28,6 +29,7 @@
         <tbody>
         @foreach($service_instance as $service_instance)
             <tr>
+                <td>{{$service_instance->id}}</td>
                 <td>{{$service_instance->host_id}}</td>
                 <td>{{$service_instance->service_id}}</td>
                 <td>{{$service_instance->host_ip_id}}</td>
