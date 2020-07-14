@@ -15,37 +15,36 @@
             margin: 0 auto;
         }
     </style>
-    <style type="text/css">
-        #mynetwork2 {
-            width: 600px;
-            height: 400px;
-            border: 1px solid lightgray;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 @section('content')
     @include('cabecalho',['tituloPagina'=>'SISINFRA'])
     <body>
     <br>
-    <form method="post" action="{{ route('search') }}">
-        @csrf
-        <input type="text" class = "form-control col-sm-2" name="pesquisa" placeholder="Pesquisar dispositivo">
-        <button type="submit" class="btn btn-primary mt-2">Pesquisar</button>
-    </form>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <form method="post" action="{{ route('search') }}">
+                    @csrf
+                    <input type="text" class = "form-control col-sm" name="pesquisa" placeholder="Pesquisar dispositivo">
+                    <button type="submit" class="btn btn-primary mt-2">Pesquisar</button>
+                </form>
+            </div>
+            <div class="col-sm"><div id="mynetwork"></div></div>
+            <div class="col-sm"><pre id="eventSpan"></pre></div>
+        </div>
+    </div>
+    </body>
 
-
-    <div id="mynetwork"></div>
-    <script type="text/javascript">
+    <script defer type="text/javascript">
 
         var nodes = null;
         var edges = null;
         var network = null;
 
+        var nodeid =null;
+
         var DIR = "../img/icon/";
-        var EDGE_LENGTH_MAIN = 150;
-        var EDGE_LENGTH_SUB = 50;
 
         // Called when the Visualization API is loaded.
         function draw() {
@@ -75,25 +74,30 @@
                 edges: edges
             };
             var options = {
+                layout: {randomSeed: 2},
+                interaction: { hover: false },
                 edges: {
-                    arrows: {
-                        to: {
-                            enabled: true,
-                            scaleFactor: 1,
-                            src: undefined,
-                            type: "arrow"
-                        },
-                    }
+                    arrows: "to"
                 }
             };
             network = new vis.Network(container, data, options);
+
+            network.on("click", function(params) {
+                params.event = "[original event]";
+                nodeid = params.nodes;
+                @foreach($service_instance as $sis)
+                    if(nodeid == "{{$sis->id}}"){
+                    document.getElementById("eventSpan").innerHTML =
+                        "<h5>Host selecionado:</h5>" + "<a>ID: </a>" + nodeid + "<br><a>Descrição: </a>" + "{{$sis->descr}}";
+                }
+                @endforeach
+
+            });
         }
 
         window.addEventListener("load", () => {
             draw();
         });
-
     </script>
-    </body>
 
 @endsection

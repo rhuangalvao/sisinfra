@@ -15,21 +15,20 @@
             margin: 0 auto;
         }
     </style>
-    <style type="text/css">
-        #mynetwork2 {
-            width: 600px;
-            height: 400px;
-            border: 1px solid lightgray;
-            margin: 0 auto;
-        }
-    </style>
 </head>
 
 @section('content')
     @include('cabecalho',['tituloPagina'=>'SISINFRA'])
     <body>
+    <br>
+    <div class="row">
+        <div class="col-sm"></div>
+        <div class="col-sm"><div id="mynetwork"></div></div>
+        <div class="col-sm"><pre id="eventSpan"></pre></div>
+    </div>
 
-    <div id="mynetwork"></div>
+
+
     <script type="text/javascript">
 
         var nodes = null;
@@ -81,13 +80,6 @@
             }
             busca(raiz);
 
-            {{--nodes.push({--}}
-            {{--    id: "{{$si->id}}",--}}
-            {{--    label: "{{$si->descr}}",--}}
-            {{--    image: DIR + "Desktop.png",--}}
-            {{--    shape: "image"--}}
-            {{--});--}}
-
             @foreach($service_dependency as $sd)
             edges.push({ from: "{{$sd->service_instance_id}}", to: "{{$sd->service_instance_id_dep}}"});
             @endforeach
@@ -108,9 +100,26 @@
                             type: "arrow"
                         },
                     }
+                },
+                layout: {
+                    hierarchical: {
+                        direction: "UD",
+                        sortMethod: "directed"
+                    }
                 }
             };
             network = new vis.Network(container, data, options);
+
+            network.on("click", function(params) {
+                params.event = "[original event]";
+                nodeid = params.nodes;
+                @foreach($service_instance as $sis)
+                if(nodeid == "{{$sis->id}}"){
+                    document.getElementById("eventSpan").innerHTML =
+                        "<h5>Host selecionado:</h5>" + "<a>ID: </a>" + nodeid + "<br><a>Descrição: </a>" + "{{$sis->descr}}";
+                }
+                @endforeach
+            });
         }
 
         window.addEventListener("load", () => {
