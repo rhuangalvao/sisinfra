@@ -16,6 +16,7 @@ yarn-error.log
 .config/
 .gitconfig
 .local/
+.npm/
 _windows
 *.xml
 /codestyles
