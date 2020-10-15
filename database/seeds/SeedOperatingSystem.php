@@ -52,9 +52,11 @@ class SeedOperatingSystem extends Seeder
             ['id' => 38, 'version' => '12', 'name' => 'Extreme XOS'],
             ['id' => 39, 'version' => '1.0', 'name' => 'D-Link DES-3028'],
             ['id' => 40, 'version' => '8.2.170.0', 'name' => 'Cisco AP IOS'],
+            ['id' => 40, 'version' => 'V200', 'name' => 'Huawei VRP'],
 
         ];
         DB::table('operating_systems')->delete();
         DB::table('operating_systems')->insert($insert);
+        DB::statement("SELECT setval('public.operating_systems', 10000, true);");
     }
 }

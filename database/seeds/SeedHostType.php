@@ -33,5 +33,6 @@ class SeedHostType extends Seeder
 
         //DB::table('host_types')->delete();
         DB::table('host_types')->insert($insert);
+        DB::statement("SELECT setval('public.host_types', 10000, true);");
     }
 }

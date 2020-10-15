@@ -27,6 +27,7 @@ class DatabaseSeeder extends Seeder
             SeedSnmpDeviceClassSysoid::class,
             SeedDiscoveryProtocol::class,
             SeedAddC3750E::class,
+            SeedHostStatus::class,
         ]);
 
     }

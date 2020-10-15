@@ -22,6 +22,8 @@ class CreateSnmpHostIparpsTable extends Migration
             $table->string('vlan_index', 250)->nullable();
             $table->integer('count')->default(0);
             $table->integer('version')->default(4);
+            $table->bigInteger('discovery_protocol_id')->default(1);
+            $table->foreign('discovery_protocol_id')->references('id')->on('discovery_protocols');
             $table->timestamps();
             $table->unique(array('snmp_host_id', 'ip_address', 'mac_address', 'vlan_index'));
         });

@@ -17,6 +17,7 @@ class SeedDiscoveryProtocol extends Seeder
             ['id' => 3, 'name' => 'cdp', 'order' => 20 ],
             ['id' => 4, 'name' => 'edp', 'order' => 30 ],
             ['id' => 5, 'name' => 'manual', 'order' => 10 ],
+            ['id' => 6, 'name' => 'snmp', 'order' => 60 ],
         ];
         DB::table('discovery_protocols')->delete();
         DB::table('discovery_protocols')->insert($insert);

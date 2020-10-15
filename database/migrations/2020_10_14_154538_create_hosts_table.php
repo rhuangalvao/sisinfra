@@ -29,6 +29,9 @@ class CreateHostsTable extends Migration
             $table->text('descr')->nullable()->comment('short description');
             $table->text('obs')->nullable()->comment('full description');
             $table->string('chassis_id',128)->nullable();
+            $table->string('serial_number',128)->nullable();
+            $table->bigInteger('aux_vendor_id')->nullable();
+            $table->foreign('aux_vendor_id')->references('id')->on('aux_vendors');
             $table->timestamps();
         });
     }

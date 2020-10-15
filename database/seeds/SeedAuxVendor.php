@@ -18,7 +18,9 @@ class SeedAuxVendor extends Seeder
             ['id'=> 4, 'name' => 'Huawei'],
             ['id'=> 5, 'name' => 'HP'],
             ['id'=> 6, 'name' => 'HPE/Aruba'],
+            ['id'=> 7, 'name' => 'Aastra'],
         ];
         DB::table('aux_vendors')->insert($insert);
+        DB::statement("SELECT setval('public.aux_vendors', 10000, true);");
     }
 }

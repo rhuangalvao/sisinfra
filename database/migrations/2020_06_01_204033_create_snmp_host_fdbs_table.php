@@ -21,6 +21,8 @@ class CreateSnmpHostFdbsTable extends Migration
             $table->string('ifindex', 250)->nullable();
             $table->string('vlan_index', 250)->nullable();
             $table->integer('count')->default(0);
+            $table->bigInteger('discovery_protocol_id')->default(1);
+            $table->foreign('discovery_protocol_id')->references('id')->on('discovery_protocols');
             $table->timestamps();
             $table->unique(array('snmp_host_id', 'mac_address', 'ifindex', 'vlan_index'));
         });

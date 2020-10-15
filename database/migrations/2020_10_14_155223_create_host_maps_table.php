@@ -15,7 +15,7 @@ class CreateHostMapsTable extends Migration
     {
         Schema::create('host_maps', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->bigInteger('host_id')->nullable()->unique();
+            $table->bigInteger('host_id')->unique();
             $table->foreign('host_id')->references('id')->on('hosts');
 
             $table->bigInteger('snmp_host_id')->nullable()->unique();

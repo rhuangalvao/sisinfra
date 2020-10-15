@@ -28,6 +28,8 @@ class CreateSnmpHostInterfacesTable extends Migration
             $table->string('ifalias', 250)->nullable();
             $table->string('portid', 250)->nullable();
             $table->boolean('is_trunk')->default(false);
+            $table->bigInteger('discovery_protocol_id')->default(1);
+            $table->foreign('discovery_protocol_id')->references('id')->on('discovery_protocols');
             $table->timestamps();
             $table->unique(array('snmp_host_id', 'ifindex'));
         });

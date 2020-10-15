@@ -12,7 +12,10 @@ use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\DB;
 
 
-
+use App\Host;
+use App\HostInterface;
+use App\HostIp;
+use App\HostMap;
 use App\SnmpCmm;
 use App\SnmpHost;
 use App\SnmpHostAddress;
@@ -53,6 +56,13 @@ class SnmpDiscovery
     private $ipCalc;
 
     const discoveryProtocolLLDP = 2;
+
+    const hostTypeRouter = 6;
+    const hostTypeSwitch = 5;
+    const hostTypePhone = 7;
+    const hostTypeAccessPoint = 8;
+    const hostStatusProd = 1;
+    const discoveryProtocolSnmp = 6;
 
     public function __construct(){
 
@@ -321,6 +331,7 @@ class SnmpDiscovery
         $snmp_device_class_id = null;
         $data = array();
         $find=array();
+        $host_type_id = 0;
 
         Log::debug('setSnmpHost: address:('.$ip.') community:('.$community.')');
 
@@ -376,6 +387,8 @@ class SnmpDiscovery
                 }
             }
 
+
+
             // se nao encontrou o tipo do device, faz o find com base nos parametros abaixo
             if (array_key_exists('chassisid',$find)==false && array_key_exists('chassisid',$find)==false) {
                 $find['sysname'] = $data['sysname'];
@@ -384,40 +397,45 @@ class SnmpDiscovery
             }
 
             //print_r($data);
+            $snmpHost=null;
 
-            // insert/update o novo host
-            $snmpHost = SnmpHost::updateOrCreate($find, $data);
-            //echo 'insert/update:'.$snmpSystem.PHP_EOL;
-
-            //$netmap_snmpsystem_id=json_decode($return);
-            Log::debug('setSnmpHost:'.'('.$ip .')'.'add/update:'.$snmpHost->id);
-
-            // insert/update Community
-            // TODO: remover hardcoded snmp v2c
-            $snmp_cmm=SnmpCmm::where('community_name', $community)->first();
-
-            $findIP['snmp_host_id']=$snmpHost->id;
-            $dataIP['address']=$ip;
-            $dataIP['snmp_cmm_id']=$snmp_cmm->id;
-            $dataIP['enabled']=true;
-            $snmpHostAddress = SnmpHostAddress::updateOrCreate($findIP, $dataIP);
-
-            //print_r($snmpHostAddress);
-            Log::debug('setSnmpHost:'.'('.$ip .')'.'add/update snmpHostAddr id:'.$snmpHostAddress->id);
-
-            //echo "class id:".$snmp_device_class_id;
 
             $snmp_device_class=SnmpDeviceClass::where('id', $snmp_device_class_id);
-            //echo $snmp_device_class->name;
-
             if ($snmp_device_class->count() > 0){
-                $snmp_device_class_name = $snmp_device_class->first()->name;
+                // se encontrou device class, ele deve ser SWITCH
+                $host_type_id = $snmp_device_class->first()->host_type_id;
+                if ($host_type_id == self::hostTypeSwitch){
+                    // insert/update o novo host
+                    $snmpHost = SnmpHost::updateOrCreate($find, $data);
+                    //echo 'insert/update:'.$snmpSystem.PHP_EOL;
+
+                    //$netmap_snmpsystem_id=json_decode($return);
+                    Log::debug('setSnmpHost:'.'('.$ip .')'.'add/update:'.$snmpHost->id);
+
+                    // insert/update Community
+                    // TODO: remover hardcoded snmp v2c
+                    $snmp_cmm=SnmpCmm::where('community_name', $community)->first();
+
+                    $findIP['snmp_host_id']=$snmpHost->id;
+                    $dataIP['address']=$ip;
+                    $dataIP['snmp_cmm_id']=$snmp_cmm->id;
+                    $dataIP['enabled']=true;
+                    $snmpHostAddress = SnmpHostAddress::updateOrCreate($findIP, $dataIP);
+
+                    //print_r($snmpHostAddress);
+                    Log::debug('setSnmpHost:'.'('.$ip .')'.'add/update snmpHostAddr id:'.$snmpHostAddress->id);
+
+                    //echo "class id:".$snmp_device_class_id;
+                    //echo $snmp_device_class->name;
+                    $snmp_device_class_name = $snmp_device_class->first()->name;
+
+                    //echo " name:".$snmp_device_class_name.PHP_EOL;
+                    Log::notice('setSnmpHost add/update ip:'.$ip.' cmm:'.$community.' deviceClass:'.$snmp_device_class_name);
+
+                }
             }
-            else {
-                $snmp_device_class_name = "undef";
-            }
-            //echo " name:".$snmp_device_class_name.PHP_EOL;
-            Log::notice('setSnmpHost add/update ip:'.$ip.' cmm:'.$community.' deviceClass:'.$snmp_device_class_name);
+
+
 
         }
 
@@ -771,6 +789,203 @@ class SnmpDiscovery
 
 
 
+    function setHostFromSnmp(){
+        // insere novo host, a partir das tabelas snmp_host e snmp_host_remotes
+
+        $snmpHosts = SnmpHost::all();
+
+        // insere hosts da tabela snmp_hosts
+
+        foreach($snmpHosts as $snmpHost){
+            // 1 - insere snmp_host somente insere se chassis_id for consistente
+            if (strlen($this->common->adjustMacAddr($snmpHost->chassisid)) == 12){
+                echo $snmpHost->hostname.PHP_EOL;
+
+                // 1.1 - sync na tabela hosts
+                $data=array();
+                $find=array();
+
+                $data['os_id'] = $snmpHost->snmpDeviceClass()->get()->first()->operating_system_id;
+                $data['host_type_id'] = $snmpHost->snmpDeviceClass()->get()->first()->host_type_id;
+                $data['status_id'] = self::hostStatusProd;
+                $data['tag'] = explode(".",$snmpHost->sysname)[0];
+                $data['hostname'] = $snmpHost->sysname;
+                $data['descr'] = $snmpHost->sysdescr;
+                $data['chassis_id'] = $this->common->adjustMacAddr($snmpHost->chassisid);
+                $data['serial_number'] = $snmpHost->serialnumber;
+                $data['aux_vendor_id'] = $snmpHost->snmpDeviceClass()->get()->first()->aux_vendor_id;
+
+                $find['tag']=$data['tag'];
+                $find['chassis_id']=$data['chassis_id'];
+
+                $host=Host::updateOrCreate($find, $data);
+
+                echo "HOST ID:".$host->id.PHP_EOL;
+                // 1.2 - sync em host_map
+                $data=array();
+                $find=array();
+                $data['host_id']=$host->id;
+                $data['snmp_host_id']=$snmpHost->id;
+                $find['host_id']=$data['host_id'];
+
+                HostMap::updateOrCreate($find, $data);
+
+                // 1.3 - sync em host_interfaces
+                $snmpHostInterfaces = SnmpHostInterface::where('snmp_host_id',$snmpHost->id)->where('iftype', 6)->get();
+
+
+                foreach($snmpHostInterfaces as $snmpHostInterface){
+                    $data=array();
+                    $find=array();
+                    $data['host_id']=$host->id;
+                    $data['ifname']=$snmpHostInterface->ifname;
+                    $data['iftype']=$snmpHostInterface->iftype;
+                    $data['ifspeed']=$snmpHostInterface->ifspeed;
+                    $data['ifindex']=$snmpHostInterface->ifindex;
+                    $data['ifooperstatus']=$snmpHostInterface->ifoperstatus;
+                    $data['ifalias']=$snmpHostInterface->ifalias;
+                    $data['portid']=$snmpHostInterface->portid;
+                    $data['discovery_protocol_id']=self::discoveryProtocolSnmp;
+
+                    $find['host_id']=$data['host_id'];
+                    $find['ifindex']=$data['ifindex'];
+
+                    $interface=HostInterface::updateOrCreate($find, $data);
+
+                }
+
+                // 1.4 - sync na tabela host_ips
+                $snmpHostAddress = SnmpHostAddress::where('snmp_host_id',$snmpHost->id)->get()->first();
+
+                // checar ipv4 ou ipv6
+                $version = $this->ipCalc->IPversion($snmpHostAddress->address);
+                // se o ip é valido, insere
+                if ($version){
+                    $data=array();
+                    $find=array();
+
+                    $data['host_id']=$host->id;
+                    $data['ip_address']=$snmpHostAddress->address;
+                    $mask=32;
+                    if ($version==6){
+                        $mask=128;
+                    }
+                    $data['mask']=$mask;
+                    $data['version']=$version;
+
+                    $find['host_id']=$data['host_id'];
+                    $find['ip_address']=$data['ip_address'];
+
+                    $hostIp=HostIP::updateOrCreate($find, $data);
+
+                }
+
+            }
+
+        }
+
+
+
+        // 2 - insere hosts da tabela snmp_host_remotes
+        $snmpHostRemotes = SnmpHostRemote::all();
+
+        foreach($snmpHostRemotes as $snmpHostRemote){
+
+            if ($snmpHostRemote->sysname){
+                $class_id=$this->getClassBySysdescr($snmpHostRemote->sysdesc);
+                if ($class_id){
+                    echo "\t".$snmpHostRemote->sysname." ".$class_id->name.PHP_EOL;
+
+                    // 2.1 - sync na tabela hosts
+                    $data=array();
+                    $find=array();
+
+                    $data['os_id'] = $class_id->operating_system_id;
+                    $data['host_type_id'] = $class_id->host_type_id;
+                    $data['status_id'] = self::hostStatusProd;
+                    $data['tag'] = explode(".",$snmpHostRemote->sysname)[0];
+                    $data['hostname'] = $snmpHostRemote->sysname;
+                    $data['descr'] = $snmpHostRemote->sysdesc;
+
+                    $data['chassis_id']=null;
+                    if ($snmpHostRemote->chassisidsubtype == 4){
+                        $data['chassis_id'] = $this->common->adjustMacAddr($snmpHostRemote->chassisid);
+                    }
+                    if ($snmpHostRemote->chassisidsubtype == 5){
+                        // HARDCODED - CORRIGIR
+                        // class_id Cisco IP Phone
+                        if (
+                            $class_id->id == 8 ||
+                            $class_id->id == 9 ||
+                            $class_id->id == 10
+                        ){
+                            // remove a string "SEP" e obtem o endereço MAC
+                            $data['chassis_id']=$this->common->adjustMacAddr(substr(explode(".",$snmpHostRemote->sysname)[0], 3));
+                        }
+
+                        // class_id Aastra IP Phone
+                        if ($class_id->id == 11){
+                            $data['chassis_id']=$this->common->adjustMacAddr($snmpHostRemote->lldpxmed_rem_serial);
+                            $data['tag']=$data['chassis_id'];
+                            $data['descr']=$snmpHostRemote->lldpxmed_rem_hw." ".$snmpHostRemote->lldpxmed_rem_sw;
+                        }
+                    }
+
+                    $data['serial_number'] = $snmpHostRemote->lldpxmed_rem_serial;
+                    $data['aux_vendor_id'] = $class_id->aux_vendor_id;
+
+                    //$find['tag']=$data['tag'];
+                    $find['chassis_id']=$data['chassis_id'];
+
+                    // insere somente se possui chassis_id
+                    if (!is_null($data['chassis_id'])){
+                        $host=Host::updateOrCreate($find, $data);
+
+                        // 2.2 - sync em host_map
+                        $data=array();
+                        $find=array();
+
+                        $data['host_id']=$host->id;
+                        $data['snmp_host_remote_id']=$snmpHostRemote->id;
+                        $find['host_id']=$data['host_id'];
+                        HostMap::updateOrCreate($find, $data);
+
+
+                        // 2.3 - sync em host_interfaces
+
+                        // HARDCODED - CORRIGIR
+                        // Class_id Cisco IP Phone, Aastra IP Phone, Cisco AP, Ciaco AP 2700
+                        if (
+                            $class_id->id == 8 ||
+                            $class_id->id == 9 ||
+                            $class_id->id == 10 ||
+                            $class_id->id == 11 ||
+                            $class_id->id == 12 ||
+                            $class_id->id == 13
+                        ){
+                            $data=array();
+                            $find=array();
+                            $data['host_id']=$host->id;
+                            $data['ifindex']="P0";
+                            $data['portid']="0";
+                            $data['discovery_protocol_id']=self::discoveryProtocolSnmp;
+
+                            $find['host_id']=$data['host_id'];
+                            $find['ifindex']=$data['ifindex'];
+
+                            $interface=HostInterface::updateOrCreate($find, $data);
+
+                        }
+                    }
+                }
+                else {
+                    echo "No class_id:".$snmpHostRemote->sysname.PHP_EOL;
+                }
+            }
+        }
+    }
+
+
 
     function setHostConnection(){
         $connections = SnmpHostConnection::all();
@@ -870,18 +1085,19 @@ class SnmpDiscovery
 
                         if ($this->common->isMacAddr($data[0])){
                             $host_b_chassisid=$data[0];
-
-                            if (array_key_exists(1, $data)){
-                                $host_b_port=$data[1];
-                            }
-                            else {
-                                $host_b_port="P0";
-                            }
+                            $host_b_port="P0";
                         }
 
 
                     }
                     break;
+            }
+
+            $host_b_id=null;
+            $host_b_chassisid=$this->common->adjustMacAddr($host_b_chassisid);
+            $host_b = Host::where('chassis_id', $host_b_chassisid)->get();
+            if (count($host_b) > 0){
+                $host_b_id=$host_b->first()->id;
             }
 
 
@@ -891,6 +1107,7 @@ class SnmpDiscovery
                 "\t\t\t -> \t\t\t".
                 "HOST_B chassis_id:".$host_b_chassisid.
                 " PORT:".$host_b_port.
+                " HOST_ID:".$host_b_id.
                 PHP_EOL;
         }
     }

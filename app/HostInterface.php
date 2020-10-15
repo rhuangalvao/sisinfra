@@ -11,9 +11,10 @@ class HostInterface extends Model
         'ifname',
         'iftype',
         'ifspeed',
-        'ifpysadddress',
+        'ifindex',
         'ifoperstatus',
         'ifalias',
+        'portid',
         'is_mgmt',
         'discovery_protocol_id',
     ];

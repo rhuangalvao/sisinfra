@@ -14,7 +14,17 @@ class CliSnmpDiscovery extends Command
      *
      * @var string
      */
-    protected $signature = 'snmp:discovery {--job=} {--exec=} {--execsingle=} {--ip=} {--community=} {--sync=} {--addhost=} {--list=}';
+    protected $signature = 'snmp:discovery 
+    {--job=} 
+    {--exec=} 
+    {--execsingle=} 
+    {--exec-all : execute all discovery methods}
+    {--ip=} 
+    {--community=} 
+    {--sync=} 
+    {--addhost=} 
+    {--list=} 
+    {--syncConn : sync discovery host connections and interfaces}';
 
     /**
      * The console command description.
@@ -42,9 +52,12 @@ class CliSnmpDiscovery extends Command
     {
         $snmpDiscovery = new SnmpDiscovery();
 
+        if ($this->option('syncConn')) {
 
-        $snmpDiscovery->setHostConnection();
+            //$snmpDiscovery->setHostFromSnmp();
 
+            $snmpDiscovery->setHostConnection();
+        }
 
 
         //$ping = new Ping();
@@ -65,33 +78,35 @@ class CliSnmpDiscovery extends Command
         */
 
 
-        /*
 
-        // discovery novos hosts - a cada 6h
-        $snmpDiscovery->execSnmpHost(false);
 
-        // remote - run a cada 15 min
-        $snmpDiscovery->execSnmpHostDiscovery('remote', false);
+        if ($this->option('exec-all')) {
 
-        // interface - a cada 24h
-        $snmpDiscovery->execSnmpHostDiscovery('interface', false);
+            // discovery novos hosts - a cada 6h
+            $snmpDiscovery->execSnmpHost(false);
 
-        // vlan - a cada 6h
-        $snmpDiscovery->execSnmpHostDiscovery('vlan', false);
+            // remote - run a cada 15 min
+            $snmpDiscovery->execSnmpHostDiscovery('remote', false);
 
-        // fdb - a cada 10 min
-        $snmpDiscovery->execSnmpHostDiscovery('fdb', false);
+            // interface - a cada 24h
+            $snmpDiscovery->execSnmpHostDiscovery('interface', false);
 
-        // connection - a cada 15 min
-        $snmpDiscovery->execSnmpHostDiscovery('connection', false, 2);
+            // vlan - a cada 6h
+            $snmpDiscovery->execSnmpHostDiscovery('vlan', false);
 
-        // iparp - a cada 15 min
-        $snmpDiscovery->execSnmpHostDiscovery('iparp', false);
+            // fdb - a cada 10 min
+            $snmpDiscovery->execSnmpHostDiscovery('fdb', false);
 
-        // ipv6nd - a cada 15 min
-        $snmpDiscovery->execSnmpHostDiscovery('ipv6nd', false);
+            // connection - a cada 15 min
+            $snmpDiscovery->execSnmpHostDiscovery('connection', false, 2);
 
-        */
+            // iparp - a cada 15 min
+            $snmpDiscovery->execSnmpHostDiscovery('iparp', false);
+
+            // ipv6nd - a cada 15 min
+            $snmpDiscovery->execSnmpHostDiscovery('ipv6nd', false);
+        }
+
 
     }
 }

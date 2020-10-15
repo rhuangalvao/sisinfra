@@ -23,9 +23,9 @@ class SeedUEPG extends Seeder
 
 
         $insert2 = [
-            ['id'=> 1, 'network_type_id' => 1, 'name' => 'mgmt campus', 'address' => '172.19.0.0/23', 'enabled' => true],
-            ['id'=> 2, 'network_type_id' => 1, 'name' => 'mgmt hu', 'address' => '172.19.21.0/26', 'enabled' => true],
-            ['id'=> 3, 'network_type_id' => 1, 'name' => 'mgmt centro', 'address' => '172.21.0.0/24', 'enabled' => true],
+            ['id'=> 1, 'network_type_id' => 1, 'name' => 'mgmt campus', 'address' => '172.19.0.0/30', 'enabled' => true],
+            ['id'=> 2, 'network_type_id' => 1, 'name' => 'mgmt hu', 'address' => '172.19.21.0/28', 'enabled' => true],
+            ['id'=> 3, 'network_type_id' => 1, 'name' => 'mgmt centro', 'address' => '172.21.0.0/28', 'enabled' => true],
         ];
         DB::table('networks')->delete();
         DB::table('networks')->insert($insert2);
