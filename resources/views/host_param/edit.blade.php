@@ -42,12 +42,15 @@
                         <div class="form-group">
                             <label for="host_id">host_id: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do host_id</option>
+                                @foreach($host as $h)
+                                    @if($host_param->host_id == $h->id)
+                                        <option value="{{ $host_param->host_id }}" selected>{{ $h->hostname }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($host as $h)
                                     <option value={{$h->id}}> {{$h->hostname}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="host_id" value="{{ $host_param->host_id }}"/>--}}
                         </div>
                         <div class="form-group">
                             <label for="param_name">param_name: </label>

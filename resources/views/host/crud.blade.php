@@ -26,6 +26,8 @@
             <td>chassis_id</td>
             <td>Monitoring</td>
             <td>Enabled</td>
+            <td>serial_number</td>
+            <td>aux_vendor</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -55,6 +57,12 @@
                 <td>{{$host->chassis_id}}</td>
                 <td>{{$host->monitoring}}</td>
                 <td>{{$host->enabled}}</td>
+                <td>{{$host->serial_number}}</td>
+                @foreach($aux_vendor as $av)
+                    @if($av->id == $host->aux_vendor_id)
+                        <td>{{$av->name}}</td>
+                    @endif
+                @endforeach
                 <td>
                     <a href="{{ route('host.edit',$host->id)}}" class="btn btn-primary">Editar</a>
                 </td>

@@ -47,7 +47,6 @@
                                         <option value={{$h->id}}> {{$h->hostname}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="ifname">ifname: </label>
@@ -70,21 +69,37 @@
                                 <input type="text" maxlength="30" class="form-control" name="ifoperstatus"/>
                             </div>
                             <div class="form-group">
-                                <label for="portid">portid:</label>
-                                <input type="text" maxlength="30" class="form-control" name="portid" />
+                                <label for="ifalias">ifalias:</label>
+                                <input type="text" maxlength="30" class="form-control" name="ifalias" />
                             </div>
                             <div class="form-group">
-                                <label for="ifoperstatus">ifoperstatus: </label>
-                                <input type="text" maxlength="30" class="form-control" name="ifoperstatus"/>
+                                <label for="portid">portid: </label>
+                                <input type="text" maxlength="30" class="form-control" name="portid"/>
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="is_mgmt" value="off">
                                 <input type="checkbox" class="form-check-input" name="is_mgmt">
                                 <label class="form-check-label" for="is_mgmt">is_mgmt</label>
                             </div>
+
                             <div class="form-group">
-                                <label for="discovery_protocol_id">discovery_protocol_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="discovery_protocol_id"/>
+                                <label for="discovery_protocol_id">discovery_protocol: </label>
+                                <select id="discovery_protocol_id" name="discovery_protocol_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do discovery_protocol</option>
+                                    @foreach($discovery_protocol as $dp)
+                                        <option value={{$dp->id}}> {{$dp->name}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="snmp_host_interface_id">snmp_host_interface: </label>
+                                <select id="snmp_host_interface_id" name="snmp_host_interface_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do snmp_host_interface</option>
+                                    @foreach($snmp_host_interface as $shi)
+                                        <option value={{$shi->id}}> {{$shi->ifname}} </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Host_interface</button>

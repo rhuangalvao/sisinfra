@@ -17,6 +17,7 @@ class HostInterface extends Model
         'portid',
         'is_mgmt',
         'discovery_protocol_id',
+        'snmp_host_interface_id',
     ];
 
     public function hostId()

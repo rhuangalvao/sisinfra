@@ -27,16 +27,43 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="host_id">host_id:</label>
-                            <input type="text" class="form-control" name="snmp_host_id" value="{{ $host_map->host_id }}" />
+                            <label for="host_id">host: </label>
+                            <select id="host_id" name="host_id" class="select2ex form-control">
+                                @foreach($host as $h)
+                                    @if($host_map->host_id == $h->id)
+                                        <option value="{{ $host_map->host_id }}" selected>{{ $h->hostname }}</option>
+                                    @endif
+                                @endforeach
+                                @foreach($host as $h)
+                                    <option value={{$h->id}}> {{$h->hostname}} </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="snmp_host_id">snmp_host_id:</label>
-                            <input type="text" class="form-control" name="snmp_host_id" value="{{ $host_map->snmp_host_id }}" />
+                            <label for="snmp_host_id">snmp_host: </label>
+                            <select id="snmp_host_id" name="snmp_host_id" class="select2ex form-control">
+                                @foreach($snmp_host as $sh)
+                                    @if($host_map->snmp_host_id == $sh->id)
+                                        <option value="{{ $host_map->snmp_host_id }}" selected>{{ $sh->hostname }}</option>
+                                    @endif
+                                @endforeach
+                                @foreach($snmp_host as $sh)
+                                    <option value={{$sh->id}}> {{$sh->hostname}} </option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
-                            <label for="snmp_host_remote_id">snmp_host_remote_id: </label>
-                            <input type="text" maxlength="30" class="form-control" name="snmp_host_remote_id" value="{{ $host_map->snmp_host_remote_id }}"/>
+                            <label for="snmp_host_remote_id">snmp_host_remote: </label>
+                            <select id="snmp_host_remote_id" name="snmp_host_remote_id" class="select2ex form-control">
+                                @foreach($snmp_host as $sh)
+                                    @if($host_map->snmp_host_remote_id == $sh->id)
+                                        <option value="{{ $host_map->snmp_host_remote_id }}" selected>{{ $sh->hostname }}</option>
+                                    @endif
+                                @endforeach
+                                @foreach($snmp_host as $sh)
+                                    <option value={{$sh->id}}> {{$sh->hostname}} </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>

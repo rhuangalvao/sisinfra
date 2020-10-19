@@ -4,17 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Model\Host;
 use App\Model\HostMap;
+use App\Model\SnmpHost;
 use Illuminate\Http\Request;
 
 class HostMapController extends Controller
 {
     public function create(){
         $host = Host::all();
-        return view('host_map.create',compact('host'));
+        $snmp_host = SnmpHost::all();
+        return view('host_map.create',compact('host','snmp_host'));
     }
     public function crud(){
         $host_map = HostMap::all();
-        return view('host_map.crud',compact('host_map'));
+        $host = Host::all();
+        $snmp_host = SnmpHost::all();
+        return view('host_map.crud',compact('host_map','host','snmp_host'));
     }
     public function store(Request $request){
 
@@ -39,8 +43,9 @@ class HostMapController extends Controller
     }
     public function edit($id){
         $host = Host::all();
+        $snmp_host = SnmpHost::all();
         $host_map = HostMap::find($id);
-        return view('host_map.edit', compact('host_map','host'));
+        return view('host_map.edit', compact('host_map','host','snmp_host'));
     }
     public function update(Request $request, $id){
         $request->validate([

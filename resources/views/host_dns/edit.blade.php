@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="version">version:</label>
-                            <input type="text" maxlength="30" class="form-control" name="version" value="{{ $host_dns->version }}"/>
+                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version" value="{{ $host_dns->version }}"/>
                         </div>
                         <div class="form-group form-check">
                             <input type="hidden" name="is_main" value="off">

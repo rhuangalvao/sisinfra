@@ -14,7 +14,8 @@ class ServiceDependencyController extends Controller
     }
     public function crud(){
         $service_dependency = ServiceDependency::all();
-        return view('service_dependency.crud',compact('service_dependency'));
+        $service_instance = ServiceInstance::all();
+        return view('service_dependency.crud',compact('service_dependency','service_instance'));
     }
     public function store(Request $request){
 

@@ -10,7 +10,8 @@ class ServiceInstanceParamController extends Controller
 {
     public function create(){
         $service_instance = ServiceInstance::all();
-        return view('service_instance_param.create',compact('service_instance'));
+        $service_instance = ServiceInstance::all();
+        return view('service_instance_param.create',compact('service_instance','service_instance'));
     }
     public function crud(){
         $service_instance_param = ServiceInstanceParam::all();

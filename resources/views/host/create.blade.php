@@ -104,6 +104,19 @@
                                 <input type="checkbox" class="form-check-input" name="enabled">
                                 <label class="form-check-label" for="enabled">enabled</label>
                             </div>
+                            <div class="form-group">
+                                <label for="serial_number">serial_number: </label>
+                                <input type="text" maxlength="30" class="form-control" name="serial_number"/>
+                            </div>
+                            <div class="form-group">
+                                <label for="aux_vendor_id">aux_vendor:</label>
+                                <select id="aux_vendor_id" name="aux_vendor_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do aux_vendor</option>
+                                    @foreach($aux_vendor as $av)
+                                        <option value={{$av->id}}> {{$av->name}} </option>
+                                    @endforeach
+                                </select>
+                            </div>
 
                             <button type="submit" class="btn btn-primary">Adicionar Host</button>
                             <form>

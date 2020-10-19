@@ -7,5 +7,5 @@ use Illuminate\Database\Eloquent\Model;
 class AuxVendor extends Model
 {
     //
-    protected $fillable = 'name';
+    protected $fillable = ['name'];
 }

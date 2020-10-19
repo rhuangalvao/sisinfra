@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Model\AuxVendor;
 use App\Model\Host;
 use App\Model\OperatingSystem;
 use App\Model\HostType;
@@ -14,14 +15,16 @@ class HostController extends Controller
         $operating_system = OperatingSystem::all();
         $host_type = HostType::all();
         $host_status = HostStatus::all();
-        return view('host.create',compact('operating_system','host_type','host_status'));
+        $aux_vendor = AuxVendor::all();
+        return view('host.create',compact('operating_system','host_type','host_status','aux_vendor'));
     }
     public function crud(){
         $host = Host::all();
         $operating_system = OperatingSystem::all();
         $host_type = HostType::all();
         $host_status = HostStatus::all();
-        return view('host.crud',compact('host', 'operating_system','host_type','host_status'));
+        $aux_vendor = AuxVendor::all();
+        return view('host.crud',compact('host', 'operating_system','host_type','host_status','aux_vendor'));
     }
     public function store(Request $request){
 
@@ -35,6 +38,8 @@ class HostController extends Controller
             'descr'=>'required',
             'obs'=>'required',
             'chassis_id'=>'required',
+            'serial_number'=>'required',
+            'aux_vendor_id'=>'required',
         ]);
         $host = new Host([
             'os_id' => $request->get('os_id'),
@@ -48,6 +53,8 @@ class HostController extends Controller
             'chassis_id' => $request->get('chassis_id'),
             'monitoring' => $request->get('monitoring'),
             'enabled' => $request->get('enabled'),
+            'serial_number' => $request->get('serial_number'),
+            'aux_vendor_id' => $request->get('aux_vendor_id'),
         ]);
         $host->save();
         return redirect('/host/crud')->with('success', 'Host salvo!');
@@ -63,7 +70,8 @@ class HostController extends Controller
         $host_type = HostType::all();
         $host_status = HostStatus::all();
         $host = Host::find($id);
-        return view('host.edit', compact('host','operating_system','host_type','host_status'));
+        $aux_vendor = AuxVendor::all();
+        return view('host.edit', compact('host','operating_system','host_type','host_status','aux_vendor'));
     }
     public function update(Request $request, $id){
         $request->validate([
@@ -76,6 +84,8 @@ class HostController extends Controller
             'descr'=>'required',
             'obs'=>'required',
             'chassis_id'=>'required',
+            'serial_number'=>'required',
+            'aux_vendor_id'=>'required',
         ]);
 
         $host = Host::find($id);
@@ -91,6 +101,8 @@ class HostController extends Controller
         $host->chassis_id = $request->get('chassis_id');
         $host->monitoring = $request->get('monitoring');
         $host->enabled = $request->get('enabled');
+        $host->serial_number = $request->get('serial_number');
+        $host->aux_vendor_id = $request->get('aux_vendor_id');
 
         $host->save();
 

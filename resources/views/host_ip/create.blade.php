@@ -55,7 +55,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="mask">mask:</label>
-                                <input type="text" maxlength="30" class="form-control" name="mask" />
+                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="mask" />
                             </div>
                             <div class="form-group">
                                 <label for="gateway">gateway: </label>
@@ -63,7 +63,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="version">version: </label>
-                                <input type="text" maxlength="30" class="form-control" name="version"/>
+                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version"/>
                             </div>
                             <div class="form-group">
                                 <label for="mac_address">mac_address:</label>

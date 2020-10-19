@@ -15,7 +15,7 @@
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>service_instance_id</td>
+            <td>service_instance</td>
             <td>param_name</td>
             <td>param_value</td>
             <td>enabled</td>
@@ -25,7 +25,11 @@
         <tbody>
         @foreach($service_instance_param as $service_instance_param)
             <tr>
-                <td>{{$service_instance_param->service_instance_id}}</td>
+                @foreach($service_instance as $si)
+                    @if($si->id == $service_instance_param->service_instance_id)
+                        <td>{{$si->descr}}</td>
+                    @endif
+                @endforeach
                 <td>{{$service_instance_param->param_name}}</td>
                 <td>{{$service_instance_param->param_value}}</td>
                 <td>{{$service_instance_param->enabled}}</td>

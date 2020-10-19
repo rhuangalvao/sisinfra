@@ -15,18 +15,30 @@
     <table align="center" class="table table-striped table-active table-sm col-sm-8">
         <thead>
         <tr>
-            <td>host_id</td>
-            <td>snmp_host_id</td>
-            <td>snmp_host_remote_id</td>
+            <td>host</td>
+            <td>snmp_host</td>
+            <td>snmp_host_remote</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
         <tbody>
         @foreach($host_map as $host_map)
             <tr>
-                <td>{{$host_map->host_id}}</td>
-                <td>{{$host_map->snmp_host_id}}</td>
-                <td>{{$host_map->snmp_host_remote_id}}</td>
+                @foreach($host as $h)
+                    @if($h->id == $host_map->host_id)
+                        <td>{{$h->hostname}}</td>
+                    @endif
+                @endforeach
+                @foreach($snmp_host as $sh)
+                    @if($sh->id == $host_map->snmp_host_id)
+                        <td>{{$sh->hostname}}</td>
+                    @endif
+                @endforeach
+                @foreach($snmp_host as $sh)
+                    @if($sh->id == $host_map->snmp_host_remote_id)
+                        <td>{{$sh->hostname}}</td>
+                    @endif
+                @endforeach
                 <td>
                     <a href="{{ route('host_map.edit',$host_map->id)}}" class="btn btn-primary">Editar</a>
                 </td>

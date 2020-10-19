@@ -18,6 +18,8 @@ class Host extends Model
         'chassis_id',
         'monitoring',
         'enabled',
+        'serial_number',
+        'aux_vendor_id',
     ];
 
     public function os_id()

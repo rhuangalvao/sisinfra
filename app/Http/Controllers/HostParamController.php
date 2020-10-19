@@ -24,7 +24,7 @@ class HostParamController extends Controller
             'param_name'=>'required',
             'param_value'=>'required',
         ]);
-        $host_param = new host_param([
+        $host_param = new HostParam([
             'host_id' => $request->get('host_id'),
             'param_name' => $request->get('param_name'),
             'param_value' => $request->get('param_value'),

@@ -131,6 +131,60 @@ Route::group(['prefix'=>'operating_system'], function (){
     Route::get('{id}/edit',['as'=>'operating_system.edit','uses'=> 'OperatingSystemController@edit']);
     Route::patch('{id}/update',['as'=>'operating_system.update','uses'=>'OperatingSystemController@update']);
 });
+Route::group(['prefix'=>'aux_mac'], function (){
+    Route::get('',['as'=>'aux_mac','uses'=>'AuxMacController@index']);
+    Route::get('crud',['as'=>'aux_mac.crud','uses'=>'AuxMacController@crud']);
+    Route::get('create',['as'=>'aux_mac.create','uses'=> 'AuxMacController@create']);
+    Route::post('store',['as'=>'aux_mac.store','uses'=> 'AuxMacController@store']);
+    Route::delete('{id}/destroy',['as'=>'aux_mac.destroy','uses'=> 'AuxMacController@destroy']);
+    Route::get('{id}/edit',['as'=>'aux_mac.edit','uses'=> 'AuxMacController@edit']);
+    Route::patch('{id}/update',['as'=>'aux_mac.update','uses'=>'AuxMacController@update']);
+});
+Route::group(['prefix'=>'aux_vendor'], function (){
+    Route::get('',['as'=>'aux_vendor','uses'=>'AuxVendorController@index']);
+    Route::get('crud',['as'=>'aux_vendor.crud','uses'=>'AuxVendorController@crud']);
+    Route::get('create',['as'=>'aux_vendor.create','uses'=> 'AuxVendorController@create']);
+    Route::post('store',['as'=>'aux_vendor.store','uses'=> 'AuxVendorController@store']);
+    Route::delete('{id}/destroy',['as'=>'aux_vendor.destroy','uses'=> 'AuxVendorController@destroy']);
+    Route::get('{id}/edit',['as'=>'aux_vendor.edit','uses'=> 'AuxVendorController@edit']);
+    Route::patch('{id}/update',['as'=>'aux_vendor.update','uses'=>'AuxVendorController@update']);
+});
+Route::group(['prefix'=>'discovery_protocol'], function (){
+    Route::get('',['as'=>'discovery_protocol','uses'=>'DiscoveryProtocolController@index']);
+    Route::get('crud',['as'=>'discovery_protocol.crud','uses'=>'DiscoveryProtocolController@crud']);
+    Route::get('create',['as'=>'discovery_protocol.create','uses'=> 'DiscoveryProtocolController@create']);
+    Route::post('store',['as'=>'discovery_protocol.store','uses'=> 'DiscoveryProtocolController@store']);
+    Route::delete('{id}/destroy',['as'=>'discovery_protocol.destroy','uses'=> 'DiscoveryProtocolController@destroy']);
+    Route::get('{id}/edit',['as'=>'discovery_protocol.edit','uses'=> 'DiscoveryProtocolController@edit']);
+    Route::patch('{id}/update',['as'=>'discovery_protocol.update','uses'=>'DiscoveryProtocolController@update']);
+});
+Route::group(['prefix'=>'network_type'], function (){
+    Route::get('',['as'=>'network_type','uses'=>'NetworkTypeController@index']);
+    Route::get('crud',['as'=>'network_type.crud','uses'=>'NetworkTypeController@crud']);
+    Route::get('create',['as'=>'network_type.create','uses'=> 'NetworkTypeController@create']);
+    Route::post('store',['as'=>'network_type.store','uses'=> 'NetworkTypeController@store']);
+    Route::delete('{id}/destroy',['as'=>'network_type.destroy','uses'=> 'NetworkTypeController@destroy']);
+    Route::get('{id}/edit',['as'=>'network_type.edit','uses'=> 'NetworkTypeController@edit']);
+    Route::patch('{id}/update',['as'=>'network_type.update','uses'=>'NetworkTypeController@update']);
+});
+Route::group(['prefix'=>'network'], function (){
+    Route::get('',['as'=>'network','uses'=>'NetworkController@index']);
+    Route::get('crud',['as'=>'network.crud','uses'=>'NetworkController@crud']);
+    Route::get('create',['as'=>'network.create','uses'=> 'NetworkController@create']);
+    Route::post('store',['as'=>'network.store','uses'=> 'NetworkController@store']);
+    Route::delete('{id}/destroy',['as'=>'network.destroy','uses'=> 'NetworkController@destroy']);
+    Route::get('{id}/edit',['as'=>'network.edit','uses'=> 'NetworkController@edit']);
+    Route::patch('{id}/update',['as'=>'network.update','uses'=>'NetworkController@update']);
+});
+Route::group(['prefix'=>'password'], function (){
+    Route::get('',['as'=>'password','uses'=>'PasswordController@index']);
+    Route::get('crud',['as'=>'password.crud','uses'=>'PasswordController@crud']);
+    Route::get('create',['as'=>'password.create','uses'=> 'PasswordController@create']);
+    Route::post('store',['as'=>'password.store','uses'=> 'PasswordController@store']);
+    Route::delete('{id}/destroy',['as'=>'password.destroy','uses'=> 'PasswordController@destroy']);
+    Route::get('{id}/edit',['as'=>'password.edit','uses'=> 'PasswordController@edit']);
+    Route::patch('{id}/update',['as'=>'password.update','uses'=>'PasswordController@update']);
+});
 
 //Route::get('/', function () {
 //    return view('welcome');

@@ -304,6 +304,36 @@ return [
                     'url'         => 'operating_system/crud',
                     'icon'        => 'far fa-fw fa-file',
                 ],
+                [
+                    'text'        => 'Mac Address',
+                    'url'         => 'aux_mac/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Vendors',
+                    'url'         => 'aux_vendor/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Discovery Protocols',
+                    'url'         => 'discovery_protocol/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Network Types',
+                    'url'         => 'network_type/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Networks',
+                    'url'         => 'network/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
+                [
+                    'text'        => 'Passwords',
+                    'url'         => 'password/crud',
+                    'icon'        => 'far fa-fw fa-file',
+                ],
             ],
         ],
         ['header' => 'account_settings'],

@@ -15,16 +15,24 @@
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Service_instance_id</td>
-            <td>Service_instance_id_dep</td>
+            <td>Service_instance</td>
+            <td>Service_instance_dep</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
         <tbody>
         @foreach($service_dependency as $service_dependency)
             <tr>
-                <td>{{$service_dependency->service_instance_id}}</td>
-                <td>{{$service_dependency->service_instance_id_dep}}</td>
+                @foreach($service_instance as $si)
+                    @if($si->id == $service_dependency->service_instance_id_dep)
+                        <td>{{$si->descr}}</td>
+                    @endif
+                @endforeach
+                @foreach($service_instance as $si)
+                    @if($si->id == $service_dependency->service_instance_id)
+                        <td>{{$si->descr}}</td>
+                    @endif
+                @endforeach
                 <td>
                     <a href="{{ route('service_dependency.edit',$service_dependency->id)}}" class="btn btn-primary">Editar</a>
                 </td>

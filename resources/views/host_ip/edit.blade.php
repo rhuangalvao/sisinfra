@@ -56,7 +56,7 @@
                         </div>
                         <div class="form-group">
                             <label for="mask">mask:</label>
-                            <input type="text" maxlength="30" class="form-control" name="mask" value="{{ $host_ip->mask }}"/>
+                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="mask" value="{{ $host_ip->mask }}"/>
                         </div>
                         <div class="form-group">
                             <label for="gateway">gateway: </label>
@@ -64,7 +64,7 @@
                         </div>
                         <div class="form-group">
                             <label for="version">version: </label>
-                            <input type="text" maxlength="30" class="form-control" name="version" value="{{ $host_ip->version }}"/>
+                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version" value="{{ $host_ip->version }}"/>
                         </div>
                         <div class="form-group">
                             <label for="mac_address">mac_address:</label>

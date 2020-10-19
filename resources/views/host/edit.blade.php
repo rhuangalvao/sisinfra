@@ -41,34 +41,43 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="os_id">ID Operating System:</label>
+                            <label for="os_id">Operating System:</label>
                             <select id="os_id" name="os_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do operating_system_id</option>
+                                @foreach($operating_system as $os)
+                                    @if($host->os_id == $os->id)
+                                        <option value="{{ $host->os_id }}" selected>{{ $os->name }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($operating_system as $os)
                                     <option value={{$os->id}}> {{$os->name}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="os_id" value="{{ $host->os_id }}" />--}}
                         </div>
                         <div class="form-group">
-                            <label for="host_type_id">host_type_id: </label>
+                            <label for="host_type_id">host_type: </label>
                             <select id="host_type_id" name="host_type_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do host_type_id</option>
+                                @foreach($host_type as $ht)
+                                    @if($host->host_type_id == $ht->id)
+                                        <option value="{{ $host->host_type_id }}" selected>{{ $ht->name }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($host_type as $ht)
                                     <option value={{$ht->id}}> {{$ht->name}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="host_type_id" value="{{ $host->host_type_id }}"/>--}}
                         </div>
                         <div class="form-group">
-                            <label for="status_id">status_id:</label>
+                            <label for="status_id">status:</label>
                             <select id="status_id" name="status_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do status_id</option>
+                                @foreach($host_status as $hs)
+                                    @if($host->status_id == $hs->id)
+                                        <option value="{{ $host->status_id }}" selected>{{ $hs->status }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($host_status as $hs)
                                     <option value={{$hs->id}}> {{$hs->status}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="status_id" value="{{ $host->status_id }}" />--}}
                         </div>
                         <div class="form-group">
                             <label for="tag">TAG: </label>
@@ -103,6 +112,23 @@
                             <input type="hidden" name="enabled" value="off">
                             <input type="checkbox" class="form-check-input" name="enabled">
                             <label class="form-check-label" for="enabled">enabled</label>
+                        </div>
+                        <div class="form-group">
+                            <label for="serial_number">serial_number: </label>
+                            <input type="text" maxlength="30" class="form-control" name="serial_number" value="{{ $host->serial_number }}"/>
+                        </div>
+                        <div class="form-group">
+                            <label for="aux_vendor_id">aux_vendor:</label>
+                            <select id="aux_vendor_id" name="aux_vendor_id" class="select2ex form-control">
+                                @foreach($aux_vendor as $av)
+                                    @if($host->aux_vendor_id == $av->id)
+                                        <option value="{{ $host->aux_vendor_id }}" selected>{{ $av->name }}</option>
+                                    @endif
+                                @endforeach
+                                @foreach($aux_vendor as $av)
+                                    <option value={{$av->id}}> {{$av->name}} </option>
+                                @endforeach
+                            </select>
                         </div>
 
                         <button type="submit" class="btn btn-primary">Editar</button>

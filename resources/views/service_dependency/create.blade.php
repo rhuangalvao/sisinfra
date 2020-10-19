@@ -40,22 +40,23 @@
                         <form method="post" action="{{ route('service_dependency.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="service_instance_id">Service_instance_id: </label>
-
+                                <label for="service_instance_id">Service_instance: </label>
                                 <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Digite o nome do service_instance</option>
+                                    <option disabled value="" selected>Nome do service_instance</option>
                                     @foreach($service_instance as $si)
                                         <option value={{$si->id}}> {{$si->descr}} </option>
                                     @endforeach
                                 </select>
-
-{{--                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="service_instance_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="service_instance_id_dep">Service_instance_id_dep: </label>
-                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="service_instance_id_dep"/>
+                                <label for="service_instance_id_dep">Service_instance_dep: </label>
+                                <select id="service_instance_id_dep" name="service_instance_id_dep" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do service_instance_dep</option>
+                                    @foreach($service_instance as $si)
+                                        <option value={{$si->id}}> {{$si->descr}} </option>
+                                    @endforeach
+                                </select>
                             </div>
-
                             <button type="submit" class="btn btn-primary">Adicionar Service_dependency</button>
                             <form>
                                 <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">

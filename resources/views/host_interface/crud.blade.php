@@ -24,7 +24,8 @@
             <td>ifalias</td>
             <td>portid</td>
             <td>is_mgmt</td>
-            <td>is_mgmt</td>
+            <td>discovery_protocol</td>
+            <td>snmp_host_interface</td>
             <td colspan = 2>Ações</td>
         </tr>
         </thead>
@@ -44,7 +45,16 @@
                 <td>{{$host_interface->ifalias}}</td>
                 <td>{{$host_interface->portid}}</td>
                 <td>{{$host_interface->is_mgmt}}</td>
-                <td>{{$host_interface->discovery_protocol_id}}</td>
+                @foreach($discovery_protocol as $dp)
+                    @if($dp->id == $host_interface->discovery_protocol_id)
+                        <td>{{$dp->name}}</td>
+                    @endif
+                @endforeach
+                @foreach($snmp_host_interface as $shi)
+                    @if($shi->id == $host_interface->snmp_host_interface_id)
+                        <td>{{$shi->ifname}}</td>
+                    @endif
+                @endforeach
                 <td>
                     <a href="{{ route('host_interface.edit',$host_interface->id)}}" class="btn btn-primary">Editar</a>
                 </td>
