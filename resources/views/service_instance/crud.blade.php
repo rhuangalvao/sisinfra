@@ -21,7 +21,7 @@
             <td>Host_ip</td>
             <td>Host_dns</td>
             <td>descr</td>
-            <td>password_id</td>
+            <td>password</td>
             <td>monitoring</td>
             <td colspan = 2>Ações</td>
         </tr>
@@ -51,7 +51,11 @@
                     @endif
                 @endforeach
                 <td>{{$service_instance->descr}}</td>
-                <td>{{$service_instance->password_id}}</td>
+                @foreach($password as $pw)
+                    @if($pw->id == $service_instance->password_id)
+                        <td>{{$pw->name}}</td>
+                    @endif
+                @endforeach
                 <td>{{$service_instance->monitoring}}</td>
                 <td>
                     <a href="{{ route('service_instance.edit',$service_instance->id)}}" class="btn btn-primary">Editar</a>

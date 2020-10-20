@@ -39,52 +39,53 @@
                         <form method="post" action="{{ route('service_instance.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="host_id">ID Host: </label>
+                                <label for="host_id">Host: </label>
                                 <select id="host_id" name="host_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host_id</option>
+                                    <option disabled value="" selected>Nome do host</option>
                                     @foreach($host as $h)
                                         <option value={{$h->id}}> {{$h->hostname}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
-                            </div>
+                           </div>
                             <div class="form-group">
-                                <label for="service_id">service_id: </label>
+                                <label for="service_id">service: </label>
                                 <select id="service_id" name="service_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do service_id</option>
+                                    <option disabled value="" selected>Nome do service</option>
                                     @foreach($service as $s)
                                         <option value={{$s->id}}> {{$s->name}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="service_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="host_ip_id">host_ip_id:</label>
                                 <select id="host_ip_id" name="host_ip_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Endereço do host_ip_id</option>
+                                    <option disabled value="" selected>Endereço do host_ip</option>
                                     @foreach($host_ip as $hi)
                                         <option value={{$hi->id}}> {{$hi->ip_address}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_ip_id" />--}}
                             </div>
                             <div class="form-group">
                                 <label for="host_dns_id">host_dns_id: </label>
                                 <select id="host_dns_id" name="host_dns_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host_dns_id</option>
+                                    <option disabled value="" selected>Nome do host_dns</option>
                                     @foreach($host_dns as $hd)
                                         <option value={{$hd->id}}> {{$hd->name}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_dns_id"/>--}}
                             </div>
                             <div class="form-group">
                                 <label for="descr">descr: </label>
                                 <input type="text" maxlength="30" class="form-control" name="descr"/>
                             </div>
                             <div class="form-group">
-                                <label for="password_id">password_id:</label>
-                                <input type="text" maxlength="30" class="form-control" name="password_id" />
+                                <label for="password_id">password: </label>
+                                <select id="password_id" name="password_id" class="select2ex form-control">
+                                    <option disabled value="" selected>Nome do password</option>
+                                    @foreach($password as $pw)
+                                        <option value={{$pw->id}}> {{$pw->name}} </option>
+                                    @endforeach
+                                </select>
                             </div>
 
                             <div class="form-group form-check">

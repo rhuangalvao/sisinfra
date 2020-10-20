@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Host;
 use App\Model\HostDns;
 use App\Model\HostIp;
+use App\Model\Password;
 use App\Model\Service;
 use App\Model\ServiceInstance;
 use Illuminate\Http\Request;
@@ -16,7 +17,8 @@ class ServiceInstanceController extends Controller
         $service = Service::all();
         $host_ip = HostIp::all();
         $host_dns = HostDns::all();
-        return view('service_instance.create',compact('host','service','host_ip','host_dns'));
+        $password = Password::all();
+        return view('service_instance.create',compact('host','service','host_ip','host_dns','password'));
     }
     public function crud(){
         $service_instance = ServiceInstance::all();
@@ -24,7 +26,8 @@ class ServiceInstanceController extends Controller
         $service = Service::all();
         $host_ip = HostIp::all();
         $host_dns = HostDns::all();
-        return view('service_instance.crud',compact('service_instance','host','service','host_ip','host_dns'));
+        $password = Password::all();
+        return view('service_instance.crud',compact('service_instance','host','service','host_ip','host_dns','password'));
     }
     public function store(Request $request){
 
@@ -59,8 +62,9 @@ class ServiceInstanceController extends Controller
         $service = Service::all();
         $host_ip = Host_ip::all();
         $host_dns = HostDns::all();
+        $password = Password::all();
         $service_instance = ServiceInstance::find($id);
-        return view('service_instance.edit', compact('service_instance','host','service','host_ip','host_dns'));
+        return view('service_instance.edit', compact('service_instance','host','service','host_ip','host_dns','password'));
     }
     public function update(Request $request, $id){
         $request->validate([
