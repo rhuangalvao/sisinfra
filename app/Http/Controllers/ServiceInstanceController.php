@@ -34,20 +34,33 @@ class ServiceInstanceController extends Controller
         $request->validate([
             'host_id'=>'required',
             'service_id'=>'required',
-            'host_ip_id'=>'required',
-            'host_dns_id'=>'required',
+//            'host_ip_id'=>'required',
+//            'host_dns_id'=>'required',
             'descr'=>'required',
             'password_id'=>'required',
         ]);
-        $service_instance = new ServiceInstance([
-            'host_id' => $request->get('host_id'),
-            'service_id' => $request->get('service_id'),
-            'host_ip_id' => $request->get('host_ip_id'),
-            'host_dns_id' => $request->get('host_dns_id'),
-            'descr' => $request->get('descr'),
-            'password_id' => $request->get('password_id'),
-            'monitoring' => $request->get('monitoring'),
-        ]);
+        if($request->get('host_ip_id')!=null){
+            $service_instance = new ServiceInstance([
+                'host_id' => $request->get('host_id'),
+                'service_id' => $request->get('service_id'),
+                'host_ip_id' => $request->get('host_ip_id'),
+                'host_dns_id' => null,
+                'descr' => $request->get('descr'),
+                'password_id' => $request->get('password_id'),
+                'monitoring' => $request->get('monitoring'),
+            ]);
+        }else{
+            $service_instance = new ServiceInstance([
+                'host_id' => $request->get('host_id'),
+                'service_id' => $request->get('service_id'),
+                'host_ip_id' => null,
+                'host_dns_id' => $request->get('host_dns_id'),
+                'descr' => $request->get('descr'),
+                'password_id' => $request->get('password_id'),
+                'monitoring' => $request->get('monitoring'),
+            ]);
+        }
+
         $service_instance->save();
         return redirect('/service_instance/crud')->with('success', 'service_instance salvo!');
     }
@@ -60,7 +73,7 @@ class ServiceInstanceController extends Controller
     public function edit($id){
         $host = Host::all();
         $service = Service::all();
-        $host_ip = Host_ip::all();
+        $host_ip = HostIp::all();
         $host_dns = HostDns::all();
         $password = Password::all();
         $service_instance = ServiceInstance::find($id);
@@ -70,22 +83,31 @@ class ServiceInstanceController extends Controller
         $request->validate([
             'host_id'=>'required',
             'service_id'=>'required',
-            'host_ip_id'=>'required',
-            'host_dns_id'=>'required',
+//            'host_ip_id'=>'required',
+//            'host_dns_id'=>'required',
             'descr'=>'required',
             'password_id'=>'required',
         ]);
 
         $service_instance = ServiceInstance::find($id);
 
-        $service_instance->host_id = $request->get('host_id');
-        $service_instance->service_id = $request->get('service_id');
-        $service_instance->host_ip_id = $request->get('host_ip_id');
-        $service_instance->host_dns_id = $request->get('host_dns_id');
-        $service_instance->descr = $request->get('descr');
-        $service_instance->password_id = $request->get('password_id');
-        $service_instance->monitoring = $request->get('monitoring');
-
+        if($request->get('host_ip_id')!=null) {
+            $service_instance->host_id = $request->get('host_id');
+            $service_instance->service_id = $request->get('service_id');
+            $service_instance->host_ip_id = $request->get('host_ip_id');
+            $service_instance->host_dns_id = null;
+            $service_instance->descr = $request->get('descr');
+            $service_instance->password_id = $request->get('password_id');
+            $service_instance->monitoring = $request->get('monitoring');
+        }else{
+            $service_instance->host_id = $request->get('host_id');
+            $service_instance->service_id = $request->get('service_id');
+            $service_instance->host_ip_id = null;
+            $service_instance->host_dns_id = $request->get('host_dns_id');
+            $service_instance->descr = $request->get('descr');
+            $service_instance->password_id = $request->get('password_id');
+            $service_instance->monitoring = $request->get('monitoring');
+        }
         $service_instance->save();
 
         return redirect('/service_instance/crud')->with('success', 'service_instance editado!');

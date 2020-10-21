@@ -43,12 +43,15 @@
                         <div class="form-group">
                             <label for="host_id">ID Host: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do host_id</option>
+                                @foreach($host as $h)
+                                    @if($host_ip->host_id == $h->id)
+                                        <option value="{{ $host_ip->host_id }}" selected>{{ $h->hostname }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($host as $h)
                                     <option value={{$h->id}}> {{$h->hostname}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="host_id" value="{{ $host_ip->host_id }}"/>--}}
                         </div>
                         <div class="form-group">
                             <label for="ip_address">ip_address: </label>
@@ -62,10 +65,39 @@
                             <label for="gateway">gateway: </label>
                             <input type="text" maxlength="30" class="form-control" name="gateway" value="{{ $host_ip->gateway }}"/>
                         </div>
-                        <div class="form-group">
-                            <label for="version">version: </label>
-                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version" value="{{ $host_ip->version }}"/>
-                        </div>
+                        @if($host_ip->version == 4)
+                            <div class="form-group">
+                                <label for="version">version: </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        IPV4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios2" value=6>
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        IPV6
+                                    </label>
+                                </div>
+                            </div>
+                        @else
+                            <div class="form-group">
+                                <label for="version">version: </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 >
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        IPV4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios2" value=6 checked>
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        IPV6
+                                    </label>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group">
                             <label for="mac_address">mac_address:</label>
                             <input type="text" maxlength="30" class="form-control" name="mac_address" value="{{ $host_ip->mac_address }}"/>

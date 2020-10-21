@@ -45,7 +45,7 @@
                             <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
                                 @foreach($service_instance as $si)
                                     @if($service_dependency->service_instance_id == $si->id)
-                                        <option value="{{ $host_interface->service_instance_id }}" selected>{{ $si->descr }}</option>
+                                        <option value="{{ $service_dependency->service_instance_id }}" selected>{{ $si->descr }}</option>
                                     @endif
                                 @endforeach
                                 @foreach($service_instance as $si)
@@ -58,7 +58,7 @@
                             <select id="service_instance_id_dep" name="service_instance_id_dep" class="select2ex form-control">
                                 @foreach($service_instance as $si)
                                     @if($service_dependency->service_instance_id_dep == $si->id)
-                                        <option value="{{ $host_interface->service_instance_id_dep }}" selected>{{ $si->descr }}</option>
+                                        <option value="{{ $service_dependency->service_instance_id_dep }}" selected>{{ $si->descr }}</option>
                                     @endif
                                 @endforeach
                                 @foreach($service_instance as $si)

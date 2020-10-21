@@ -43,7 +43,11 @@
                         <div class="form-group">
                             <label for="host_id">ID Host: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
-                                <option disabled value="" selected>Nome do host_id</option>
+                                @foreach($host as $h)
+                                    @if($host_dns->host_id == $h->id)
+                                        <option value="{{ $host_dns->host_id }}" selected>{{ $h->hostname }}</option>
+                                    @endif
+                                @endforeach
                                 @foreach($host as $h)
                                     <option value={{$h->id}}> {{$h->hostname}} </option>
                                 @endforeach
@@ -54,10 +58,39 @@
                             <label for="name">name: </label>
                             <input type="text" maxlength="30" class="form-control" name="name" value="{{ $host_dns->name }}"/>
                         </div>
-                        <div class="form-group">
-                            <label for="version">version:</label>
-                            <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version" value="{{ $host_dns->version }}"/>
-                        </div>
+                        @if($host_dns->version == 4)
+                            <div class="form-group">
+                                <label for="version">version: </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        IPV4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios2" value=6>
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        IPV6
+                                    </label>
+                                </div>
+                            </div>
+                        @else
+                            <div class="form-group">
+                                <label for="version">version: </label>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 >
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        IPV4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios2" value=6 checked>
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        IPV6
+                                    </label>
+                                </div>
+                            </div>
+                        @endif
                         <div class="form-group form-check">
                             <input type="hidden" name="is_main" value="off">
                             <input type="checkbox" class="form-check-input" name="is_main">

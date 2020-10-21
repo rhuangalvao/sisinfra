@@ -63,7 +63,18 @@
                             </div>
                             <div class="form-group">
                                 <label for="version">version: </label>
-                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="version"/>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
+                                    <label class="form-check-label" for="exampleRadios1">
+                                        IPV4
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="version" id="exampleRadios2" value=6>
+                                    <label class="form-check-label" for="exampleRadios2">
+                                        IPV6
+                                    </label>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="mac_address">mac_address:</label>

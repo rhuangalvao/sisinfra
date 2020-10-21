@@ -65,15 +65,12 @@
                                 <label for="service_group_id">Service_group_id: </label>
 
                                 <select id="service_group_id" name="service_group_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Digite o nome do service_group</option>
+                                    <option disabled value="" selected>Selecio o service_group</option>
                                     @foreach($service_group as $sg)
                                         <option value={{$sg->id}}> {{$sg->name}} </option>
                                     @endforeach
                                 </select>
-
-{{--                                <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="service_group_id"/>--}}
                             </div>
-
                             <button type="submit" class="btn btn-primary">Adicionar Service</button>
                             <form>
                                 <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">

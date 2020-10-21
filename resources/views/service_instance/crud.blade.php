@@ -40,16 +40,31 @@
                         <td>{{$s->name}}</td>
                     @endif
                 @endforeach
-                @foreach($host_ip as $hi)
-                    @if($hi->id == $service_instance->host_ip_id)
-                        <td>{{$hi->ip_address}}</td>
-                    @endif
-                @endforeach
-                @foreach($host_dns as $hd)
-                    @if($hd->id == $service_instance->host_dns_id)
-                        <td>{{$hd->name}}</td>
-                    @endif
-                @endforeach
+                @if($service_instance->host_ip_id != null)
+                    @foreach($host_ip as $hi)
+                        @if($hi->id == $service_instance->host_ip_id)
+                            <td>{{$hi->ip_address}}</td>
+                        @endif
+                    @endforeach
+                        <td></td>
+                @else
+                    <td></td>
+                    @foreach($host_dns as $hd)
+                        @if($hd->id == $service_instance->host_dns_id)
+                            <td>{{$hd->name}}</td>
+                        @endif
+                    @endforeach
+                @endif
+{{--                @foreach($host_ip as $hi)--}}
+{{--                    @if($hi->id == $service_instance->host_ip_id)--}}
+{{--                        <td>{{$hi->ip_address}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--                @foreach($host_dns as $hd)--}}
+{{--                    @if($hd->id == $service_instance->host_dns_id)--}}
+{{--                        <td>{{$hd->name}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$service_instance->descr}}</td>
                 @foreach($password as $pw)
                     @if($pw->id == $service_instance->password_id)

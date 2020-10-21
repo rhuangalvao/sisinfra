@@ -24,7 +24,7 @@
         @if($layoutHelper->isLayoutTopnavEnabled())
             @include('adminlte::partials.navbar.navbar-layout-topnav')
         @else
-            @include('adminlte::partials.navbar.navbar')
+{{--            @include('adminlte::partials.navbar.navbar')--}}
         @endif
 
         {{-- Left Main Sidebar --}}

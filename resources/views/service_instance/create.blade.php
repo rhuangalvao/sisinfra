@@ -56,6 +56,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="host_ip_id">host_ip_id:</label>
                                 <select id="host_ip_id" name="host_ip_id" class="select2ex form-control">
@@ -65,6 +66,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="host_dns_id">host_dns_id: </label>
                                 <select id="host_dns_id" name="host_dns_id" class="select2ex form-control">
@@ -74,6 +76,7 @@
                                     @endforeach
                                 </select>
                             </div>
+
                             <div class="form-group">
                                 <label for="descr">descr: </label>
                                 <input type="text" maxlength="30" class="form-control" name="descr"/>

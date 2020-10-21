@@ -43,8 +43,8 @@
                             <label for="service_instance_id">service_instance_id: </label>
                             <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
                                 @foreach($service_instance as $si)
-                                    @if($service_dependency_param->service_instance_id == $si->id)
-                                        <option value="{{ $service_dependency_param->service_instance_id }}" selected>{{ $si->descr }}</option>
+                                    @if($service_instance_param->service_instance_id == $si->id)
+                                        <option value="{{ $service_instance_param->service_instance_id }}" selected>{{ $si->descr }}</option>
                                     @endif
                                 @endforeach
                                 @foreach($service_instance as $si)
