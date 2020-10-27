@@ -10,33 +10,33 @@
 @section('content')
     @include('cabecalho',['tituloPagina'=>'Password'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('password.create')}}" class="btn btn-primary">Novo Password</a>
+        <a style="margin: 19px;" href="{{ route('password.create')}}" class="btn btn-primary">New Password</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>username</td>
-            <td>password</td>
-            <td>name</td>
-            <td>descr</td>
-            <td colspan = 2>Ações</td>
+            <td>Username</td>
+            <td>Password</td>
+            <td>Name</td>
+            <td>Description</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($password as $password)
+        @foreach($passwords as $password)
             <tr>
                 <td>{{$password->username}}</td>
                 <td>{{$password->password}}</td>
                 <td>{{$password->name}}</td>
                 <td>{{$password->descr}}</td>
                 <td>
-                    <a href="{{ route('password.edit',$password->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('password.edit',$password->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('password.destroy', $password->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -44,5 +44,6 @@
         </tbody>
     </table>
     <br/>
+    {{$passwords->links()}}
 @endsection
 

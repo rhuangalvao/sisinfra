@@ -9,13 +9,13 @@ use Illuminate\Http\Request;
 class HostIpController extends Controller
 {
     public function create(){
-        $host = Host::all();
-        return view('host_ip.create',compact('host'));
+        $hosts = Host::all();
+        return view('host_ip.create',compact('hosts'));
     }
     public function crud(){
-        $host_ip = HostIp::all();
-        $host = Host::all();
-        return view('host_ip.crud',compact('host_ip','host'));
+        $host_ips = HostIp::paginate(10);
+        $hosts = Host::all();
+        return view('host_ip.crud',compact('host_ips','hosts'));
     }
     public function store(Request $request){
 
@@ -23,9 +23,9 @@ class HostIpController extends Controller
             'host_id'=>'required',
             'ip_address'=>'required',
             'mask'=>'required',
-            'gateway'=>'required',
+//            'gateway'=>'required',
             'version'=>'required',
-            'mac_address'=>'required',
+//            'mac_address'=>'required',
         ]);
         $host_ip = new HostIp([
             'host_id' => $request->get('host_id'),
@@ -46,18 +46,18 @@ class HostIpController extends Controller
         return redirect('/host_ip/crud')->with('success', 'host_ip deletado!');
     }
     public function edit($id){
-        $host = Host::all();
-        $host_ip = HostIp::find($id);
-        return view('host_ip.edit', compact('host_ip','host'));
+        $hosts = Host::all();
+        $host_ips = HostIp::find($id);
+        return view('host_ip.edit', compact('host_ips','hosts'));
     }
     public function update(Request $request, $id){
         $request->validate([
             'host_id'=>'required',
             'ip_address'=>'required',
             'mask'=>'required',
-            'gateway'=>'required',
+//            'gateway'=>'required',
             'version'=>'required',
-            'mac_address'=>'required',
+//            'mac_address'=>'required',
         ]);
 
         $host_ip = HostIp::find($id);

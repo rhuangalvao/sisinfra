@@ -11,8 +11,8 @@ class HostStatusController extends Controller
         return view('host_status.create');
     }
     public function crud(){
-        $host_status = HostStatus::all();
-        return view('host_status.crud',compact('host_status'));
+        $host_statuses = HostStatus::paginate(10);
+        return view('host_status.crud',compact('host_statuses'));
     }
     public function store(Request $request){
 

@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Aux Vendor</h1>
+            <h1 class="display-3">Add Aux Vendor</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -26,12 +26,12 @@
                         <form method="post" action="{{ route('aux_vendor.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="name">name: </label>
-                                <input type="text" maxlength="30" class="form-control" name="name"/>
+                                <label for="name">Name: </label>
+                                <input type="text" maxlength="250" class="form-control" name="name"/>
                             </div>
-                            <button type="submit" class="btn btn-primary">Adicionar aux_vendor</button>
+                            <button type="submit" class="btn btn-primary">Add aux vendor</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

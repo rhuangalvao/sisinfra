@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Aux Mac</h1>
+            <h1 class="display-3">Add Aux Mac</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -26,24 +26,24 @@
                         <form method="post" action="{{ route('aux_mac.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="mac">mac: </label>
-                                <input type="text" maxlength="30" class="form-control" name="mac"/>
+                                <label for="mac">Mac: </label>
+                                <input type="text" maxlength="6" class="form-control" name="mac"/>
                             </div>
                             <div class="form-group">
-                                <label for="mfr">mfr: </label>
-                                <input type="text" maxlength="30" class="form-control" name="mfr"/>
+                                <label for="mfr">Mfr: </label>
+                                <input type="text" maxlength="250" class="form-control" name="mfr"/>
                             </div>
                             <div class="form-group">
-                                <label for="mfr_short">mfr_short: </label>
-                                <input type="text" maxlength="30" class="form-control" name="mfr_short"/>
+                                <label for="mfr_short">Mfr short: </label>
+                                <input type="text" maxlength="50" class="form-control" name="mfr_short"/>
                             </div>
                             <div class="form-group">
-                                <label for="logo">logo: </label>
-                                <input type="text" maxlength="30" class="form-control" name="logo"/>
+                                <label for="logo">Logo: </label>
+                                <input type="text" maxlength="250" class="form-control" name="logo"/>
                             </div>
-                            <button type="submit" class="btn btn-primary">Adicionar aux_mac</button>
+                            <button type="submit" class="btn btn-primary">Add aux mac</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

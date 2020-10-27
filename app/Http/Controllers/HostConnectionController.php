@@ -10,9 +10,9 @@ use Illuminate\Http\Request;
 class HostConnectionController extends Controller
 {
     public function crud(){
-        $host_connection = HostConnection::all();
-        $host_interface = HostInterface::all();
-        $discovery_protocol = DiscoveryProtocol::all();
-        return view('host_connection.crud',compact('host_connection','host_interface','discovery_protocol'));
+        $host_connections = HostConnection::paginate(10);
+        $host_interfaces = HostInterface::all();
+        $discovery_protocols = DiscoveryProtocol::all();
+        return view('host_connection.crud',compact('host_connections','host_interfaces','discovery_protocols'));
     }
 }

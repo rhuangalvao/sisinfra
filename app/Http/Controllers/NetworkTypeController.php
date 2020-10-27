@@ -11,8 +11,8 @@ class NetworkTypeController extends Controller
         return view('network_type.create');
     }
     public function crud(){
-        $network_type = NetworkType::all();
-        return view('network_type.crud',compact('network_type'));
+        $network_types = NetworkType::paginate(10);
+        return view('network_type.crud',compact('network_types'));
     }
     public function store(Request $request){
 

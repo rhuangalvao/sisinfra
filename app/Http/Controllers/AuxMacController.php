@@ -11,16 +11,14 @@ class AuxMacController extends Controller
         return view('aux_mac.create');
     }
     public function crud(){
-        $aux_mac = AuxMac::all();
-        return view('aux_mac.crud',compact('aux_mac'));
+        $aux_macs = AuxMac::paginate(10);
+        return view('aux_mac.crud',compact('aux_macs'));
     }
     public function store(Request $request){
 
         $request->validate([
             'mac'=>'required',
             'mfr'=>'required',
-            'mfr_short'=>'required',
-            'logo'=>'required',
         ]);
         $aux_mac = new AuxMac([
             'mac' => $request->get('mac'),
@@ -38,15 +36,14 @@ class AuxMacController extends Controller
         return redirect('/aux_mac/crud')->with('success', 'aux_mac deletado!');
     }
     public function edit($id){
-        $aux_mac = AuxMac::find($id);
-        return view('aux_mac.edit', compact('aux_mac'));
+        $aux_macs = AuxMac::find($id);
+        return view('aux_mac.edit', compact('aux_macs'));
     }
     public function update(Request $request, $id){
         $request->validate([
             'mac'=>'required',
             'mfr'=>'required',
-            'mfr_short'=>'required',
-            'logo'=>'required',
+
         ]);
 
         $aux_mac = AuxMac::find($id);

@@ -21,13 +21,13 @@ class ServiceInstanceController extends Controller
         return view('service_instance.create',compact('host','service','host_ip','host_dns','password'));
     }
     public function crud(){
-        $service_instance = ServiceInstance::all();
+        $service_instances = ServiceInstance::paginate(10);
         $host = Host::all();
         $service = Service::all();
         $host_ip = HostIp::all();
         $host_dns = HostDns::all();
         $password = Password::all();
-        return view('service_instance.crud',compact('service_instance','host','service','host_ip','host_dns','password'));
+        return view('service_instance.crud',compact('service_instances','host','service','host_ip','host_dns','password'));
     }
     public function store(Request $request){
 
@@ -36,7 +36,7 @@ class ServiceInstanceController extends Controller
             'service_id'=>'required',
 //            'host_ip_id'=>'required',
 //            'host_dns_id'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
             'password_id'=>'required',
         ]);
         if($request->get('host_ip_id')!=null){
@@ -85,7 +85,7 @@ class ServiceInstanceController extends Controller
             'service_id'=>'required',
 //            'host_ip_id'=>'required',
 //            'host_dns_id'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
             'password_id'=>'required',
         ]);
 

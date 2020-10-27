@@ -11,8 +11,8 @@ class AuxVendorController extends Controller
         return view('aux_vendor.create');
     }
     public function crud(){
-        $aux_vendor = AuxVendor::all();
-        return view('aux_vendor.crud',compact('aux_vendor'));
+        $aux_vendors = AuxVendor::paginate(10);
+        return view('aux_vendor.crud',compact('aux_vendors'));
     }
     public function store(Request $request){
 
@@ -32,8 +32,8 @@ class AuxVendorController extends Controller
         return redirect('/aux_vendor/crud')->with('success', 'aux_vendor deletado!');
     }
     public function edit($id){
-        $aux_vendor = AuxVendor::find($id);
-        return view('aux_vendor.edit', compact('aux_vendor'));
+        $aux_vendors = AuxVendor::find($id);
+        return view('aux_vendor.edit', compact('aux_vendors'));
     }
     public function update(Request $request, $id){
         $request->validate([

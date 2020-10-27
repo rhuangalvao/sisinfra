@@ -10,29 +10,27 @@
 @section('content')
     @include('cabecalho',['tituloPagina'=>'Discovery Protocol'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('discovery_protocol.create')}}" class="btn btn-primary">Novo Discovery Protocol</a>
+        <a style="margin: 19px;" href="{{ route('discovery_protocol.create')}}" class="btn btn-primary">New Discovery Protocol</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>name</td>
-            <td>order</td>
-            <td colspan = 2>Ações</td>
+            <td>Name</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($discovery_protocol as $discovery_protocol)
+        @foreach($discovery_protocols as $discovery_protocol)
             <tr>
                 <td>{{$discovery_protocol->name}}</td>
-                <td>{{$discovery_protocol->order}}</td>
                 <td>
-                    <a href="{{ route('discovery_protocol.edit',$discovery_protocol->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('discovery_protocol.edit',$discovery_protocol->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('discovery_protocol.destroy', $discovery_protocol->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -40,5 +38,6 @@
         </tbody>
     </table>
     <br/>
+    {{$discovery_protocols->links()}}
 @endsection
 

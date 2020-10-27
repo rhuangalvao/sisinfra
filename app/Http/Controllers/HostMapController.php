@@ -15,17 +15,17 @@ class HostMapController extends Controller
         return view('host_map.create',compact('host','snmp_host'));
     }
     public function crud(){
-        $host_map = HostMap::all();
+        $host_maps = HostMap::paginate(10);
         $host = Host::all();
         $snmp_host = SnmpHost::all();
-        return view('host_map.crud',compact('host_map','host','snmp_host'));
+        return view('host_map.crud',compact('host_maps','host','snmp_host'));
     }
     public function store(Request $request){
 
         $request->validate([
             'host_id'=>'required',
-            'snmp_host_id'=>'required',
-            'snmp_host_remote_id'=>'required',
+//            'snmp_host_id'=>'required',
+//            'snmp_host_remote_id'=>'required',
         ]);
         $host_map = new HostMap([
             'host_id' => $request->get('host_id'),
@@ -50,8 +50,8 @@ class HostMapController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'host_id'=>'required',
-            'snmp_host_id'=>'required',
-            'snmp_host_remote_id'=>'required',
+//            'snmp_host_id'=>'required',
+//            'snmp_host_remote_id'=>'required',
         ]);
 
         $host_map = HostMap::find($id);

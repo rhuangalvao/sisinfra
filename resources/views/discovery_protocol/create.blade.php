@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Discovery Protocol</h1>
+            <h1 class="display-3">Add Discovery Protocol</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -26,16 +26,16 @@
                         <form method="post" action="{{ route('discovery_protocol.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="name">name: </label>
+                                <label for="name">Name: </label>
                                 <input type="text" maxlength="30" class="form-control" name="name"/>
                             </div>
                             <div class="form-group">
-                                <label for="order">order: </label>
+                                <label for="order">Order: </label>
                                 <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="order"/>
                             </div>
-                            <button type="submit" class="btn btn-primary">Adicionar discovery_protocol</button>
+                            <button type="submit" class="btn btn-primary">Add discovery protocol</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

@@ -14,9 +14,9 @@ class ServiceInstanceParamController extends Controller
         return view('service_instance_param.create',compact('service_instance','service_instance'));
     }
     public function crud(){
-        $service_instance_param = ServiceInstanceParam::all();
+        $service_instance_params = ServiceInstanceParam::paginate(10);
         $service_instance = ServiceInstance::all();
-        return view('service_instance_param.crud',compact('service_instance_param', 'service_instance'));
+        return view('service_instance_param.crud',compact('service_instance_params', 'service_instance'));
     }
     public function store(Request $request){
 

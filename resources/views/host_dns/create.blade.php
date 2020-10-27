@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_dns</title>
+    <title>Host DNS</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Host_dns</h1>
+            <h1 class="display-3">Add Host DNS</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,9 +40,9 @@
                         <form method="post" action="{{ route('host_dns.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="host_id">ID Host: </label>
+                                <label for="host_id">Host: </label>
                                 <select id="host_id" name="host_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host_id</option>
+                                    <option disabled value="" selected>Host name</option>
                                     @foreach($host as $h)
                                         <option value={{$h->id}}> {{$h->hostname}} </option>
                                     @endforeach
@@ -50,11 +50,11 @@
 {{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="name">name: </label>
+                                <label for="name">Name: </label>
                                 <input type="text" maxlength="30" class="form-control" name="name"/>
                             </div>
                             <div class="form-group">
-                                <label for="version">version: </label>
+                                <label for="version">Version: </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
                                     <label class="form-check-label" for="exampleRadios1">
@@ -71,12 +71,12 @@
                             <div class="form-group form-check">
                                 <input type="hidden" name="is_main" value="off">
                                 <input type="checkbox" class="form-check-input" name="is_main">
-                                <label class="form-check-label" for="is_main">is_main</label>
+                                <label class="form-check-label" for="is_main">Is main</label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar Host_dns</button>
+                            <button type="submit" class="btn btn-primary">Add Host_dns</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

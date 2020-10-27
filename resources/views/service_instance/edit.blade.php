@@ -18,12 +18,12 @@
     });
 </script>
 <head>
-    <title>Service_instance</title>
+    <title>Service instance</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Service_instance</h1>
+            <h1 class="display-3">Edit Service instance</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -53,7 +53,7 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="service_id">service: </label>
+                            <label for="service_id">Service: </label>
                             <select id="service_id" name="service_id" class="select2ex form-control">
                                 @foreach($service as $s)
                                     @if($service_instance->service_id == $s->id)
@@ -68,7 +68,7 @@
 
                         @if($service_instance->host_ip_id != null)
                         <div class="form-group">
-                            <label for="host_ip_id">host_ip_id:</label>
+                            <label for="host_ip_id">Host IP:</label>
                             <select id="host_ip_id" name="host_ip_id" class="select2ex form-control">
                                 @foreach($host_ip as $hi)
                                     @if($service_instance->host_ip_id == $hi->id)
@@ -82,7 +82,7 @@
                         </div>
                         @else
                         <div class="form-group">
-                            <label for="host_dns_id">host_dns_id: </label>
+                            <label for="host_dns_id">Host DNS: </label>
                             <select id="host_dns_id" name="host_dns_id" class="select2ex form-control">
                                 @foreach($host_dns as $hd)
                                     @if($service_instance->host_dns_id == $hd->id)
@@ -96,11 +96,11 @@
                         </div>
                         @endif
                         <div class="form-group">
-                            <label for="descr">descr: </label>
-                            <input type="text" maxlength="30" class="form-control" name="descr" value="{{ $service_instance->descr }}"/>
+                            <label for="descr">Description: </label>
+                            <input type="text" class="form-control" name="descr" value="{{ $service_instance->descr }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="password_id">password: </label>
+                            <label for="password_id">Password: </label>
                             <select id="password_id" name="password_id" class="select2ex form-control">
                                 @foreach($password as $pw)
                                     @if($service_instance->password_id == $pw->id)
@@ -119,9 +119,9 @@
                             <label class="form-check-label" for="monitoring">monitoring</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

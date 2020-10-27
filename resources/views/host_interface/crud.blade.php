@@ -4,33 +4,33 @@
 {{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
 <head>
-    <title>Host_interface</title>
+    <title>Host Interface</title>
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host_interface'])
+    @include('cabecalho',['tituloPagina'=>'Host Interface'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_interface.create')}}" class="btn btn-primary">Novo Host_interface</a>
+        <a style="margin: 19px;" href="{{ route('host_interface.create')}}" class="btn btn-primary">New Host Interface</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
             <td>Host</td>
-            <td>ifname</td>
-            <td>iftype</td>
-            <td>ifspeed</td>
-            <td>ifindex</td>
-            <td>ifoperstatus</td>
-            <td>ifalias</td>
-            <td>portid</td>
-            <td>is_mgmt</td>
-            <td>discovery_protocol</td>
+            <td>Name</td>
+            <td>Type</td>
+            <td>Speed</td>
+            <td>Index</td>
+            <td>Oper status</td>
+            <td>Alias</td>
+            <td>Port ID</td>
+            <td>Is mgmt</td>
+            <td>Discovery protocol</td>
             <td>snmp_host_interface</td>
-            <td colspan = 2>Ações</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($host_interface as $host_interface)
+        @foreach($host_interfaces as $host_interface)
             <tr>
                 @foreach($host as $h)
                     @if($h->id == $host_interface->host_id)
@@ -50,19 +50,23 @@
                         <td>{{$dp->name}}</td>
                     @endif
                 @endforeach
-                @foreach($snmp_host_interface as $shi)
-                    @if($shi->id == $host_interface->snmp_host_interface_id)
-                        <td>{{$shi->ifname}}</td>
-                    @endif
-                @endforeach
+                @if($host_interface->snmp_host_interface_id != null)
+                    @foreach($snmp_host_interface as $shi)
+                        @if($shi->id == $host_interface->snmp_host_interface_id)
+                            <td>{{$shi->ifname}}</td>
+                        @endif
+                    @endforeach
+                @else
+                    <td></td>
+                @endif
                 <td>
-                    <a href="{{ route('host_interface.edit',$host_interface->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('host_interface.edit',$host_interface->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('host_interface.destroy', $host_interface->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -70,5 +74,6 @@
         </tbody>
     </table>
     <br/>
+    {{$host_interfaces->links()}}
 @endsection
 

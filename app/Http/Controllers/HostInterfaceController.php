@@ -17,26 +17,26 @@ class HostInterfaceController extends Controller
         return view('host_interface.create',compact('host','snmp_host_interface', 'discovery_protocol'));
     }
     public function crud(){
-        $host_interface = HostInterface::all();
+        $host_interfaces = HostInterface::paginate(10);
         $snmp_host_interface = SnmpHostInterface::all();
         $discovery_protocol = DiscoveryProtocol::all();
         $host = Host::all();
-        return view('host_interface.crud',compact('host_interface','host','snmp_host_interface', 'discovery_protocol'));
+        return view('host_interface.crud',compact('host_interfaces','host','snmp_host_interface', 'discovery_protocol'));
     }
     public function store(Request $request){
 
         $request->validate([
             'host_id'=>'required',
-            'ifname'=>'required',
-            'iftype'=>'required',
-            'ifspeed'=>'required',
-            'ifindex'=>'required',
-            'ifoperstatus'=>'required',
-            'ifalias'=>'required',
-            'portid'=>'required',
+//            'ifname'=>'required',
+//            'iftype'=>'required',
+//            'ifspeed'=>'required',
+//            'ifindex'=>'required',
+//            'ifoperstatus'=>'required',
+//            'ifalias'=>'required',
+//            'portid'=>'required',
             'is_mgmt'=>'required',
             'discovery_protocol_id'=>'required',
-            'snmp_host_interface_id'=>'required',
+//            'snmp_host_interface_id'=>'required',
         ]);
         $host_interface = new HostInterface([
             'host_id' => $request->get('host_id'),
@@ -70,16 +70,16 @@ class HostInterfaceController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'host_id'=>'required',
-            'ifname'=>'required',
-            'iftype'=>'required',
-            'ifspeed'=>'required',
-            'ifindex'=>'required',
-            'ifoperstatus'=>'required',
-            'ifalias'=>'required',
-            'portid'=>'required',
+//            'ifname'=>'required',
+//            'iftype'=>'required',
+//            'ifspeed'=>'required',
+//            'ifindex'=>'required',
+//            'ifoperstatus'=>'required',
+//            'ifalias'=>'required',
+//            'portid'=>'required',
             'is_mgmt'=>'required',
             'discovery_protocol_id'=>'required',
-            'snmp_host_interface_id'=>'required',
+//            'snmp_host_interface_id'=>'required',
         ]);
 
         $host_interface = HostInterface::find($id);

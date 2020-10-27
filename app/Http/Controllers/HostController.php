@@ -12,19 +12,20 @@ use Illuminate\Http\Request;
 class HostController extends Controller
 {
     public function create(){
-        $operating_system = OperatingSystem::all();
-        $host_type = HostType::all();
+        $operating_systems = OperatingSystem::all();
+        $host_types = HostType::all();
         $host_status = HostStatus::all();
-        $aux_vendor = AuxVendor::all();
-        return view('host.create',compact('operating_system','host_type','host_status','aux_vendor'));
+        $aux_vendors = AuxVendor::all();
+        return view('host.create',compact('operating_systems','host_types','host_status','aux_vendors'));
     }
     public function crud(){
-        $host = Host::all();
-        $operating_system = OperatingSystem::all();
-        $host_type = HostType::all();
+//        $host = DB::table('hosts')->paginate(10);
+        $hosts = Host::paginate(10);
+        $operating_systems = OperatingSystem::all();
+        $host_types = HostType::all();
         $host_status = HostStatus::all();
-        $aux_vendor = AuxVendor::all();
-        return view('host.crud',compact('host', 'operating_system','host_type','host_status','aux_vendor'));
+        $aux_vendors = AuxVendor::all();
+        return view('host.crud',compact('hosts', 'operating_systems','host_types','host_status','aux_vendors'));
     }
     public function store(Request $request){
 
@@ -34,12 +35,7 @@ class HostController extends Controller
             'status_id'=>'required',
             'tag'=>'required',
             'hostname'=>'required',
-            'domain_suffix'=>'required',
-            'descr'=>'required',
-            'obs'=>'required',
-            'chassis_id'=>'required',
-            'serial_number'=>'required',
-            'aux_vendor_id'=>'required',
+
         ]);
         $host = new Host([
             'os_id' => $request->get('os_id'),
@@ -66,12 +62,12 @@ class HostController extends Controller
         return redirect('/host/crud')->with('success', 'Host deletado!');
     }
     public function edit($id){
-        $operating_system = OperatingSystem::all();
-        $host_type = HostType::all();
+        $operating_systems = OperatingSystem::all();
+        $host_types = HostType::all();
         $host_status = HostStatus::all();
-        $host = Host::find($id);
-        $aux_vendor = AuxVendor::all();
-        return view('host.edit', compact('host','operating_system','host_type','host_status','aux_vendor'));
+        $hosts = Host::find($id);
+        $aux_vendors = AuxVendor::all();
+        return view('host.edit', compact('hosts','operating_systems','host_types','host_status','aux_vendors'));
     }
     public function update(Request $request, $id){
         $request->validate([
@@ -80,12 +76,7 @@ class HostController extends Controller
             'status_id'=>'required',
             'tag'=>'required',
             'hostname'=>'required',
-            'domain_suffix'=>'required',
-            'descr'=>'required',
-            'obs'=>'required',
-            'chassis_id'=>'required',
-            'serial_number'=>'required',
-            'aux_vendor_id'=>'required',
+
         ]);
 
         $host = Host::find($id);

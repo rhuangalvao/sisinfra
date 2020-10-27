@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Service_dependency</title>
+    <title>Service dependency</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Service_dependency</h1>
+            <h1 class="display-3">Add Service dependency</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,26 +40,26 @@
                         <form method="post" action="{{ route('service_dependency.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="service_instance_id">Service_instance: </label>
+                                <label for="service_instance_id">Service instance: </label>
                                 <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do service_instance</option>
+                                    <option disabled value="" selected>Service instance name</option>
                                     @foreach($service_instance as $si)
                                         <option value={{$si->id}}> {{$si->descr}} </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="service_instance_id_dep">Service_instance_dep: </label>
+                                <label for="service_instance_id_dep">Service instance dep: </label>
                                 <select id="service_instance_id_dep" name="service_instance_id_dep" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do service_instance_dep</option>
+                                    <option disabled value="" selected>Service instance dep name</option>
                                     @foreach($service_instance as $si)
                                         <option value={{$si->id}}> {{$si->descr}} </option>
                                     @endforeach
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary">Adicionar Service_dependency</button>
+                            <button type="submit" class="btn btn-primary">Add Service dependency</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

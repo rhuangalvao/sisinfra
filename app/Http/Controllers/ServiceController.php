@@ -13,18 +13,18 @@ class ServiceController extends Controller
         return view('service.create',compact('service_group'));
     }
     public function crud(){
-        $service = Service::all();
+        $services = Service::paginate(10);
         $service_group = ServiceGroup::all();
-        return view('service.crud',compact('service', 'service_group'));
+        return view('service.crud',compact('services', 'service_group'));
     }
     public function store(Request $request){
 
         $request->validate([
             'name'=>'required',
-            'daemon_name'=>'required',
-            'protocol'=>'required',
-            'port'=>'required',
-            'service_group_id'=>'required'
+//            'daemon_name'=>'required',
+//            'protocol'=>'required',
+//            'port'=>'required',
+//            'service_group_id'=>'required'
         ]);
         $service = new Service([
             'name' => $request->get('name'),
@@ -50,10 +50,10 @@ class ServiceController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-            'daemon_name'=>'required',
-            'protocol'=>'required',
-            'port'=>'required',
-            'service_group_id'=>'required'
+//            'daemon_name'=>'required',
+//            'protocol'=>'required',
+//            'port'=>'required',
+//            'service_group_id'=>'required'
         ]);
 
         $service = Service::find($id);

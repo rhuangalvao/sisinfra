@@ -13,9 +13,9 @@ class HostDnsController extends Controller
         return view('host_dns.create',compact('host'));
     }
     public function crud(){
-        $host_dns = HostDns::all();
-        $host = Host::all();
-        return view('host_dns.crud',compact('host_dns','host'));
+        $host_dnss = HostDns::paginate(10);
+        $hosts = Host::all();
+        return view('host_dns.crud',compact('host_dnss','hosts'));
     }
     public function store(Request $request){
 

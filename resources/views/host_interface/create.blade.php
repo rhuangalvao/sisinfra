@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_interface</title>
+    <title>Host Interface</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Host_interface</h1>
+            <h1 class="display-3">Add Host Interface</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,52 +40,52 @@
                         <form method="post" action="{{ route('host_interface.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="host_id">ID Host: </label>
+                                <label for="host_id">Host: </label>
                                 <select id="host_id" name="host_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host</option>
+                                    <option disabled value="" selected>Host name</option>
                                     @foreach($host as $h)
                                         <option value={{$h->id}}> {{$h->hostname}} </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="ifname">ifname: </label>
-                                <input type="text" maxlength="30" class="form-control" name="ifname"/>
+                                <label for="ifname">Name: </label>
+                                <input type="text" maxlength="250" class="form-control" name="ifname"/>
                             </div>
                             <div class="form-group">
-                                <label for="iftype">iftype:</label>
-                                <input type="text" maxlength="30" class="form-control" name="iftype" />
+                                <label for="iftype">Type:</label>
+                                <input type="text" maxlength="250" class="form-control" name="iftype" />
                             </div>
                             <div class="form-group">
-                                <label for="ifspeed">ifspeed: </label>
-                                <input type="text" maxlength="30" class="form-control" name="ifspeed"/>
+                                <label for="ifspeed">Speed: </label>
+                                <input type="text" maxlength="250" class="form-control" name="ifspeed"/>
                             </div>
                             <div class="form-group">
-                                <label for="ifindex">ifindex:</label>
-                                <input type="text" maxlength="30" class="form-control" name="ifindex" />
+                                <label for="ifindex">Index:</label>
+                                <input type="text" maxlength="250" class="form-control" name="ifindex" />
                             </div>
                             <div class="form-group">
-                                <label for="ifoperstatus">ifoperstatus: </label>
-                                <input type="text" maxlength="30" class="form-control" name="ifoperstatus"/>
+                                <label for="ifoperstatus">Oper status: </label>
+                                <input type="text" maxlength="250" class="form-control" name="ifoperstatus"/>
                             </div>
                             <div class="form-group">
-                                <label for="ifalias">ifalias:</label>
-                                <input type="text" maxlength="30" class="form-control" name="ifalias" />
+                                <label for="ifalias">Alias:</label>
+                                <input type="text" maxlength="250" class="form-control" name="ifalias" />
                             </div>
                             <div class="form-group">
-                                <label for="portid">portid: </label>
-                                <input type="text" maxlength="30" class="form-control" name="portid"/>
+                                <label for="portid">Port ID: </label>
+                                <input type="text" maxlength="250" class="form-control" name="portid"/>
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="is_mgmt" value="off">
                                 <input type="checkbox" class="form-check-input" name="is_mgmt">
-                                <label class="form-check-label" for="is_mgmt">is_mgmt</label>
+                                <label class="form-check-label" for="is_mgmt">Is management</label>
                             </div>
 
                             <div class="form-group">
-                                <label for="discovery_protocol_id">discovery_protocol: </label>
+                                <label for="discovery_protocol_id">Discovery protocol: </label>
                                 <select id="discovery_protocol_id" name="discovery_protocol_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do discovery_protocol</option>
+                                    <option disabled value="" selected>Discovery protocol name</option>
                                     @foreach($discovery_protocol as $dp)
                                         <option value={{$dp->id}}> {{$dp->name}} </option>
                                     @endforeach
@@ -95,16 +95,16 @@
                             <div class="form-group">
                                 <label for="snmp_host_interface_id">snmp_host_interface: </label>
                                 <select id="snmp_host_interface_id" name="snmp_host_interface_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do snmp_host_interface</option>
+                                    <option disabled value="" selected>snmp_host_interface name</option>
                                     @foreach($snmp_host_interface as $shi)
                                         <option value={{$shi->id}}> {{$shi->ifname}} </option>
                                     @endforeach
                                 </select>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar Host_interface</button>
+                            <button type="submit" class="btn btn-primary">Add Host Interface</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

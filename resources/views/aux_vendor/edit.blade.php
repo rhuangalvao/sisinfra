@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar aux_vendor</h1>
+            <h1 class="display-3">Edit aux_vendor</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -23,16 +23,16 @@
             @endif
             <div class ="card">
                 <div class="card-body">
-                    <form method="post" action="{{ route('aux_vendor.update', $aux_vendor->id) }}">
+                    <form method="post" action="{{ route('aux_vendor.update', $aux_vendors->id) }}">
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="name">name:</label>
-                            <input type="text" class="form-control" name="name" value="{{ $aux_vendor->name }}" />
+                            <label for="name">Name:</label>
+                            <input type="text" maxlength="250" class="form-control" name="name" value="{{ $aux_vendors->name }}" />
                         </div>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

@@ -14,15 +14,15 @@ class NetworkController extends Controller
     }
     public function crud(){
         $network_type = NetworkType::all();
-        $network = Network::all();
-        return view('network.crud',compact('network','network_type'));
+        $networks = Network::paginate(10);
+        return view('network.crud',compact('networks','network_type'));
     }
     public function store(Request $request){
 
         $request->validate([
             'network_type_id'=>'required',
             'name'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
             'address'=>'required',
         ]);
         $network = new Network([
@@ -50,7 +50,7 @@ class NetworkController extends Controller
         $request->validate([
             'network_type_id'=>'required',
             'name'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
             'address'=>'required',
         ]);
 

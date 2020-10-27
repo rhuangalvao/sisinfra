@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_ip</title>
+    <title>Host IP</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Host_ip</h1>
+            <h1 class="display-3">Edit Host IP</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -41,9 +41,9 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="host_id">ID Host: </label>
+                            <label for="host_id">Host: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
-                                @foreach($host as $h)
+                                @foreach($hosts as $h)
                                     @if($host_ip->host_id == $h->id)
                                         <option value="{{ $host_ip->host_id }}" selected>{{ $h->hostname }}</option>
                                     @endif
@@ -54,20 +54,20 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="ip_address">ip_address: </label>
+                            <label for="ip_address">IP address: </label>
                             <input type="text" maxlength="30" class="form-control" name="ip_address" value="{{ $host_ip->ip_address }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="mask">mask:</label>
+                            <label for="mask">Mask:</label>
                             <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="mask" value="{{ $host_ip->mask }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="gateway">gateway: </label>
+                            <label for="gateway">Gateway: </label>
                             <input type="text" maxlength="30" class="form-control" name="gateway" value="{{ $host_ip->gateway }}"/>
                         </div>
                         @if($host_ip->version == 4)
                             <div class="form-group">
-                                <label for="version">version: </label>
+                                <label for="version">Version: </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
                                     <label class="form-check-label" for="exampleRadios1">
@@ -83,7 +83,7 @@
                             </div>
                         @else
                             <div class="form-group">
-                                <label for="version">version: </label>
+                                <label for="version">Version: </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 >
                                     <label class="form-check-label" for="exampleRadios1">
@@ -99,18 +99,18 @@
                             </div>
                         @endif
                         <div class="form-group">
-                            <label for="mac_address">mac_address:</label>
+                            <label for="mac_address">Mac address:</label>
                             <input type="text" maxlength="30" class="form-control" name="mac_address" value="{{ $host_ip->mac_address }}"/>
                         </div>
                         <div class="form-group form-check">
                             <input type="hidden" name="is_main" value="off">
                             <input type="checkbox" class="form-check-input" name="is_main">
-                            <label class="form-check-label" for="is_main">is_main</label>
+                            <label class="form-check-label" for="is_main">Is main</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

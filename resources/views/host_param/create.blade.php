@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_param</title>
+    <title>Host param</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Host_param</h1>
+            <h1 class="display-3">Add Host param</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -40,32 +40,31 @@
                         <form method="post" action="{{ route('host_param.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="host_id">host_id: </label>
+                                <label for="host_id">Host: </label>
                                 <select id="host_id" name="host_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host_id</option>
+                                    <option disabled value="" selected>Host name</option>
                                     @foreach($host as $h)
                                         <option value={{$h->id}}> {{$h->hostname}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="param_name">param_name: </label>
-                                <input type="text" maxlength="30" class="form-control" name="param_name"/>
+                                <label for="param_name">Param name: </label>
+                                <input type="text" maxlength="250" class="form-control" name="param_name"/>
                             </div>
                             <div class="form-group">
-                                <label for="param_value">param_value:</label>
-                                <input type="text" maxlength="30" class="form-control" name="param_value" />
+                                <label for="param_value">Param value:</label>
+                                <input type="text" maxlength="250" class="form-control" name="param_value" />
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="enabled" value="off">
                                 <input type="checkbox" class="form-check-input" name="enabled">
-                                <label class="form-check-label" for="enabled">enabled</label>
+                                <label class="form-check-label" for="enabled">Enabled</label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar host_param</button>
+                            <button type="submit" class="btn btn-primary">Add host param</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

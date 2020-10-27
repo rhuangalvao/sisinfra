@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Network</h1>
+            <h1 class="display-3">Add Network</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -26,35 +26,35 @@
                         <form method="post" action="{{ route('network.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="network_type_id">network_type_id:</label>
+                                <label for="network_type_id">Network type:</label>
                                 <select id="network_type_id" name="network_type_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do network_type_id</option>
+                                    <option disabled value="" selected>Network type name</option>
                                     @foreach($network_type as $nt)
                                         <option value={{$nt->id}}> {{$nt->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="name">name: </label>
-                                <input type="text" maxlength="30" class="form-control" name="name"/>
+                                <label for="name">Name: </label>
+                                <input type="text" maxlength="50" class="form-control" name="name"/>
                             </div>
                             <div class="form-group">
-                                <label for="descr">descr: </label>
-                                <input type="text" maxlength="30" class="form-control" name="descr"/>
+                                <label for="descr">Description: </label>
+                                <input type="text" class="form-control" name="descr"/>
                             </div>
                             <div class="form-group">
-                                <label for="address">address: </label>
-                                <input type="text" maxlength="30" class="form-control" name="address"/>
+                                <label for="address">Address: </label>
+                                <input type="text" maxlength="50" class="form-control" name="address"/>
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="enabled" value="off">
                                 <input type="checkbox" class="form-check-input" name="enabled">
-                                <label class="form-check-label" for="enabled">enabled</label>
+                                <label class="form-check-label" for="enabled">Enabled</label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar network</button>
+                            <button type="submit" class="btn btn-primary">Add network</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

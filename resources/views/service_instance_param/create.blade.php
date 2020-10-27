@@ -20,12 +20,12 @@
 </script>
 
 <head>
-    <title>Service_instance_param</title>
+    <title>Service instance param</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Service_instance_param</h1>
+            <h1 class="display-3">Add Service instance param</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -41,32 +41,31 @@
                         <form method="post" action="{{ route('service_instance_param.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="service_instance_id">service_instance_id: </label>
+                                <label for="service_instance_id">Service instance: </label>
                                 <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do service_instance</option>
+                                    <option disabled value="" selected>Service instance</option>
                                     @foreach($service_instance as $si)
                                         <option value={{$si->id}}> {{$si->descr}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="service_instance_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="param_name">param_name: </label>
-                                <input type="text" maxlength="30" class="form-control" name="param_name"/>
+                                <label for="param_name">Param name: </label>
+                                <input type="text" maxlength="250" class="form-control" name="param_name"/>
                             </div>
                             <div class="form-group">
-                                <label for="param_value">param_value:</label>
-                                <input type="text" maxlength="30" class="form-control" name="param_value" />
+                                <label for="param_value">Param value:</label>
+                                <input type="text" maxlength="250" class="form-control" name="param_value" />
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="enabled" value="off">
                                 <input type="checkbox" class="form-check-input" name="enabled">
-                                <label class="form-check-label" for="enabled">enabled</label>
+                                <label class="form-check-label" for="enabled">Enabled</label>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar service_instance_param</button>
+                            <button type="submit" class="btn btn-primary">Add Service instance param</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

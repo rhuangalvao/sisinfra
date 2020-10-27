@@ -25,7 +25,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Host</h1>
+            <h1 class="display-3">Add Host</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -41,86 +41,82 @@
                         <form method="post" action="{{ route('host.store') }}">
                             @csrf
                             <div class="form-group">
-                                <label for="os_id">ID OperatingSystem: </label>
+                                <label for="os_id">Operating System: </label>
                                 <select id="os_id" name="os_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do operating_system_id</option>
-                                    @foreach($operating_system as $os)
+                                    <option disabled value="" selected>Operating system name</option>
+                                    @foreach($operating_systems as $os)
                                         <option value={{$os->id}}> {{$os->name}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="os_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="host_type_id">Host_type_id: </label>
+                                <label for="host_type_id">Host type: </label>
                                 <select id="host_type_id" name="host_type_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do host_type_id</option>
-                                    @foreach($host_type as $ht)
+                                    <option disabled value="" selected>Host type name</option>
+                                    @foreach($host_types as $ht)
                                         <option value={{$ht->id}}> {{$ht->name}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="host_type_id"/>--}}
                             </div>
                             <div class="form-group">
-                                <label for="status_id">Status_id:</label>
+                                <label for="status_id">Status:</label>
                                 <select id="status_id" name="status_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do status_id</option>
+                                    <option disabled value="" selected>Status name</option>
                                     @foreach($host_status as $hs)
                                         <option value={{$hs->id}}> {{$hs->status}} </option>
                                     @endforeach
                                 </select>
-{{--                                <input type="text" maxlength="30" class="form-control" name="status_id" />--}}
                             </div>
                             <div class="form-group">
                                 <label for="tag">TAG: </label>
-                                <input type="text" maxlength="30" class="form-control" name="tag"/>
+                                <input type="text" maxlength="128" class="form-control" name="tag"/>
                             </div>
                             <div class="form-group">
-                                <label for="hostname">hostname: </label>
-                                <input type="text" maxlength="30" class="form-control" name="hostname"/>
+                                <label for="hostname">Hostname: </label>
+                                <input type="text" maxlength="128" class="form-control" name="hostname"/>
                             </div>
                             <div class="form-group">
-                                <label for="domain_suffix">domain_suffix: </label>
-                                <input type="text" maxlength="30" class="form-control" name="domain_suffix"/>
+                                <label for="domain_suffix">Domain suffix: </label>
+                                <input type="text" maxlength="128" class="form-control" name="domain_suffix"/>
                             </div>
                             <div class="form-group">
-                                <label for="descr">descrição: </label>
-                                <input type="text" maxlength="30" class="form-control" name="descr"/>
+                                <label for="descr">Description: </label>
+                                <input type="text" class="form-control" name="descr"/>
                             </div>
                             <div class="form-group">
-                                <label for="obs">obs: </label>
-                                <input type="text" maxlength="30" class="form-control" name="obs"/>
+                                <label for="obs">Obs: </label>
+                                <input type="text" class="form-control" name="obs"/>
                             </div>
                             <div class="form-group">
-                                <label for="chassis_id">chassis_id: </label>
-                                <input type="text" maxlength="30" class="form-control" name="chassis_id"/>
+                                <label for="chassis_id">Chassis id: </label>
+                                <input type="text" maxlength="128" class="form-control" name="chassis_id"/>
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="monitoring" value="off">
                                 <input type="checkbox" class="form-check-input" name="monitoring">
-                                <label class="form-check-label" for="monitoring">monitoring</label>
+                                <label class="form-check-label" for="monitoring">Monitoring</label>
                             </div>
                             <div class="form-group form-check">
                                 <input type="hidden" name="enabled" value="off">
                                 <input type="checkbox" class="form-check-input" name="enabled">
-                                <label class="form-check-label" for="enabled">enabled</label>
+                                <label class="form-check-label" for="enabled">Enabled</label>
                             </div>
                             <div class="form-group">
-                                <label for="serial_number">serial_number: </label>
-                                <input type="text" maxlength="30" class="form-control" name="serial_number"/>
+                                <label for="serial_number">Serial number: </label>
+                                <input type="text" maxlength="128" class="form-control" name="serial_number"/>
                             </div>
                             <div class="form-group">
-                                <label for="aux_vendor_id">aux_vendor:</label>
+                                <label for="aux_vendor_id">Vendor:</label>
                                 <select id="aux_vendor_id" name="aux_vendor_id" class="select2ex form-control">
-                                    <option disabled value="" selected>Nome do aux_vendor</option>
-                                    @foreach($aux_vendor as $av)
+                                    <option disabled value="" selected>Vendor name</option>
+                                    @foreach($aux_vendors as $av)
                                         <option value={{$av->id}}> {{$av->name}} </option>
                                     @endforeach
                                 </select>
                             </div>
-
-                            <button type="submit" class="btn btn-primary">Adicionar Host</button>
+                            <button type="submit" class="btn btn-primary">Add Host</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

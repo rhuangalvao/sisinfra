@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_dns</title>
+    <title>Host DNS</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar host_dns</h1>
+            <h1 class="display-3">Edit Host DNS</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -55,12 +55,12 @@
 {{--                            <input type="text" maxlength="30" class="form-control" name="host_id" value="{{ $host_dns->host_id }}"/>--}}
                         </div>
                         <div class="form-group">
-                            <label for="name">name: </label>
-                            <input type="text" maxlength="30" class="form-control" name="name" value="{{ $host_dns->name }}"/>
+                            <label for="name">Name: </label>
+                            <input type="text" maxlength="250" class="form-control" name="name" value="{{ $host_dns->name }}"/>
                         </div>
                         @if($host_dns->version == 4)
                             <div class="form-group">
-                                <label for="version">version: </label>
+                                <label for="version">Version: </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 checked>
                                     <label class="form-check-label" for="exampleRadios1">
@@ -76,7 +76,7 @@
                             </div>
                         @else
                             <div class="form-group">
-                                <label for="version">version: </label>
+                                <label for="version">Version: </label>
                                 <div class="form-check">
                                     <input class="form-check-input" type="radio" name="version" id="exampleRadios1" value=4 >
                                     <label class="form-check-label" for="exampleRadios1">
@@ -94,12 +94,12 @@
                         <div class="form-group form-check">
                             <input type="hidden" name="is_main" value="off">
                             <input type="checkbox" class="form-check-input" name="is_main">
-                            <label class="form-check-label" for="is_main">is_main</label>
+                            <label class="form-check-label" for="is_main">Is main</label>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

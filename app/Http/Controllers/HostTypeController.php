@@ -11,14 +11,14 @@ class HostTypeController extends Controller
         return view('host_type.create');
     }
     public function crud(){
-        $host_type = HostType::all();
-        return view('host_type.crud',compact('host_type'));
+        $host_types = HostType::paginate(10);
+        return view('host_type.crud',compact('host_types'));
     }
     public function store(Request $request){
 
         $request->validate([
             'name'=>'required',
-            'tag_prefix'=>'required',
+//            'tag_prefix'=>'required',
         ]);
         $host_type = new HostType([
             'name' => $request->get('name'),
@@ -40,7 +40,7 @@ class HostTypeController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-            'tag_prefix'=>'required',
+//            'tag_prefix'=>'required',
         ]);
 
         $host_type = HostType::find($id);

@@ -11,14 +11,13 @@ class DiscoveryProtocolController extends Controller
         return view('discovery_protocol.create');
     }
     public function crud(){
-        $discovery_protocol = DiscoveryProtocol::all();
-        return view('discovery_protocol.crud',compact('discovery_protocol'));
+        $discovery_protocols = DiscoveryProtocol::paginate(10);
+        return view('discovery_protocol.crud',compact('discovery_protocols'));
     }
     public function store(Request $request){
 
         $request->validate([
             'name'=>'required',
-            'order'=>'required',
         ]);
         $discovery_protocol = new DiscoveryProtocol([
             'name' => $request->get('name'),
@@ -40,7 +39,6 @@ class DiscoveryProtocolController extends Controller
     public function update(Request $request, $id){
         $request->validate([
             'name'=>'required',
-            'order'=>'required',
         ]);
 
         $discovery_protocol = DiscoveryProtocol::find($id);

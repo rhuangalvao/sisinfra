@@ -13,9 +13,9 @@ class HostParamController extends Controller
         return view('host_param.create',compact('host'));
     }
     public function crud(){
-        $host_param = HostParam::all();
+        $host_params= HostParam::paginate(10);
         $host = Host::all();
-        return view('host_param.crud',compact('host_param','host'));
+        return view('host_param.crud',compact('host_params','host'));
     }
     public function store(Request $request){
 

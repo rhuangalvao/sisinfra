@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar aux_mac</h1>
+            <h1 class="display-3">Edit Aux Mac</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -23,28 +23,28 @@
             @endif
             <div class ="card">
                 <div class="card-body">
-                    <form method="post" action="{{ route('aux_mac.update', $aux_mac->id) }}">
+                    <form method="post" action="{{ route('aux_mac.update', $aux_macs->id) }}">
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="mac">mac:</label>
-                            <input type="text" class="form-control" name="mac" value="{{ $aux_mac->mac }}" />
+                            <label for="mac">Mac:</label>
+                            <input type="text" maxlength="6" class="form-control" name="mac" value="{{ $aux_macs->mac }}" />
                         </div>
                         <div class="form-group">
-                            <label for="mfr">mfr: </label>
-                            <input type="text" maxlength="30" class="form-control" name="mfr" value="{{ $aux_mac->mfr }}"/>
+                            <label for="mfr">Mfr: </label>
+                            <input type="text" maxlength="250" class="form-control" name="mfr" value="{{ $aux_macs->mfr }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="mfr_short">mfr_short:</label>
-                            <input type="text" class="form-control" name="mfr_short" value="{{ $aux_mac->mfr_short }}" />
+                            <label for="mfr_short">Mfr short:</label>
+                            <input type="text" maxlength="50" class="form-control" name="mfr_short" value="{{ $aux_macs->mfr_short }}" />
                         </div>
                         <div class="form-group">
-                            <label for="logo">logo: </label>
-                            <input type="text" maxlength="30" class="form-control" name="logo" value="{{ $aux_mac->logo }}"/>
+                            <label for="logo">Logo: </label>
+                            <input type="text" maxlength="250" class="form-control" name="logo" value="{{ $aux_macs->logo }}"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

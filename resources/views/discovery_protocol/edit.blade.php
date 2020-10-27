@@ -27,11 +27,11 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="name">name:</label>
-                            <input type="text" class="form-control" name="name" value="{{ $discovery_protocol->name }}" />
+                            <label for="name">Name:</label>
+                            <input type="text" maxlength="255" class="form-control" name="name" value="{{ $discovery_protocol->name }}" />
                         </div>
                         <div class="form-group">
-                            <label for="order">order: </label>
+                            <label for="order">Order: </label>
                             <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="order" value="{{ $discovery_protocol->order }}"/>
                         </div>
                         <button type="submit" class="btn btn-primary">Editar</button>

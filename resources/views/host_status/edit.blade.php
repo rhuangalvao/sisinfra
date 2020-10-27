@@ -5,12 +5,12 @@
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <head>
-    <title>Host_status</title>
+    <title>Host status</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Host_status</h1>
+            <h1 class="display-3">Edit Host status</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -28,12 +28,11 @@
                         @csrf
                         <div class="form-group">
                             <label for="status">Status:</label>
-                            <input type="text" class="form-control" name="status" value="{{ $host_status->status }}" />
+                            <input type="text" maxlength="10" class="form-control" name="status" value="{{ $host_status->status }}" />
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

@@ -5,12 +5,12 @@
 <script src="{{asset('js/popper.min.js')}}"></script>
 <script src="{{asset('js/bootstrap.js')}}"></script>
 <head>
-    <title>Service_group</title>
+    <title>Service group</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Adicionar Service_group</h1>
+            <h1 class="display-3">Add Service group</h1>
             <div>
                 @if ($errors->any())
                     <div class="alert alert-danger">
@@ -27,16 +27,16 @@
                             @csrf
                             <div class="form-group">
                                 <label for="name">Name: </label>
-                                <input type="text" maxlength="30" class="form-control" name="name"/>
+                                <input type="text" maxlength="50" class="form-control" name="name"/>
                             </div>
                             <div class="form-group">
-                                <label for="descr">Descr: </label>
-                                <input type="text" maxlength="30" class="form-control" name="descr"/>
+                                <label for="descr">Description: </label>
+                                <input type="text" maxlength="250" class="form-control" name="descr"/>
                             </div>
 
-                            <button type="submit" class="btn btn-primary">Adicionar service_group</button>
+                            <button type="submit" class="btn btn-primary">Add Service group</button>
                             <form>
-                                <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                                <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                             </form>
                         </form>
                     </div>

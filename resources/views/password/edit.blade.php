@@ -10,7 +10,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Password</h1>
+            <h1 class="display-3">Edit Password</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -27,24 +27,24 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="username">username:</label>
+                            <label for="username">Username:</label>
                             <input type="text" class="form-control" name="username" value="{{ $password->username }}" />
                         </div>
                         <div class="form-group">
-                            <label for="password">password: </label>
+                            <label for="password">Password: </label>
                             <input type="text" maxlength="30" class="form-control" name="password" value="{{ $password->password }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="name">name:</label>
+                            <label for="name">Name:</label>
                             <input type="text" class="form-control" name="name" value="{{ $password->name }}" />
                         </div>
                         <div class="form-group">
-                            <label for="descr">descr: </label>
+                            <label for="descr">Description: </label>
                             <input type="text" maxlength="30" class="form-control" name="descr" value="{{ $password->descr }}"/>
                         </div>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

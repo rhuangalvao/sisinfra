@@ -11,8 +11,8 @@ class OperatingSystemController extends Controller
         return view('operating_system.create');
     }
     public function crud(){
-        $operating_system = OperatingSystem::all();
-        return view('operating_system.crud',compact('operating_system'));
+        $operating_systems = OperatingSystem::paginate(10);
+        return view('operating_system.crud',compact('operating_systems'));
     }
     public function store(Request $request){
 

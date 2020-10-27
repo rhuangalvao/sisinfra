@@ -13,9 +13,9 @@ class ServiceDependencyController extends Controller
         return view('service_dependency.create',compact('service_instance'));
     }
     public function crud(){
-        $service_dependency = ServiceDependency::all();
+        $service_dependencies = ServiceDependency::paginate(10);
         $service_instance = ServiceInstance::all();
-        return view('service_dependency.crud',compact('service_dependency','service_instance'));
+        return view('service_dependency.crud',compact('service_dependencies','service_instance'));
     }
     public function store(Request $request){
 

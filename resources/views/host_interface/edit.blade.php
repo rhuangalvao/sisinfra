@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Host_interface</title>
+    <title>Host Interface</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Host_interface</h1>
+            <h1 class="display-3">Edit Host Interface</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -41,7 +41,7 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="host_id">ID Host: </label>
+                            <label for="host_id">Host: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
                                 @foreach($host as $h)
                                     @if($host_interface->host_id == $h->id)
@@ -52,43 +52,42 @@
                                     <option value={{$h->id}}> {{$h->hostname}} </option>
                                 @endforeach
                             </select>
-{{--                            <input type="text" maxlength="30" class="form-control" name="host_id" value="{{ $host_interface->host_id }}"/>--}}
                         </div>
                         <div class="form-group">
-                            <label for="ifname">ifname: </label>
-                            <input type="text" maxlength="30" class="form-control" name="ifname" value="{{ $host_interface->ifname }}"/>
+                            <label for="ifname">Name: </label>
+                            <input type="text" maxlength="250" class="form-control" name="ifname" value="{{ $host_interface->ifname }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="iftype">iftype:</label>
-                            <input type="text" maxlength="30" class="form-control" name="iftype" value="{{ $host_interface->iftype }}"/>
+                            <label for="iftype">Type:</label>
+                            <input type="text" maxlength="250" class="form-control" name="iftype" value="{{ $host_interface->iftype }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="ifspeed">ifspeed: </label>
-                            <input type="text" maxlength="30" class="form-control" name="ifspeed" value="{{ $host_interface->ifspeed }}"/>
+                            <label for="ifspeed">Speed: </label>
+                            <input type="text" maxlength="250" class="form-control" name="ifspeed" value="{{ $host_interface->ifspeed }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="ifindex">ifindex:</label>
-                            <input type="text" maxlength="30" class="form-control" name="ifindex" value="{{ $host_interface->ifindex }}"/>
+                            <label for="ifindex">Index:</label>
+                            <input type="text" maxlength="250" class="form-control" name="ifindex" value="{{ $host_interface->ifindex }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="ifoperstatus">ifoperstatus: </label>
-                            <input type="text" maxlength="30" class="form-control" name="ifoperstatus" value="{{ $host_interface->ifoperstatus }}"/>
+                            <label for="ifoperstatus">Oper status: </label>
+                            <input type="text" maxlength="250" class="form-control" name="ifoperstatus" value="{{ $host_interface->ifoperstatus }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="ifalias">ifalias:</label>
-                            <input type="text" maxlength="30" class="form-control" name="ifalias" value="{{ $host_interface->ifalias }}"/>
+                            <label for="ifalias">Alias:</label>
+                            <input type="text" maxlength="250" class="form-control" name="ifalias" value="{{ $host_interface->ifalias }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="portid">portid:</label>
-                            <input type="text" maxlength="30" class="form-control" name="portid" value="{{ $host_interface->portid }}"/>
+                            <label for="portid">Port ID:</label>
+                            <input type="text" maxlength="250" class="form-control" name="portid" value="{{ $host_interface->portid }}"/>
                         </div>
                         <div class="form-group form-check">
                             <input type="hidden" name="is_mgmt" value="off">
                             <input type="checkbox" class="form-check-input" name="is_mgmt">
-                            <label class="form-check-label" for="is_mgmt">is_mgmt</label>
+                            <label class="form-check-label" for="is_mgmt">Is managementt</label>
                         </div>
                         <div class="form-group">
-                            <label for="discovery_protocol_id">discovery_protocol: </label>
+                            <label for="discovery_protocol_id">Discovery protocol: </label>
                             <select id="discovery_protocol_id" name="discovery_protocol_id" class="select2ex form-control">
                                 @foreach($discovery_protocol as $dp)
                                     @if($host_interface->discovery_protocol_id == $dp->id)
@@ -115,9 +114,9 @@
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

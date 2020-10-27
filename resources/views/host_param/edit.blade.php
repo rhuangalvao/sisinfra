@@ -18,12 +18,12 @@
     });
 </script>
 <head>
-    <title>Host_param</title>
+    <title>Host param</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Host_param</h1>
+            <h1 class="display-3">Edit Host param</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -40,7 +40,7 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="host_id">host_id: </label>
+                            <label for="host_id">Host: </label>
                             <select id="host_id" name="host_id" class="select2ex form-control">
                                 @foreach($host as $h)
                                     @if($host_param->host_id == $h->id)
@@ -53,22 +53,21 @@
                             </select>
                         </div>
                         <div class="form-group">
-                            <label for="param_name">param_name: </label>
+                            <label for="param_name">Param name: </label>
                             <input type="text" maxlength="30" class="form-control" name="param_name" value="{{ $host_param->param_name }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="param_value">param_value:</label>
+                            <label for="param_value">Param value:</label>
                             <input type="text" maxlength="30" class="form-control" name="param_value" value="{{ $host_param->param_value }}" />
                         </div>
                         <div class="form-group form-check">
                             <input type="hidden" name="enabled" value="off">
                             <input type="checkbox" class="form-check-input" name="enabled">
-                            <label class="form-check-label" for="enabled">enabled</label>
+                            <label class="form-check-label" for="enabled">Enabled</label>
                         </div>
-
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

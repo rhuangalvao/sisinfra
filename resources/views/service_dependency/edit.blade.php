@@ -19,12 +19,12 @@
     });
 </script>
 <head>
-    <title>Service_dependency</title>
+    <title>Service dependency</title>
 </head>
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Service_dependency</h1>
+            <h1 class="display-3">Edit Service dependency</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -41,7 +41,7 @@
                         @method('PATCH')
                         @csrf
                         <div class="form-group">
-                            <label for="service_instance_id">Service_instance:</label>
+                            <label for="service_instance_id">Service instance:</label>
                             <select id="service_instance_id" name="service_instance_id" class="select2ex form-control">
                                 @foreach($service_instance as $si)
                                     @if($service_dependency->service_instance_id == $si->id)
@@ -54,7 +54,7 @@
                             </select>
                        </div>
                         <div class="form-group">
-                            <label for="service_instance_id_dep">service_instance_dep:</label>
+                            <label for="service_instance_id_dep">Service instance dep:</label>
                             <select id="service_instance_id_dep" name="service_instance_id_dep" class="select2ex form-control">
                                 @foreach($service_instance as $si)
                                     @if($service_dependency->service_instance_id_dep == $si->id)
@@ -66,9 +66,9 @@
                                 @endforeach
                             </select>
                         </div>
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

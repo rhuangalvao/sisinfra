@@ -11,8 +11,8 @@ class PasswordController extends Controller
         return view('password.create');
     }
     public function crud(){
-        $password = Password::all();
-        return view('password.crud',compact('password'));
+        $passwords = Password::paginate(10);
+        return view('password.crud',compact('passwords'));
     }
     public function store(Request $request){
 
@@ -20,7 +20,7 @@ class PasswordController extends Controller
             'username'=>'required',
             'password'=>'required',
             'name'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
         ]);
         $password = new Password([
             'username' => $request->get('username'),
@@ -46,7 +46,7 @@ class PasswordController extends Controller
             'username'=>'required',
             'password'=>'required',
             'name'=>'required',
-            'descr'=>'required',
+//            'descr'=>'required',
         ]);
 
         $password = Password::find($id);

@@ -4,25 +4,25 @@
 {{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
 <head>
-    <title>Host_map</title>
+    <title>Host map</title>
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host_map'])
+    @include('cabecalho',['tituloPagina'=>'Host map'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_map.create')}}" class="btn btn-primary">Novo Host_map</a>
+        <a style="margin: 19px;" href="{{ route('host_map.create')}}" class="btn btn-primary">New Host map</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm col-sm-8">
         <thead>
         <tr>
-            <td>host</td>
+            <td>Host</td>
             <td>snmp_host</td>
             <td>snmp_host_remote</td>
-            <td colspan = 2>Ações</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($host_map as $host_map)
+        @foreach($host_maps as $host_map)
             <tr>
                 @foreach($host as $h)
                     @if($h->id == $host_map->host_id)
@@ -34,19 +34,23 @@
                         <td>{{$sh->hostname}}</td>
                     @endif
                 @endforeach
-                @foreach($snmp_host as $sh)
-                    @if($sh->id == $host_map->snmp_host_remote_id)
-                        <td>{{$sh->hostname}}</td>
-                    @endif
-                @endforeach
+                @if($host_map->snmp_host_remote_id != null)
+                    @foreach($snmp_host as $sh)
+                        @if($sh->id == $host_map->snmp_host_remote_id)
+                                <td>{{$sh->hostname}}</td>
+                        @endif
+                    @endforeach
+                @else
+                    <td></td>
+                @endif
                 <td>
-                    <a href="{{ route('host_map.edit',$host_map->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('host_map.edit',$host_map->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('host_map.destroy', $host_map->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -54,5 +58,6 @@
         </tbody>
     </table>
     <br/>
+    {{$host_maps->links()}}
 @endsection
 

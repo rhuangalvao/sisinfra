@@ -7,7 +7,11 @@
 @else
     @php( $def_container_class = 'container-fluid' )
 @endif
-
+<style type="text/css">
+    body{
+        overflow-x:hidden;
+    }
+</style>
 @section('adminlte_css')
     @stack('css')
     @yield('css')

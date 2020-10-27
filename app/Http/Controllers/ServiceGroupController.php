@@ -11,8 +11,8 @@ class ServiceGroupController extends Controller
         return view('service_group.create');
     }
     public function crud(){
-        $service_group = ServiceGroup::all();
-        return view('service_group.crud',compact('service_group'));
+        $service_groups = ServiceGroup::paginate(10);
+        return view('service_group.crud',compact('service_groups'));
     }
     public function store(Request $request){
 

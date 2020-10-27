@@ -29,7 +29,7 @@
 @section('content')
     <div class="row">
         <div class="col-sm-8 offset-sm-2">
-            <h1 class="display-3">Editar Service</h1>
+            <h1 class="display-3">Edit Service</h1>
             @if ($errors->any())
                 <div class="alert alert-danger">
                     <ul>
@@ -47,37 +47,41 @@
                         @csrf
                         <div class="form-group">
                             <label for="name">Name:</label>
-                            <input type="text" class="form-control" name="name" value="{{ $service->name }}" />
+                            <input type="text" maxlength="50" class="form-control" name="name" value="{{ $service->name }}" />
                         </div>
                         <div class="form-group">
-                            <label for="daemon_name">Daemon_name:</label>
-                            <input type="text" class="form-control" name="daemon_name" value="{{ $service->daemon_name }}" />
+                            <label for="daemon_name">Daemon name:</label>
+                            <input type="text" maxlength="50" class="form-control" name="daemon_name" value="{{ $service->daemon_name }}" />
                         </div>
                         <div class="form-group">
                             <label for="protocol">Protocol: </label>
-                            <input type="text" maxlength="30" class="form-control" name="protocol" value="{{ $service->protocol }}"/>
+                            <input type="text" maxlength="20" class="form-control" name="protocol" value="{{ $service->protocol }}"/>
                         </div>
                         <div class="form-group">
                             <label for="port">Port: </label>
                             <input type="text" onkeypress="return event.charCode >= 48 && event.charCode <= 57" maxlength="30" class="form-control" name="port" value="{{ $service->port }}"/>
                         </div>
                         <div class="form-group">
-                            <label for="service_group_id">Service_group_id: </label>
+                            <label for="service_group_id">Service group: </label>
                             <select id="service_group_id" name="service_group_id" class="select2ex form-control">
-                                @foreach($service_group as $sg)
-                                    @if($service->service_group_id == $sg->id)
-                                        <option value="{{ $service->service_group_id }}" selected>{{ $sg->name }}</option>
-                                    @endif
-                                @endforeach
+                                @if($service->service_group_id !=null)
+                                    @foreach($service_group as $sg)
+                                        @if($service->service_group_id == $sg->id)
+                                            <option value="{{ $service->service_group_id }}" selected>{{ $sg->name }}</option>
+                                        @endif
+                                    @endforeach
+                                @else
+                                    <option value="" selected></option>
+                                @endif
                                 @foreach($service_group as $sg)
                                     <option value={{$sg->id}}> {{$sg->name}} </option>
                                 @endforeach
                             </select>
                         </div>
 
-                        <button type="submit" class="btn btn-primary">Editar</button>
+                        <button type="submit" class="btn btn-primary">Edit</button>
                         <form>
-                            <input type="button" class="btn btn-danger" value="Cancelar" onclick="history.back()">
+                            <input type="button" class="btn btn-danger" value="Cancel" onclick="history.back()">
                         </form>
                     </form>
                 </div>

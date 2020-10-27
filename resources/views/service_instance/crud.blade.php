@@ -4,13 +4,13 @@
 {{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
 <head>
-    <title>Service_instance</title>
+    <title>Service instance</title>
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Service_instance'])
+    @include('cabecalho',['tituloPagina'=>'Service instance'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('service_instance.create')}}" class="btn btn-primary">Novo Service_instance</a>
+        <a style="margin: 19px;" href="{{ route('service_instance.create')}}" class="btn btn-primary">New Service instance</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
@@ -18,16 +18,16 @@
             <td>ID</td>
             <td>Host</td>
             <td>Service</td>
-            <td>Host_ip</td>
-            <td>Host_dns</td>
-            <td>descr</td>
-            <td>password</td>
-            <td>monitoring</td>
-            <td colspan = 2>Ações</td>
+            <td>Host IP</td>
+            <td>Host DNS</td>
+            <td>Description</td>
+            <td>Password</td>
+            <td>Monitoring</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($service_instance as $service_instance)
+        @foreach($service_instances as $service_instance)
             <tr>
                 <td>{{$service_instance->id}}</td>
                 @foreach($host as $h)
@@ -73,13 +73,13 @@
                 @endforeach
                 <td>{{$service_instance->monitoring}}</td>
                 <td>
-                    <a href="{{ route('service_instance.edit',$service_instance->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('service_instance.edit',$service_instance->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('service_instance.destroy', $service_instance->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -87,5 +87,6 @@
         </tbody>
     </table>
     <br/>
+    {{$service_instances->links()}}
 @endsection
 

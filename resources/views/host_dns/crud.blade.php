@@ -4,13 +4,13 @@
 {{--<script src="{{asset('js/popper.min.js')}}"></script>--}}
 {{--<script src="{{asset('js/bootstrap.js')}}"></script>--}}
 <head>
-    <title>Host_dns</title>
+    <title>Host DNS</title>
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host_dns'])
+    @include('cabecalho',['tituloPagina'=>'Host DNS'])
     <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_dns.create')}}" class="btn btn-primary">Novo Host_dns</a>
+        <a style="margin: 19px;" href="{{ route('host_dns.create')}}" class="btn btn-primary">New Host DNS</a>
     </div>
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
@@ -18,14 +18,14 @@
             <td>Host</td>
             <td>Name</td>
             <td>Version</td>
-            <td>is_main</td>
-            <td colspan = 2>Ações</td>
+            <td>Is main</td>
+            <td colspan = 2>Actions</td>
         </tr>
         </thead>
         <tbody>
-        @foreach($host_dns as $host_dns)
+        @foreach($host_dnss as $host_dns)
             <tr>
-                @foreach($host as $h)
+                @foreach($hosts as $h)
                     @if($h->id == $host_dns->host_id)
                         <td>{{$h->hostname}}</td>
                     @endif
@@ -34,13 +34,13 @@
                 <td>{{$host_dns->version}}</td>
                 <td>{{$host_dns->is_main}}</td>
                 <td>
-                    <a href="{{ route('host_dns.edit',$host_dns->id)}}" class="btn btn-primary">Editar</a>
+                    <a href="{{ route('host_dns.edit',$host_dns->id)}}" class="btn btn-primary">Edit</a>
                 </td>
                 <td>
                     <form action="{{ route('host_dns.destroy', $host_dns->id)}}" method="post">
                         @csrf
                         @method('DELETE')
-                        <button class="btn btn-danger" type="submit">Apagar</button>
+                        <button class="btn btn-danger" type="submit">Delete</button>
                     </form>
                 </td>
             </tr>
@@ -48,5 +48,6 @@
         </tbody>
     </table>
     <br/>
+    {{$host_dnss->links()}}
 @endsection
 
