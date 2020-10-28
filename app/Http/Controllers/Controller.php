@@ -19,13 +19,17 @@ class Controller extends BaseController
 
     public function welcome(){
 
-        $host = Host::all();
+    $host = Host::
+        where('id','<', '30')
+        ->get();;
 //        $snmp_host_connections = SnmpHostConnection::all();
-        $host_map = HostMap::all();
-        $host_type = HostType::all();
-        $busca = null;
-        return view('welcome',compact('host','host_map','host_type', 'busca'));
-    }
+    $host_map = HostMap::
+        where('id','<', '50')
+        ->get();
+    $host_type = HostType::all();
+    $busca = null;
+    return view('welcome',compact('host','host_map','host_type', 'busca'));
+}
 
     public function search(Request $request){
 

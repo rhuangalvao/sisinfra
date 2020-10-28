@@ -27,6 +27,22 @@ class HostController extends Controller
         $aux_vendors = AuxVendor::all();
         return view('host.crud',compact('hosts', 'operating_systems','host_types','host_status','aux_vendors'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+        $hosts = Host::
+            where('hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+            ->orWhere('tag', "ilike", '%'.$dataForm['pesquisa'].'%')
+            ->paginate(10);
+        }else{
+            $hosts = Host::paginate(10);
+        }
+        $operating_systems = OperatingSystem::all();
+        $host_types = HostType::all();
+        $host_status = HostStatus::all();
+        $aux_vendors = AuxVendor::all();
+        return view('host.crud',compact('hosts','operating_systems','host_types','host_status','aux_vendors', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

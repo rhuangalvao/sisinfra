@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::group(['prefix'=>'host'], function (){
     Route::get('',['as'=>'host','uses'=>'HostController@index']);
+    Route::any('search',['as'=>'host.search','uses'=>'HostController@search']);
     Route::get('crud',['as'=>'host.crud','uses'=>'HostController@crud']);
     Route::get('create',['as'=>'host.create','uses'=> 'HostController@create']);
     Route::post('store',['as'=>'host.store','uses'=> 'HostController@store']);

@@ -9,13 +9,34 @@
     }
 </style>
 <head>
+    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
     <title>Host</title>
 </head>
-
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host.create')}}" class="btn btn-primary">New Host</a>
+    @include('cabecalho',['tituloPagina'=>'Host'],['variavel'=>'host'])
+    <div class="container">
+        <div class="row">
+            <div class="col-sm">
+                <a  href="{{ route('host.create')}}" class="btn btn-primary">New Host</a>
+            </div>
+            <div class="col-sm">
+            </div>
+            <div class="col-sm">
+                <form method="post" action="{{ route('host.search') }}">
+                    @csrf
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-sm">
+                                <input type="text" class = "form-control " name="pesquisa" placeholder="Search Host">
+                            </div>
+                            <div class="col-sm">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
     <div class="table-responsive">
     <table id="tabelafiltro" align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
@@ -60,11 +81,10 @@
                 <td>{{$host->domain_suffix}}</td>
 {{--                <td>{{$host->descr}}</td>--}}
                 <td>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalLongoExemplo">
-                        ...
+                    <button type="button" class="btn btn-link" data-container="body" data-toggle="popover" data-placement="right" data-content="{{$host->descr}}">
+                        {{mb_strimwidth($host->descr, 0, 10, "...")}}
                     </button>
                 </td>
-
                 <td>{{$host->obs}}</td>
                 <td>{{$host->chassis_id}}</td>
                 <td>{{$host->monitoring}}</td>
@@ -90,27 +110,19 @@
                     </form>
                 </td>
             </tr>
-            <div class="modal fade" id="ModalLongoExemplo" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="TituloModalLongoExemplo">Description of {{$host->tag}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            {{$host->descr}}
-                        </div>
-                    </div>
-                </div>
-            </div>
         @endforeach
         </tbody>
     </table>
     </div>
     <br/>
-    {{$hosts->links()}}
+    @if(isset($dataForm))
+    {{$hosts->appends($dataForm)->links()}}
+    @else
+        {{$hosts->links()}}
+    @endif
 @endsection
-
-
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>

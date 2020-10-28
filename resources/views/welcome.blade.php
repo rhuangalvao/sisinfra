@@ -61,54 +61,54 @@
             edges = [];
 
             var buscando = "{{$busca}}";
-            if(buscando){                       //Quando houver busca
+            if (buscando) {                      //Quando houver busca
                 @foreach($host as $h)
-                if("{{$h->hostname}}" === buscando){            //Imprime a raiz da busca
+                if ("{{$h->hostname}}" === buscando) {            //Imprime a raiz da busca
                     imagem = imageMap("{{$h->host_type_id}}");
                     nodes.push({
                         id: "{{$h->id}}",
                         label: "{{$h->hostname}}",
-                        image: DIR + imagem +".png",
+                        image: DIR + imagem + ".png",
                         shape: "image"
                     });
                     var raiz = "{{$h->id}}";
                 }
                 @endforeach
-                                                            //Imprime as folhas da busca
+                //Imprime as folhas da busca
 
-               {{-- function busca(raiz) {--}}
-               {{--     @foreach($snmp_host_connections as $hc)--}}
-               {{--     if ("{{$hc->snmp_host_id}}" === raiz){--}}
-               {{--         var folha = "{{$hc->remote_chassisid}}";--}}
-               {{--         @foreach($host as $h)--}}
-               {{--         if("{{$h->chassis_id}}" === folha){--}}
-               {{--             imagem = imageMap("{{$h->host_type_id}}");--}}
-               {{--             nodes.push({--}}
-               {{--                 id: "{{$h->id}}",--}}
-               {{--                 label: "{{$h->hostname}}",--}}
-               {{--                 image: DIR + imagem +".png",--}}
-               {{--                 shape: "image"--}}
-               {{--             });--}}
-               {{--         }--}}
-               {{--         @endforeach--}}
-               {{--         busca(folha);--}}
-               {{--     }--}}
-               {{--     @endforeach--}}
-               {{--}--}}
-               {{--busca(raiz);--}}
+                {{-- function busca(raiz) {--}}
+                {{--     @foreach($snmp_host_connections as $hc)--}}
+                {{--     if ("{{$hc->snmp_host_id}}" === raiz){--}}
+                {{--         var folha = "{{$hc->remote_chassisid}}";--}}
+                {{--         @foreach($host as $h)--}}
+                {{--         if("{{$h->chassis_id}}" === folha){--}}
+                {{--             imagem = imageMap("{{$h->host_type_id}}");--}}
+                {{--             nodes.push({--}}
+                {{--                 id: "{{$h->id}}",--}}
+                {{--                 label: "{{$h->hostname}}",--}}
+                {{--                 image: DIR + imagem +".png",--}}
+                {{--                 shape: "image"--}}
+                {{--             });--}}
+                {{--         }--}}
+                {{--         @endforeach--}}
+                {{--         busca(folha);--}}
+                {{--     }--}}
+                {{--     @endforeach--}}
+                {{--}--}}
+                {{--busca(raiz);--}}
 
 
                 function busca(raiz) {
                     @foreach($host_map as $hm)
-                    if ("{{$hm->snmp_host_id}}" === raiz){
+                    if ("{{$hm->snmp_host_id}}" === raiz) {
                         var folha = "{{$hm->snmp_host_remote_id}}";
                         @foreach($host as $h)
-                        if("{{$h->id}}" === folha){
+                        if ("{{$h->id}}" === folha) {
                             imagem = imageMap("{{$h->host_type_id}}");
                             nodes.push({
                                 id: "{{$h->id}}",
                                 label: "{{$h->hostname}}",
-                                image: DIR + imagem +".png",
+                                image: DIR + imagem + ".png",
                                 shape: "image"
                             });
                         }
@@ -119,113 +119,116 @@
                 }
                 busca(raiz);
             }else {                                 //Senão houver busca
-{{--                @foreach($host as $h)--}}
-{{--                    imagem = imageMap("{{$h->host_type_id}}");--}}
-{{--                    nodes.push({--}}
-{{--                        id: "{{$h->id}}",--}}
-{{--                        label: "{{$h->hostname}}",--}}
-{{--                        //image: DIR + "Desktop.png",--}}
-{{--                        image: DIR + imagem +".png",--}}
-{{--                        shape: "image"--}}
-{{--                    });--}}
-{{--                @endforeach--}}
-
+                @foreach($host as $h)
+                    imagem = imageMap("{{$h->host_type_id}}");
                 nodes.push({
-                    id: 999,
-                    label: "TESTE",
-                    image: DIR + "Desktop.png",
+                    id: "{{$h->id}}",
+                    label: "{{$h->hostname}}",
+                    // image: DIR + "Desktop.png",
+                    image: DIR + imagem + ".png",
                     shape: "image"
                 });
+                @endforeach
             }
 
-                                                        //Imprime as ligações dos dispositivos
-{{--            @foreach($snmp_host_connections as $hc)--}}
-{{--                @foreach($host as $h)--}}
-{{--                    if("{{$hc->remote_chassisid}}" === "{{$h->chassis_id}}"){--}}
-{{--                        to = "{{$h->id}}";--}}
-{{--                        edges.push({ id: "{{$hc->id}}",--}}
-{{--                            from: "{{$hc->snmp_host_id}}",--}}
-{{--                            to: to,--}}
-{{--                            length: 250,--}}
-{{--                            label: "{{$hc->local_portid}}",--}}
-{{--                            font: { align: "top" },--}}
-{{--                        });--}}
-{{--                    }--}}
-{{--                @endforeach--}}
-{{--            @endforeach--}}
+                //     nodes.push({
+                //         id: 999,
+                //         label: "TESTE",
+                //         image: DIR + "Desktop.png",
+                //         shape: "image"
+                //     });
+                // }
+
+                //Imprime as ligações dos dispositivos
+                {{--            @foreach($snmp_host_connections as $hc)--}}
+                    {{--                @foreach($host as $h)--}}
+                    {{--                    if("{{$hc->remote_chassisid}}" === "{{$h->chassis_id}}"){--}}
+                    {{--                        to = "{{$h->id}}";--}}
+                    {{--                        edges.push({ id: "{{$hc->id}}",--}}
+                    {{--                            from: "{{$hc->snmp_host_id}}",--}}
+                    {{--                            to: to,--}}
+                    {{--                            length: 250,--}}
+                    {{--                            label: "{{$hc->local_portid}}",--}}
+                    {{--                            font: { align: "top" },--}}
+                    {{--                        });--}}
+                    {{--                    }--}}
+                    {{--                @endforeach--}}
+                    {{--            @endforeach--}}
 
             @foreach($host_map as $hm)
                 @foreach($host as $h)
-                    if("{{$hm->snmp_host_remote_id}}" === "{{$h->id}}"){
+                    if ("{{$hm->snmp_host_remote_id}}" === "{{$h->id}}") {
                         to = "{{$h->id}}";
-                        edges.push({ id: "{{$hm->id}}",
+                        edges.push({
+                            id: "{{$hm->id}}",
                             from: "{{$hm->snmp_host_id}}",
                             to: to,
                             length: 250,
                             label: "IP da Ligação",
-                            font: { align: "top" },
+                            font: {align: "top"},
                         });
                     }
                 @endforeach
             @endforeach
 
-            // create a network
-            var container = document.getElementById("mynetwork");
-            var data = {
-                nodes: nodes,
-                edges: edges
-            };
-            var options = {
-                interaction: { hover: false },
-                edges: {
-                    arrows: "to"
-                },
+                // create a network
+                var container = document.getElementById("mynetwork");
+                var data = {
+                    nodes: nodes,
+                    edges: edges
+                };
+                var options = {
+                    interaction: {hover: false},
+                    edges: {
+                        arrows: "to"
+                    },
 
-            };
-            network = new vis.Network(container, data, options);
+                };
+                network = new vis.Network(container, data, options);
 
-            network.on("click", function(params) {
-                nodeid = params.nodes;
-                @foreach($host as $h)
-                    if(nodeid == "{{$h->id}}"){
+                network.on("click", function (params) {
+                    nodeid = params.nodes;
+                    @foreach($host as $h)
+                    if (nodeid == "{{$h->id}}") {
                         document.getElementById("eventSpan").innerHTML =
                             "<h5>Host selecionado:</h5>" +
                             "<a>ID: </a>" + nodeid +
                             "<br><a>Descrição: </a>" + "{{$h->hostname}}" +
                             "<br><a>chassis_id: </a>" + "{{$h->chassis_id}}";
                     }
-                @endforeach
+                    @endforeach
+                });
+
+                {{--network.on("selectEdge", function(params) {--}}
+                {{--    edgeid = params.edges;--}}
+                {{--    @foreach($snmp_host_connections as $hc)--}}
+                {{--    if(edgeid == "{{$hc->id}}"){--}}
+                {{--        document.getElementById("eventSpan").innerHTML =--}}
+                {{--            "<h5>Edge selecionado:</h5>" + "<a>ID: </a>" + edgeid--}}
+                {{--            + "<br><a>From: </a>" + "{{$hc->snmp_host_id}}"--}}
+                {{--            + "<br><a>To: </a>" + "{{$hc->remote_chassisid}}"--}}
+                {{--    }--}}
+                {{--    @endforeach--}}
+                {{--});--}}
+
+                network.on("selectEdge", function (params) {
+                    edgeid = params.edges;
+                    @foreach($host_map as $hm)
+                    if (edgeid == "{{$hm->id}}") {
+                        document.getElementById("eventSpan").innerHTML =
+                            "<h5>Edge selecionado:</h5>" + "<a>ID: </a>" + edgeid
+                            + "<br><a>From: </a>" + "{{$hm->snmp_host_id}}"
+                            + "<br><a>To: </a>" + "{{$hm->snmp_host_remote_id}}"
+                    }
+                    @endforeach
+                });
+
+            }
+
+            window.addEventListener("load", () => {
+                draw();
             });
-
-            {{--network.on("selectEdge", function(params) {--}}
-            {{--    edgeid = params.edges;--}}
-            {{--    @foreach($snmp_host_connections as $hc)--}}
-            {{--    if(edgeid == "{{$hc->id}}"){--}}
-            {{--        document.getElementById("eventSpan").innerHTML =--}}
-            {{--            "<h5>Edge selecionado:</h5>" + "<a>ID: </a>" + edgeid--}}
-            {{--            + "<br><a>From: </a>" + "{{$hc->snmp_host_id}}"--}}
-            {{--            + "<br><a>To: </a>" + "{{$hc->remote_chassisid}}"--}}
-            {{--    }--}}
-            {{--    @endforeach--}}
-            {{--});--}}
-
-            network.on("selectEdge", function(params) {
-                edgeid = params.edges;
-                @foreach($host_map as $hm)
-                if(edgeid == "{{$hm->id}}"){
-                    document.getElementById("eventSpan").innerHTML =
-                        "<h5>Edge selecionado:</h5>" + "<a>ID: </a>" + edgeid
-                        + "<br><a>From: </a>" + "{{$hm->snmp_host_id}}"
-                        + "<br><a>To: </a>" + "{{$hm->snmp_host_remote_id}}"
-                }
-                @endforeach
-            });
-
-        }
-
-        window.addEventListener("load", () => {
-            draw();
-        });
+        
     </script>
 
 @endsection
