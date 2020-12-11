@@ -65,7 +65,12 @@
 {{--                        <td>{{$hd->name}}</td>--}}
 {{--                    @endif--}}
 {{--                @endforeach--}}
-                <td>{{$service_instance->descr}}</td>
+{{--                <td>{{$service_instance->descr}}</td>--}}
+                <td>
+                    <button type="button" class="btn btn-link" data-container="body" data-toggle="popover" data-placement="right" data-content="{{$service_instance->descr}}">
+                        {{mb_strimwidth($service_instance->descr, 0, 10, "...")}}
+                    </button>
+                </td>
                 @foreach($password as $pw)
                     @if($pw->id == $service_instance->password_id)
                         <td>{{$pw->name}}</td>
@@ -89,4 +94,14 @@
     <br/>
     {{$service_instances->links()}}
 @endsection
+@section('footer')
+    @include('footer')
+@endsection
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>
 

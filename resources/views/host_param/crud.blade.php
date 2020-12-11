@@ -50,4 +50,6 @@
     <br/>
     {{$host_params->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

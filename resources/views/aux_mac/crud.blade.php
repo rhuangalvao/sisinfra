@@ -46,4 +46,6 @@
     <br/>
     {{$aux_macs->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

@@ -51,3 +51,6 @@
     {{$service_dependencies->links()}}
 @endsection
 
+@section('footer')
+    @include('footer')
+@endsection

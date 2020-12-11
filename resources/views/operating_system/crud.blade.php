@@ -42,4 +42,6 @@
     <br/>
     {{$operating_systems->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

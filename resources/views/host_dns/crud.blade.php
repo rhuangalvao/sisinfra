@@ -50,4 +50,6 @@
     <br/>
     {{$host_dnss->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

@@ -51,3 +51,6 @@
     {{$service_instance_params->links()}}
 @endsection
 
+@section('footer')
+    @include('footer')
+@endsection

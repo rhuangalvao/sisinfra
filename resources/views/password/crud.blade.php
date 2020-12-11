@@ -46,4 +46,6 @@
     <br/>
     {{$passwords->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

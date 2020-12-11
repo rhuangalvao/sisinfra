@@ -40,4 +40,6 @@
     <br/>
     {{$host_statuses->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

@@ -40,4 +40,6 @@
     <br/>
     {{$discovery_protocols->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

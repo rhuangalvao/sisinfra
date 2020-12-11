@@ -24,7 +24,12 @@
         @foreach($service_groups as $service_group)
             <tr>
                 <td>{{$service_group->name}}</td>
-                <td>{{$service_group->descr}}</td>
+{{--                <td>{{$service_group->descr}}</td>--}}
+                <td>
+                    <button type="button" class="btn btn-link" data-container="body" data-toggle="popover" data-placement="right" data-content="{{$service_group->descr}}">
+                        {{mb_strimwidth($service_group->descr, 0, 10, "...")}}
+                    </button>
+                </td>
                 <td>
                     <a href="{{ route('service_group.edit',$service_group->id)}}" class="btn btn-primary">Edit</a>
                 </td>
@@ -42,4 +47,13 @@
     <br/>
     {{$service_groups->links()}}
 @endsection
+@section('footer')
+    @include('footer')
+@endsection
 
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>

@@ -60,4 +60,6 @@
     <br/>
     {{$host_maps->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

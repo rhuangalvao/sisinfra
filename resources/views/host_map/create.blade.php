@@ -60,3 +60,6 @@
         </div>
     </div>
 @endsection
+@section('footer')
+    @include('footer')
+@endsection

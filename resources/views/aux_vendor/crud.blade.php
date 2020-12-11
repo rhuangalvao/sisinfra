@@ -40,4 +40,6 @@
     <br/>
     {{$aux_vendors->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

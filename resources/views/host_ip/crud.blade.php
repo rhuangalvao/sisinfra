@@ -55,7 +55,9 @@
     </table>
     <br>
     <div class="container">
-        {{$host_ips->links()}};
+        {{$host_ips->links()}}
     </div>
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

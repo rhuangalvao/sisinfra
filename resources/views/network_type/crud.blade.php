@@ -62,4 +62,6 @@
     <br/>
     {{$network_types->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

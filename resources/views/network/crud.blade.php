@@ -34,8 +34,8 @@
                 <td>{{$network->name}}</td>
 {{--                <td>{{$network->descr}}</td>--}}
                 <td>
-                    <button type="button" class="btn btn-info" data-toggle="modal" data-target="#ModalLongoExemplo">
-                        ...
+                    <button type="button" class="btn btn-link" data-container="body" data-toggle="popover" data-placement="right" data-content="{{$network->descr}}">
+                        {{mb_strimwidth($network->descr, 0, 10, "...")}}
                     </button>
                 </td>
                 <td>{{$network->address}}</td>
@@ -51,25 +51,19 @@
                     </form>
                 </td>
             </tr>
-            <div class="modal fade" id="ModalLongoExemplo" tabindex="-1" role="dialog" aria-labelledby="TituloModalLongoExemplo" aria-hidden="true">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="TituloModalLongoExemplo">Description of {{$network->name}}</h5>
-                            <button type="button" class="close" data-dismiss="modal" aria-label="Fechar">
-                                <span aria-hidden="true">&times;</span>
-                            </button>
-                        </div>
-                        <div class="modal-body">
-                            {{$network->descr}}
-                        </div>
-                    </div>
-                </div>
-            </div>
         @endforeach
         </tbody>
     </table>
     <br/>
     {{$networks->links()}}
 @endsection
+@section('footer')
+    @include('footer')
+@endsection
 
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+<script>
+    $(function () {
+        $('[data-toggle="popover"]').popover()
+    })
+</script>

@@ -76,4 +76,6 @@
     <br/>
     {{$host_interfaces->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection

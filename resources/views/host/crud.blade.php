@@ -9,7 +9,7 @@
     }
 </style>
 <head>
-    <script src="https://code.jquery.com/jquery-1.9.1.js"></script>
+
     <title>Host</title>
 </head>
 @section('content')
@@ -121,6 +121,11 @@
         {{$hosts->links()}}
     @endif
 @endsection
+@section('footer')
+    @include('footer')
+@endsection
+
+<script src="https://code.jquery.com/jquery-1.9.1.js"></script>
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()

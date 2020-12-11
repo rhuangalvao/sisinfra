@@ -49,4 +49,6 @@
     <br/>
     {{$host_connections->links()}}
 @endsection
-
+@section('footer')
+    @include('footer')
+@endsection
