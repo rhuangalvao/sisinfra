@@ -14,6 +14,20 @@ class HostStatusController extends Controller
         $host_statuses = HostStatus::paginate(10);
         return view('host_status.crud',compact('host_statuses'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $host_statuses = HostStatus::
+            where('status',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $host_statuses = HostStatus::paginate($dataForm['entradas']);
+        }
+        else{
+            $host_statuses = HostStatus::paginate(10);
+        }
+        return view('host_status.crud',compact('host_statuses', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

@@ -8,6 +8,7 @@ use App\Model\OperatingSystem;
 use App\Model\HostType;
 use App\Model\HostStatus;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostController extends Controller
 {
@@ -19,8 +20,16 @@ class HostController extends Controller
         return view('host.create',compact('operating_systems','host_types','host_status','aux_vendors'));
     }
     public function crud(){
-//        $host = DB::table('hosts')->paginate(10);
-        $hosts = Host::paginate(10);
+
+        $hosts = DB::table('hosts')
+            ->leftJoin('operating_systems', 'hosts.os_id', '=', 'operating_systems.id')
+            ->leftJoin('host_types','hosts.host_type_id','=','host_types.id')
+            ->leftJoin('host_statuses','hosts.status_id','=','host_statuses.id')
+            ->leftJoin('aux_vendors','hosts.aux_vendor_id','=','aux_vendors.id')
+            ->select('hosts.*','operating_systems.name as os_name', 'host_types.name as type_name', 'host_statuses.status', 'aux_vendors.name as vendor_name')
+            ->paginate(10);
+//        dd($hosts);
+//        $hosts = Host::paginate(10);
         $operating_systems = OperatingSystem::all();
         $host_types = HostType::all();
         $host_status = HostStatus::all();
@@ -30,12 +39,55 @@ class HostController extends Controller
     public function search(Request $request){
         $dataForm = $request->except('_token');
         if (isset($dataForm['pesquisa'])){
-        $hosts = Host::
-            where('hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
-            ->orWhere('tag', "ilike", '%'.$dataForm['pesquisa'].'%')
-            ->paginate(10);
-        }else{
-            $hosts = Host::paginate(10);
+
+            $hosts = DB::table('hosts')
+                ->leftJoin('operating_systems', 'hosts.os_id', '=', 'operating_systems.id')
+                ->leftJoin('host_types','hosts.host_type_id','=','host_types.id')
+                ->leftJoin('host_statuses','hosts.status_id','=','host_statuses.id')
+                ->leftJoin('aux_vendors','hosts.aux_vendor_id','=','aux_vendors.id')
+                ->select('hosts.*','operating_systems.name as os_name', 'host_types.name as type_name', 'host_statuses.status', 'aux_vendors.name as vendor_name')
+                ->where('hosts.hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.tag', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.domain_suffix', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.obs', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.chassis_id', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('hosts.serial_number', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('operating_systems.name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_types.name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_statuses.status',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('aux_vendors.name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//        $hosts = Host::
+//            where('hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('tag', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('domain_suffix', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('obs', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('chassis_id', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->orWhere('serial_number', "ilike", '%'.$dataForm['pesquisa'].'%')
+//            ->paginate($dataForm['entradas']);
+
+        }elseif(isset($dataForm['entradas'])){
+            $hosts = DB::table('hosts')
+                ->leftJoin('operating_systems', 'hosts.os_id', '=', 'operating_systems.id')
+                ->leftJoin('host_types','hosts.host_type_id','=','host_types.id')
+                ->leftJoin('host_statuses','hosts.status_id','=','host_statuses.id')
+                ->leftJoin('aux_vendors','hosts.aux_vendor_id','=','aux_vendors.id')
+                ->select('hosts.*','operating_systems.name as os_name', 'host_types.name as type_name', 'host_statuses.status', 'aux_vendors.name as vendor_name')
+                ->paginate($dataForm['entradas']);
+//            $hosts = Host::paginate($dataForm['entradas']);
+        }
+        else{
+            $hosts = DB::table('hosts')
+                ->leftJoin('operating_systems', 'hosts.os_id', '=', 'operating_systems.id')
+                ->leftJoin('host_types','hosts.host_type_id','=','host_types.id')
+                ->leftJoin('host_statuses','hosts.status_id','=','host_statuses.id')
+                ->leftJoin('aux_vendors','hosts.aux_vendor_id','=','aux_vendors.id')
+                ->select('hosts.*','operating_systems.name as os_name', 'host_types.name as type_name', 'host_statuses.status', 'aux_vendors.name as vendor_name')
+                ->paginate(10);
+//            $hosts = Host::paginate(10);
         }
         $operating_systems = OperatingSystem::all();
         $host_types = HostType::all();

@@ -8,18 +8,18 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Aux Mac'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('aux_mac.create')}}" class="btn btn-primary">New aux mac</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Aux Mac'],['variavel'=>'aux_mac'])
+{{--    <div class="container offset-sm-2">--}}
+{{--        <a style="margin: 19px;" href="{{ route('aux_mac.create')}}" class="btn btn-primary">New aux mac</a>--}}
+{{--    </div>--}}
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Mac</td>
-            <td>Mfr</td>
-            <td>Mfr short</td>
-            <td>Logo</td>
-            <td colspan = 2>Actions</td>
+            <th>Mac</th>
+            <th>Mfr</th>
+            <th>Mfr short</th>
+            <th>Logo</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -44,7 +44,11 @@
         </tbody>
     </table>
     <br/>
-    {{$aux_macs->links()}}
+    @if(isset($dataForm))
+        {{$aux_macs->appends($dataForm)->links()}}
+    @else
+        {{$aux_macs->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

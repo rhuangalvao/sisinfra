@@ -8,15 +8,12 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Aux Vendor'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('aux_vendor.create')}}" class="btn btn-primary">New aux vendor</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Aux Vendor'],['variavel'=>'aux_vendor'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Name</td>
-            <td colspan = 2>Actions</td>
+            <th>Name</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +35,11 @@
         </tbody>
     </table>
     <br/>
-    {{$aux_vendors->links()}}
+    @if(isset($dataForm))
+        {{$aux_vendors->appends($dataForm)->links()}}
+    @else
+        {{$aux_vendors->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

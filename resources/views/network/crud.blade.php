@@ -8,29 +8,27 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Network'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('network.create')}}" class="btn btn-primary">New network</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Network'],['variavel'=>'network'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Network type</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td>Address</td>
-            <td>Enabled</td>
-            <td colspan = 2>Actions</td>
+            <th>Network type</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Address</th>
+            <th>Enabled</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($networks as $network)
             <tr>
-                @foreach($network_type as $nt)
-                    @if($nt->id == $network->network_type_id)
-                        <td>{{$nt->name}}</td>
-                    @endif
-                @endforeach
+                <td>{{$network->type_name}}</td>
+{{--                @foreach($network_type as $nt)--}}
+{{--                    @if($nt->id == $network->network_type_id)--}}
+{{--                        <td>{{$nt->name}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$network->name}}</td>
 {{--                <td>{{$network->descr}}</td>--}}
                 <td>
@@ -55,7 +53,11 @@
         </tbody>
     </table>
     <br/>
-    {{$networks->links()}}
+    @if(isset($dataForm))
+        {{$networks->appends($dataForm)->links()}}
+    @else
+        {{$networks->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

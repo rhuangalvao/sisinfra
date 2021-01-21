@@ -17,6 +17,22 @@ class ServiceDependencyController extends Controller
         $service_instance = ServiceInstance::all();
         return view('service_dependency.crud',compact('service_dependencies','service_instance'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $service_dependencies = ServiceDependency::
+            where('service_instance_id',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('service_instance_id_dep', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $service_dependencies = ServiceDependency::paginate($dataForm['entradas']);
+        }
+        else{
+            $service_dependencies = ServiceDependency::paginate(10);
+        }
+        $service_instance = ServiceInstance::all();
+        return view('service_dependency.crud',compact('service_dependencies','service_instance', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

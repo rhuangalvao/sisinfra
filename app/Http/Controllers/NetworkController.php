@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Network;
 use App\Model\NetworkType;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class NetworkController extends Controller
 {
@@ -13,9 +14,51 @@ class NetworkController extends Controller
         return view('network.create',compact('network_type'));
     }
     public function crud(){
+        $networks = DB::table('networks')
+            ->leftJoin('network_types', 'networks.network_type_id', '=', 'network_types.id')
+            ->select('networks.*', 'network_types.name as type_name')
+            ->paginate(10);
+
         $network_type = NetworkType::all();
-        $networks = Network::paginate(10);
+//        $networks = Network::paginate(10);
         return view('network.crud',compact('networks','network_type'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $networks = DB::table('networks')
+                ->leftJoin('network_types', 'networks.network_type_id', '=', 'network_types.id')
+                ->select('networks.*', 'network_types.name as type_name')
+                ->where('network_types.name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('networks.name', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('networks.descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('networks.address', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//            $networks = Network::
+////            where('hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('tag', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('domain_suffix', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('obs', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('chassis_id', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('serial_number', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $networks = DB::table('networks')
+                ->leftJoin('network_types', 'networks.network_type_id', '=', 'network_types.id')
+                ->select('networks.*', 'network_types.name as type_name')
+                ->paginate($dataForm['entradas']);
+//            $networks = Network::paginate($dataForm['entradas']);
+        }
+        else{
+            $networks = DB::table('networks')
+                ->leftJoin('network_types', 'networks.network_type_id', '=', 'network_types.id')
+                ->select('networks.*', 'network_types.name as type_name')
+                ->paginate(10);
+        }
+        $network_type = NetworkType::all();
+        return view('network.crud',compact('networks','network_type', 'dataForm'));
     }
     public function store(Request $request){
 

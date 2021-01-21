@@ -8,28 +8,26 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host DNS'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_dns.create')}}" class="btn btn-primary">New Host DNS</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host DNS'],['variavel'=>'host_dns'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Host</td>
-            <td>Name</td>
-            <td>Version</td>
-            <td>Is main</td>
-            <td colspan = 2>Actions</td>
+            <th>Host</th>
+            <th>Name</th>
+            <th>Version</th>
+            <th>Is main</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($host_dnss as $host_dns)
             <tr>
-                @foreach($hosts as $h)
-                    @if($h->id == $host_dns->host_id)
-                        <td>{{$h->hostname}}</td>
-                    @endif
-                @endforeach
+                <td>{{$host_dns->hostname}}</td>
+{{--                @foreach($hosts as $h)--}}
+{{--                    @if($h->id == $host_dns->host_id)--}}
+{{--                        <td>{{$h->hostname}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$host_dns->name}}</td>
                 <td>{{$host_dns->version}}</td>
                 <td>{{$host_dns->is_main}}</td>
@@ -48,7 +46,11 @@
         </tbody>
     </table>
     <br/>
-    {{$host_dnss->links()}}
+    @if(isset($dataForm))
+        {{$host_dnss->appends($dataForm)->links()}}
+    @else
+        {{$host_dnss->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

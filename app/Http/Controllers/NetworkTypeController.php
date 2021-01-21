@@ -14,6 +14,21 @@ class NetworkTypeController extends Controller
         $network_types = NetworkType::paginate(10);
         return view('network_type.crud',compact('network_types'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $network_types = NetworkType::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $network_types = NetworkType::paginate($dataForm['entradas']);
+        }
+        else{
+            $network_types = NetworkType::paginate(10);
+        }
+        return view('network_type.crud',compact('network_types', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

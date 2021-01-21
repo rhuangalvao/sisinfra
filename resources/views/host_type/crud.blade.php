@@ -8,16 +8,13 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host Type'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_type.create')}}" class="btn btn-primary">New Host type</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host Type'],['variavel'=>'host_type'])
     <table align="center" class="table table-striped table-active table-sm col-sm-8">
         <thead>
         <tr>
-            <td>Name</td>
-            <td>TAG</td>
-            <td colspan = 2>Actions</td>
+            <th>Name</th>
+            <th>TAG</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +37,11 @@
         </tbody>
     </table>
     <br/>
-    {{$host_types->links()}}
+    @if(isset($dataForm))
+        {{$host_types->appends($dataForm)->links()}}
+    @else
+        {{$host_types->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

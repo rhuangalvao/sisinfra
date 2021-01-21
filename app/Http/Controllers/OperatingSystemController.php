@@ -14,6 +14,21 @@ class OperatingSystemController extends Controller
         $operating_systems = OperatingSystem::paginate(10);
         return view('operating_system.crud',compact('operating_systems'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $operating_systems = OperatingSystem::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('version', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $operating_systems = OperatingSystem::paginate($dataForm['entradas']);
+        }
+        else{
+            $operating_systems = OperatingSystem::paginate(10);
+        }
+        return view('operating_system.crud',compact('operating_systems', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

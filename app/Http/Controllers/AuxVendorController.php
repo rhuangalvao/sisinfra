@@ -14,6 +14,21 @@ class AuxVendorController extends Controller
         $aux_vendors = AuxVendor::paginate(10);
         return view('aux_vendor.crud',compact('aux_vendors'));
     }
+
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $aux_vendors = AuxVendor::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $aux_vendors = AuxVendor::paginate($dataForm['entradas']);
+        }
+        else{
+            $aux_vendors = AuxVendor::paginate(10);
+        }
+        return view('aux_vendor.crud',compact('aux_vendors', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

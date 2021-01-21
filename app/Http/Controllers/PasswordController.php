@@ -14,6 +14,23 @@ class PasswordController extends Controller
         $passwords = Password::paginate(10);
         return view('password.crud',compact('passwords'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $passwords = Password::
+            where('username',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('password', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('name', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $passwords = Password::paginate($dataForm['entradas']);
+        }
+        else{
+            $passwords = Password::paginate(10);
+        }
+        return view('password.crud',compact('passwords', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

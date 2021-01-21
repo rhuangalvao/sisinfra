@@ -8,28 +8,26 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host param'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_param.create')}}" class="btn btn-primary">New Host param</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host param'],['variavel'=>'host_param'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Host</td>
-            <td>Param name</td>
-            <td>Param value</td>
-            <td>Enabled</td>
-            <td colspan = 2>Actions</td>
+            <th>Host</th>
+            <th>Param name</th>
+            <th>Param value</th>
+            <th>Enabled</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($host_params as $host_param)
             <tr>
-                @foreach($host as $h)
-                    @if($h->id == $host_param->host_id)
-                        <td>{{$h->hostname}}</td>
-                    @endif
-                @endforeach
+                <td>{{$host_param->hostname}}</td>
+{{--                @foreach($host as $h)--}}
+{{--                    @if($h->id == $host_param->host_id)--}}
+{{--                        <td>{{$h->hostname}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$host_param->param_name}}</td>
                 <td>{{$host_param->param_value}}</td>
                 <td>{{$host_param->enabled}}</td>
@@ -48,7 +46,11 @@
         </tbody>
     </table>
     <br/>
-    {{$host_params->links()}}
+    @if(isset($dataForm))
+        {{$host_params->appends($dataForm)->links()}}
+    @else
+        {{$host_params->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

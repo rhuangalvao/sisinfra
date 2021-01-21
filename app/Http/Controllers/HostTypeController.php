@@ -14,6 +14,21 @@ class HostTypeController extends Controller
         $host_types = HostType::paginate(10);
         return view('host_type.crud',compact('host_types'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $host_types = HostType::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('tag_prefix', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $host_types = HostType::paginate($dataForm['entradas']);
+        }
+        else{
+            $host_types = HostType::paginate(10);
+        }
+        return view('host_type.crud',compact('host_types', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

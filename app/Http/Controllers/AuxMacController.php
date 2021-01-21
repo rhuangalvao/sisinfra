@@ -14,6 +14,23 @@ class AuxMacController extends Controller
         $aux_macs = AuxMac::paginate(10);
         return view('aux_mac.crud',compact('aux_macs'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $aux_macs = AuxMac::
+            where('mac',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('mfr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('mfr_short', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('logo', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $aux_macs = AuxMac::paginate($dataForm['entradas']);
+        }
+        else{
+            $aux_macs = AuxMac::paginate(10);
+        }
+        return view('aux_mac.crud',compact('aux_macs', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

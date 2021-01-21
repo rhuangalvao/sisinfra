@@ -8,16 +8,13 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Network Type'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('network_type.create')}}" class="btn btn-primary">New Network Type</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Network Type'],['variavel'=>'network_type'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Name</td>
-            <td>Description</td>
-            <td colspan = 2>Actions</td>
+            <th>Name</th>
+            <th>Description</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -60,7 +57,11 @@
         </tbody>
     </table>
     <br/>
-    {{$network_types->links()}}
+    @if(isset($dataForm))
+        {{$network_types->appends($dataForm)->links()}}
+    @else
+        {{$network_types->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

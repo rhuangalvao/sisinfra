@@ -8,31 +8,29 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host IP'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_ip.create')}}" class="btn btn-primary">New Host IP</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host IP'],['variavel'=>'host_ip'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Host</td>
-            <td>IP address</td>
-            <td>Mask</td>
-            <td>Gateway</td>
-            <td>Version</td>
-            <td>Mac address</td>
-            <td>Is main</td>
-            <td colspan = 2>Actions</td>
+            <th>Host</th>
+            <th>IP address</th>
+            <th>Mask</th>
+            <th>Gateway</th>
+            <th>Version</th>
+            <th>Mac address</th>
+            <th>Is main</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($host_ips as $host_ip)
             <tr>
-                @foreach($hosts as $h)
-                    @if($h->id == $host_ip->host_id)
-                        <td>{{$h->hostname}}</td>
-                    @endif
-                @endforeach
+                <td>{{$host_ip->hostname}}</td>
+{{--                @foreach($hosts as $h)--}}
+{{--                    @if($h->id == $host_ip->host_id)--}}
+{{--                        <td>{{$h->hostname}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$host_ip->ip_address}}</td>
                 <td>{{$host_ip->mask}}</td>
                 <td>{{$host_ip->gateway}}</td>
@@ -54,9 +52,11 @@
         </tbody>
     </table>
     <br>
-    <div class="container">
-        {{$host_ips->links()}}
-    </div>
+        @if(isset($dataForm))
+            {{$host_ips->appends($dataForm)->links()}}
+        @else
+            {{$host_ips->links()}}
+        @endif
 @endsection
 @section('footer')
     @include('footer')

@@ -29,7 +29,18 @@
     });
 </script>
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'SISINFRA'])
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align: center;"><img src="{{asset('/img/uepg.png')}}" alt="UEPG" height="100"></div>
+        </div>
+        <div class="col-sm text-center">
+            <h1 class="display-4">SISINFRA</h1>
+        </div>
+        <div class="col-sm">
+            <div style="text-align: center;"><img src="{{asset('/img/nti.png')}}" alt="NTI" height="100"></div>
+        </div>
+    </div>
+    <br>
     <body>
     <div class="container">
         <div class="row">
@@ -37,7 +48,7 @@
                 <form method="post" action="{{ route('search') }}">
                     @csrf
 {{--                    <input type="text" class = "form-control col-sm" name="pesquisa" placeholder="Choose a Root Host">--}}
-                    <select id="host_id" name="host_id" class="select2ex form-control">
+                    <select id="pesquisa" name="pesquisa" class="select2ex form-control">
                         <option disabled value="" selected>Choose a Root Host</option>
                         @foreach($host as $h)
                             <option value={{$h->id}}> {{$h->hostname}} </option>
@@ -89,7 +100,7 @@
             var buscando = "{{$busca}}";
             if (buscando) {                      //Quando houver busca
                 @foreach($host as $h)
-                if ("{{$h->hostname}}" === buscando) {            //Imprime a raiz da busca
+                if ("{{$h->id}}" === buscando) {            //Imprime a raiz da busca
                     imagem = imageMap("{{$h->host_type_id}}");
                     nodes.push({
                         id: "{{$h->id}}",
@@ -102,22 +113,47 @@
                 @endforeach
                 //Imprime as folhas da busca
 
+                // USando join de Hosts com interfaces e usando connections a parte
+
+                function busca(raiz) {
+                    @foreach($host_ifjoin as $join)
+                        if ("{{$join->host_id}}" === raiz) {
+                            @foreach($host_connection as $hc)
+                                if("{{$join->id}}" === "{{$hc->host_interface_id_a}}"){
+                                    var folha = "{{$hc->host_interface_id_b}}";
+                                }
+                            @endforeach
+                        }
+                    @endforeach
+                    @foreach($host_ifjoin as $join)
+                        if ("{{$join->id}}" === folha) {
+                            folha = "{{$join->host_id}}";
+                            imagem = imageMap("{{$join->host_type_id}}");
+                            nodes.push({
+                                id: "{{$join->host_id}}",
+                                label: "{{$join->hostname}}",
+                                image: DIR + imagem + ".png",
+                                shape: "image"
+                            });
+                        busca(folha);
+                        }
+                    @endforeach
+
+                }
+
+                //Usando join de host, interfaces e connections
                 {{--function busca(raiz) {--}}
-                {{--    @foreach($host_ifjoin as $join)--}}
-                {{--    if ("{{$join->host_id}}" === raiz) {--}}
-                {{--        @foreach($host_connection as $hc)--}}
-                {{--        if("{{$join->id}}" === "{{$hc->host_interface_id_a}}"){--}}
-                {{--            var folha = "{{$hc->host_interface_id_b}}";--}}
-                {{--        }--}}
-                {{--        @endforeach--}}
+                {{--    @foreach($query as $q)--}}
+                {{--    if ("{{$q->host_id}}" === raiz) {--}}
+                {{--        var folha = "{{$q->host_interface_id_b}}";--}}
                 {{--    @endforeach--}}
-                {{--    @foreach($host_ifjoin as $join)--}}
-                {{--        if ("{{$join->id}}" === folha) {--}}
-                {{--            folha = "{{$join->host_id}}"--}}
-                {{--            imagem = imageMap("{{$join->host_type_id}}");--}}
+                {{--    @foreach($query as $q)--}}
+                {{--        if ("{{$q->id}}" === folha) {--}}
+                {{--            folha = "{{$q->host_id}}";--}}
+                {{--            imagem = imageMap("{{$q->host_type_id}}");--}}
                 {{--            nodes.push({--}}
-                {{--                id: "{{$join->host_id}}",--}}
-                {{--                label: "{{$join->hostname}}",--}}
+                {{--                id: "{{$q->host_id}}",--}}
+                {{--                label: "{{$q->hostname}}",--}}
                 {{--                image: DIR + imagem + ".png",--}}
                 {{--                shape: "image"--}}
                 {{--            });--}}
@@ -128,25 +164,28 @@
                 {{--}--}}
 
 
-                function busca(raiz) {
-                    @foreach($host_map as $hm)
-                    if ("{{$hm->snmp_host_id}}" === raiz) {
-                        var folha = "{{$hm->snmp_host_remote_id}}";
-                        @foreach($host as $h)
-                        if ("{{$h->id}}" === folha) {
-                            imagem = imageMap("{{$h->host_type_id}}");
-                            nodes.push({
-                                id: "{{$h->id}}",
-                                label: "{{$h->hostname}}",
-                                image: DIR + imagem + ".png",
-                                shape: "image"
-                            });
-                        }
-                        @endforeach
-                        busca(folha);
-                    }
-                    @endforeach
-                }
+                {{--function busca(raiz) {--}}
+                {{--    @foreach($host_map as $hm)--}}
+                {{--    if ("{{$hm->snmp_host_id}}" === raiz) {--}}
+                {{--        var folha = "{{$hm->snmp_host_remote_id}}";--}}
+                {{--        @foreach($host as $h)--}}
+                {{--        if ("{{$h->id}}" === folha) {--}}
+                {{--            imagem = imageMap("{{$h->host_type_id}}");--}}
+                {{--            nodes.push({--}}
+                {{--                id: "{{$h->id}}",--}}
+                {{--                label: "{{$h->hostname}}",--}}
+                {{--                image: DIR + imagem + ".png",--}}
+                {{--                shape: "image"--}}
+                {{--            });--}}
+                {{--        }--}}
+                {{--        @endforeach--}}
+                {{--        busca(folha);--}}
+                {{--    }--}}
+                {{--    @endforeach--}}
+                {{--}--}}
+
+
+
                 busca(raiz);
             }else {                                 //Senão houver busca
                 @foreach($host as $h)
@@ -161,21 +200,45 @@
                 @endforeach
             }
 
-            @foreach($host_map as $hm)
-                @foreach($host as $h)
-                    if ("{{$hm->snmp_host_remote_id}}" === "{{$h->id}}") {
-                        to = "{{$h->id}}";
+            @foreach($host_connection as $hc)
+                portfrom = null;
+                @foreach($host_ifjoin as $join)
+                    if("{{$hc->host_interface_id_a}}" === "{{$join->id}}"){
+                        from = "{{$join->host_id}}";
+                        portfrom = "{{$join->portid}}";
+                    }
+                @endforeach
+                @foreach($host_ifjoin as $join)
+                    if("{{$hc->host_interface_id_b}}" === "{{$join->id}}"){
+                        to = "{{$join->host_id}}";
+                        portto = "{{$join->portid}}";
                         edges.push({
-                            id: "{{$hm->id}}",
-                            from: "{{$hm->snmp_host_id}}",
+                            id: "{{$hc->id}}",
+                            from: from,
                             to: to,
                             length: 250,
-                            label: "IP da Ligação",
+                            label: portfrom + " -> " + portto,
                             font: {align: "top"},
                         });
                     }
                 @endforeach
             @endforeach
+
+{{--            @foreach($host_map as $hm)--}}
+{{--                @foreach($host as $h)--}}
+{{--                    if ("{{$hm->snmp_host_remote_id}}" === "{{$h->id}}") {--}}
+{{--                        to = "{{$h->id}}";--}}
+{{--                        edges.push({--}}
+{{--                            id: "{{$hm->id}}",--}}
+{{--                            from: "{{$hm->snmp_host_id}}",--}}
+{{--                            to: to,--}}
+{{--                            length: 250,--}}
+{{--                            label: "IP da Ligação",--}}
+{{--                            font: {align: "top"},--}}
+{{--                        });--}}
+{{--                    }--}}
+{{--                @endforeach--}}
+{{--            @endforeach--}}
 
                 // create a network
                 var container = document.getElementById("mynetwork");
@@ -207,15 +270,41 @@
 
                 network.on("selectEdge", function (params) {
                     edgeid = params.edges;
-                    @foreach($host_map as $hm)
-                    if (edgeid == "{{$hm->id}}") {
-                        document.getElementById("eventSpan").innerHTML =
-                            "<h5>Connection:</h5>"
-                            + "<br><a>From: </a>" + "{{$hm->snmp_host_id}}"
-                            + "<br><a>To: </a>" + "{{$hm->snmp_host_remote_id}}";
-                            {{--+"<br><button type='submit' name='infoconnection' value='{{$hm->id}}' class='btn btn-primary mt-2'>More</button>";--}}
+                    @foreach($host_connection as $hc)
+                        hostfrom = null;
+                        chassisfrom = null;
+                        portfrom = null;
+                        hostto = null;
+                        chassisto = null;
+                        portto = null;
+                        @foreach($host_ifjoin as $join)
+                            if("{{$hc->host_interface_id_a}}" === "{{$join->id}}"){
+                                hostfrom = "{{$join->hostname}}";
+                                chassisfrom = "{{$join->chassis_id}}";
+                                portfrom = "{{$join->portid}}";
+                            }
+                        @endforeach
+                        @foreach($host_ifjoin as $join)
+                            if("{{$hc->host_interface_id_b}}" === "{{$join->id}}"){
+                                hostto = "{{$join->hostname}}";
+                                chassisto = "{{$join->chassis_id}}";
+                                portto = "{{$join->portid}}";
+                            }
+                        @endforeach
+                        if (edgeid == "{{$hc->id}}") {
+                            document.getElementById("eventSpan").innerHTML =
+                                "<h5>Connection:</h5>"
+                                + "<br><a>From: </a>"
+                                + "<br><a>Hostname: </a>" + hostfrom
+                                + "<br><a>Chassis: </a>" + chassisfrom
+                                + "<br><a>Port: </a>" + portfrom
+                                + "<br><a>To: </a>"
+                                + "<br><a>Hostname: </a>" + hostto
+                                + "<br><a>Chassis: </a>" + chassisto
+                                + "<br><a>Port: </a>" + portto ;
+                                {{--+"<br><button type='submit' name='infoconnection' value='{{$hm->id}}' class='btn btn-primary mt-2'>More</button>";--}}
 
-                    }
+                        }
                     @endforeach
                 });
             }

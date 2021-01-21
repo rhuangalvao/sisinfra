@@ -8,18 +8,15 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Password'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('password.create')}}" class="btn btn-primary">New Password</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Password'],['variavel'=>'password'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Username</td>
-            <td>Password</td>
-            <td>Name</td>
-            <td>Description</td>
-            <td colspan = 2>Actions</td>
+            <th>Username</th>
+            <th>Password</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -44,7 +41,11 @@
         </tbody>
     </table>
     <br/>
-    {{$passwords->links()}}
+    @if(isset($dataForm))
+        {{$passwords->appends($dataForm)->links()}}
+    @else
+        {{$passwords->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

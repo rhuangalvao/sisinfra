@@ -8,16 +8,13 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Operating system'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('operating_system.create')}}" class="btn btn-primary">New Operating system</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Operating system'],['variavel'=>'operating_system'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Name</td>
-            <td>Version</td>
-            <td colspan = 2>Actions</td>
+            <th>Name</th>
+            <th>Version</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -40,7 +37,11 @@
         </tbody>
     </table>
     <br/>
-    {{$operating_systems->links()}}
+    @if(isset($dataForm))
+        {{$operating_systems->appends($dataForm)->links()}}
+    @else
+        {{$operating_systems->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

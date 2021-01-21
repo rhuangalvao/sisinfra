@@ -14,6 +14,22 @@ class DiscoveryProtocolController extends Controller
         $discovery_protocols = DiscoveryProtocol::paginate(10);
         return view('discovery_protocol.crud',compact('discovery_protocols'));
     }
+
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $discovery_protocols = DiscoveryProtocol::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('order', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $discovery_protocols = DiscoveryProtocol::paginate($dataForm['entradas']);
+        }
+        else{
+            $discovery_protocols = DiscoveryProtocol::paginate(10);
+        }
+        return view('discovery_protocol.crud',compact('discovery_protocols', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

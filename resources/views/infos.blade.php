@@ -3,7 +3,18 @@
     <title>Host</title>
 </head>
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host'])
+    <div class="row">
+        <div class="col-sm">
+            <div style="text-align: center;"><img src="{{asset('/img/uepg.png')}}" alt="UEPG" height="100"></div>
+        </div>
+        <div class="col-sm text-center">
+            <h1 class="display-4">Host</h1>
+        </div>
+        <div class="col-sm">
+            <div style="text-align: center;"><img src="{{asset('/img/nti.png')}}" alt="NTI" height="100"></div>
+        </div>
+    </div>
+    <br>
     <br>
     <div class="row">
         <div class="col-sm-8 offset-sm-2">

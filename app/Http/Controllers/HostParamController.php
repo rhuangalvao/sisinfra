@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Host;
 use App\Model\HostParam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostParamController extends Controller
 {
@@ -13,9 +14,47 @@ class HostParamController extends Controller
         return view('host_param.create',compact('host'));
     }
     public function crud(){
-        $host_params= HostParam::paginate(10);
+
+        $host_params = DB::table('host_params')
+            ->leftJoin('hosts', 'host_params.host_id', '=', 'hosts.id')
+            ->select('host_params.*', 'hosts.hostname')
+            ->paginate(10);
+//        $host_params= HostParam::paginate(10);
         $host = Host::all();
         return view('host_param.crud',compact('host_params','host'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+
+            $host_params = DB::table('host_params')
+                ->leftJoin('hosts', 'host_params.host_id', '=', 'hosts.id')
+                ->select('host_params.*', 'hosts.hostname')
+                ->where('hosts.hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_params.param_name', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_params.param_value', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//            $host_params = HostParam::
+//            where('host_id',"ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('param_name', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('param_value', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $host_params = DB::table('host_params')
+                ->leftJoin('hosts', 'host_params.host_id', '=', 'hosts.id')
+                ->select('host_params.*', 'hosts.hostname')
+                ->paginate($dataForm['entradas']);
+//            $host_params = HostParam::paginate($dataForm['entradas']);
+        }
+        else{
+            $host_params = DB::table('host_params')
+                ->leftJoin('hosts', 'host_params.host_id', '=', 'hosts.id')
+                ->select('host_params.*', 'hosts.hostname')
+                ->paginate(10);
+        }
+        $host = Host::all();
+        return view('host_param.crud',compact('host_params','host', 'dataForm'));
     }
     public function store(Request $request){
 

@@ -14,6 +14,21 @@ class ServiceGroupController extends Controller
         $service_groups = ServiceGroup::paginate(10);
         return view('service_group.crud',compact('service_groups'));
     }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $service_groups = ServiceGroup::
+            where('name',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('descr', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $service_groups = ServiceGroup::paginate($dataForm['entradas']);
+        }
+        else{
+            $service_groups = ServiceGroup::paginate(10);
+        }
+        return view('service_group.crud',compact('service_groups', 'dataForm'));
+    }
     public function store(Request $request){
 
         $request->validate([

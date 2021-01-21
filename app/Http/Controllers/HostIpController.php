@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\Host;
 use App\Model\HostIp;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostIpController extends Controller
 {
@@ -13,9 +14,55 @@ class HostIpController extends Controller
         return view('host_ip.create',compact('hosts'));
     }
     public function crud(){
-        $host_ips = HostIp::paginate(10);
+
+        $host_ips = DB::table('host_ips')
+            ->leftJoin('hosts', 'host_ips.host_id', '=', 'hosts.id')
+            ->select('host_ips.*', 'hosts.hostname')
+            ->paginate(10);
+
+//        $host_ips = HostIp::paginate(10);
         $hosts = Host::all();
         return view('host_ip.crud',compact('host_ips','hosts'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+
+            $host_ips = DB::table('host_ips')
+                ->leftJoin('hosts', 'host_ips.host_id', '=', 'hosts.id')
+                ->select('host_ips.*', 'hosts.hostname')
+                ->where('hosts.hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_ips.ip_address', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_ips.mask', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_ips.gateway', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_ips.version', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_ips.mac_address', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//            $host_ips = HostIp::
+//            where('host_id',"ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('ip_address', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('mask', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('gateway', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('version', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('mac_address', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $host_ips = DB::table('host_ips')
+                ->leftJoin('hosts', 'host_ips.host_id', '=', 'hosts.id')
+                ->select('host_ips.*', 'hosts.hostname')
+                ->paginate($dataForm['entradas']);
+//            $host_ips = HostIp::paginate($dataForm['entradas']);
+        }
+        else{
+            $host_ips = DB::table('host_ips')
+                ->leftJoin('hosts', 'host_ips.host_id', '=', 'hosts.id')
+                ->select('host_ips.*', 'hosts.hostname')
+                ->paginate(10);
+//            $host_ips = HostIp::paginate(10);
+        }
+        $hosts = Host::all();
+        return view('host_ip.crud',compact('host_ips','hosts', 'dataForm'));
     }
     public function store(Request $request){
 

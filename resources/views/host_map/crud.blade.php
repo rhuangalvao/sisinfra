@@ -8,17 +8,14 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host map'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_map.create')}}" class="btn btn-primary">New Host map</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host map'],['variavel'=>'host_map'])
     <table align="center" class="table table-striped table-active table-sm col-sm-8">
         <thead>
         <tr>
-            <td>Host</td>
-            <td>snmp_host</td>
-            <td>snmp_host_remote</td>
-            <td colspan = 2>Actions</td>
+            <th>Host</th>
+            <th>snmp_host</th>
+            <th>snmp_host_remote</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -58,7 +55,11 @@
         </tbody>
     </table>
     <br/>
-    {{$host_maps->links()}}
+    @if(isset($dataForm))
+        {{$host_maps->appends($dataForm)->links()}}
+    @else
+        {{$host_maps->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

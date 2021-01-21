@@ -8,28 +8,26 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Service instance param'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('service_instance_param.create')}}" class="btn btn-primary">New Service instance param</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Service instance param'],['variavel'=>'service_instance_param'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Service instance</td>
-            <td>Param name</td>
-            <td>Param value</td>
-            <td>Enabled</td>
-            <td colspan = 2>Actions</td>
+            <th>Service instance</th>
+            <th>Param name</th>
+            <th>Param value</th>
+            <th>Enabled</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($service_instance_params as $service_instance_param)
             <tr>
-                @foreach($service_instance as $si)
-                    @if($si->id == $service_instance_param->service_instance_id)
-                        <td>{{$si->descr}}</td>
-                    @endif
-                @endforeach
+                <td>{{$service_instance_param->descr}}</td>
+{{--                @foreach($service_instance as $si)--}}
+{{--                    @if($si->id == $service_instance_param->service_instance_id)--}}
+{{--                        <td>{{$si->descr}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$service_instance_param->param_name}}</td>
                 <td>{{$service_instance_param->param_value}}</td>
                 <td>{{$service_instance_param->enabled}}</td>
@@ -48,7 +46,11 @@
         </tbody>
     </table>
     <br/>
-    {{$service_instance_params->links()}}
+    @if(isset($dataForm))
+        {{$service_instance_params->appends($dataForm)->links()}}
+    @else
+        {{$service_instance_params->links()}}
+    @endif
 @endsection
 
 @section('footer')

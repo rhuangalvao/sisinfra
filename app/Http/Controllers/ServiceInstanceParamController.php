@@ -5,18 +5,56 @@ namespace App\Http\Controllers;
 use App\Model\ServiceInstance;
 use App\Model\ServiceInstanceParam;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ServiceInstanceParamController extends Controller
 {
     public function create(){
         $service_instance = ServiceInstance::all();
-        $service_instance = ServiceInstance::all();
-        return view('service_instance_param.create',compact('service_instance','service_instance'));
+        return view('service_instance_param.create',compact('service_instance'));
     }
     public function crud(){
-        $service_instance_params = ServiceInstanceParam::paginate(10);
+        $service_instance_params = DB::table('service_instance_params')
+            ->leftJoin('service_instances', 'service_instance_params.service_instance_id', '=', 'service_instances.id')
+            ->select('service_instance_params.*', 'service_instances.descr')
+            ->paginate(10);
+
+//        $service_instance_params = ServiceInstanceParam::paginate(10);
         $service_instance = ServiceInstance::all();
         return view('service_instance_param.crud',compact('service_instance_params', 'service_instance'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+            $service_instance_params = DB::table('service_instance_params')
+                ->leftJoin('service_instances', 'service_instance_params.service_instance_id', '=', 'service_instances.id')
+                ->select('service_instance_params.*', 'service_instances.descr')
+                ->where('service_instances.descr',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('service_instance_params.param_name', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('service_instance_params.param_value', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//            $service_instance_params = ServiceInstanceParam::
+////            where('service_instance_id',"ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('param_name', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->orWhere('param_value', "ilike", '%'.$dataForm['pesquisa'].'%')
+////                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $service_instance_params = DB::table('service_instance_params')
+                ->leftJoin('service_instances', 'service_instance_params.service_instance_id', '=', 'service_instances.id')
+                ->select('service_instance_params.*', 'service_instances.descr')
+                ->paginate($dataForm['entradas']);
+//            $service_instance_params = ServiceInstanceParam::paginate($dataForm['entradas']);
+        }
+        else{
+            $service_instance_params = DB::table('service_instance_params')
+                ->leftJoin('service_instances', 'service_instance_params.service_instance_id', '=', 'service_instances.id')
+                ->select('service_instance_params.*', 'service_instances.descr')
+                ->paginate(10);
+//            $service_instance_params = ServiceInstanceParam::paginate(10);
+        }
+        $service_instance = ServiceInstance::all();
+        return view('service_instance_param.crud',compact('service_instance_params', 'service_instance', 'dataForm'));
     }
     public function store(Request $request){
 

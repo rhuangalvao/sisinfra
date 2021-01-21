@@ -8,15 +8,12 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host status'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('host_status.create')}}" class="btn btn-primary">New Host status</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Host status'],['variavel'=>'host_status'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Status</td>
-            <td colspan = 2>Actions</td>
+            <th>Status</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +35,11 @@
         </tbody>
     </table>
     <br/>
-    {{$host_statuses->links()}}
+    @if(isset($dataForm))
+        {{$host_statuses->appends($dataForm)->links()}}
+    @else
+        {{$host_statuses->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

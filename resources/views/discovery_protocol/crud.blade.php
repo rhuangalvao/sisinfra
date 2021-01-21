@@ -8,15 +8,12 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Discovery Protocol'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('discovery_protocol.create')}}" class="btn btn-primary">New Discovery Protocol</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Discovery Protocol'],['variavel'=>'discovery_protocol'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Name</td>
-            <td colspan = 2>Actions</td>
+            <th>Name</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -38,7 +35,11 @@
         </tbody>
     </table>
     <br/>
-    {{$discovery_protocols->links()}}
+    @if(isset($dataForm))
+        {{$discovery_protocols->appends($dataForm)->links()}}
+    @else
+        {{$discovery_protocols->links()}}
+    @endif
 @endsection
 @section('footer')
     @include('footer')

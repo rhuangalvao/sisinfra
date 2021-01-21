@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Model\HostDns;
 use App\Model\Host;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostDnsController extends Controller
 {
@@ -13,9 +14,48 @@ class HostDnsController extends Controller
         return view('host_dns.create',compact('host'));
     }
     public function crud(){
-        $host_dnss = HostDns::paginate(10);
+
+        $host_dnss = DB::table('host_dns')
+            ->leftJoin('hosts', 'host_dns.host_id', '=', 'hosts.id')
+            ->select('host_dns.*', 'hosts.hostname')
+            ->paginate(10);
+//        $host_dnss = HostDns::paginate(10);
         $hosts = Host::all();
         return view('host_dns.crud',compact('host_dnss','hosts'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+
+            $host_dnss = DB::table('host_dns')
+                ->leftJoin('hosts', 'host_dns.host_id', '=', 'hosts.id')
+                ->select('host_dns.*', 'hosts.hostname')
+                ->where('hosts.hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_dns.name', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('host_dns.version', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+//            $host_dnss = HostDns::
+//            where('host_id',"ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('name', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->orWhere('version', "ilike", '%'.$dataForm['pesquisa'].'%')
+//                ->paginate($dataForm['entradas']);
+        }elseif(isset($dataForm['entradas'])){
+            $host_dnss = DB::table('host_dns')
+                ->leftJoin('hosts', 'host_dns.host_id', '=', 'hosts.id')
+                ->select('host_dns.*', 'hosts.hostname')
+                ->paginate($dataForm['entradas']);
+//            $host_dnss = HostDns::paginate($dataForm['entradas']);
+        }
+        else{
+            $host_dnss = DB::table('host_dns')
+                ->leftJoin('hosts', 'host_dns.host_id', '=', 'hosts.id')
+                ->select('host_dns.*', 'hosts.hostname')
+                ->paginate(10);
+//            $host_dnss = HostDns::paginate(10);
+        }
+        $hosts = Host::all();
+        return view('host_dns.crud',compact('host_dnss','hosts', 'dataForm'));
     }
     public function store(Request $request){
 

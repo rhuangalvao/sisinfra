@@ -13,69 +13,81 @@
     <title>Host</title>
 </head>
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Host'],['variavel'=>'host'])
-    <div class="container">
-        <div class="row">
-            <div class="col-sm">
-                <a  href="{{ route('host.create')}}" class="btn btn-primary">New Host</a>
-            </div>
-            <div class="col-sm">
-            </div>
-            <div class="col-sm">
-                <form method="post" action="{{ route('host.search') }}">
-                    @csrf
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm">
-                                <input type="text" class = "form-control " name="pesquisa" placeholder="Search Host">
-                            </div>
-                            <div class="col-sm">
-                                <button type="submit" class="btn btn-primary">Search</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+        @include('cabecalho',['tituloPagina'=>'Host'],['variavel'=>'host'])
+{{--    <div class="container">--}}
+{{--        <div class="row">--}}
+{{--            <div class="col-sm">--}}
+{{--                <a  href="{{ route('host.create')}}" class="btn btn-primary">New Host</a>--}}
+{{--            </div>--}}
+{{--            <div class="col-sm">--}}
+{{--                <form method="post" action="{{ route('host.search') }}">--}}
+{{--                    @csrf--}}
+{{--                    <div class="container">--}}
+{{--                        <div class="row">--}}
+{{--                            <div class="col-sm">--}}
+{{--                                <label>--}}
+{{--                                    Show--}}
+{{--                                    <select name="entradas">--}}
+{{--                                        <option value="10">10</option>--}}
+{{--                                        <option value="25">25</option>--}}
+{{--                                        <option value="50">50</option>--}}
+{{--                                    </select>--}}
+{{--                                    entries--}}
+{{--                                </label>--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm">--}}
+{{--                                <input type="text" class = "form-control " name="pesquisa" placeholder="Search Host">--}}
+{{--                            </div>--}}
+{{--                            <div class="col-sm">--}}
+{{--                                <button type="submit" class="btn btn-primary">Search</button>--}}
+{{--                            </div>--}}
+{{--                        </div>--}}
+{{--                    </div>--}}
+{{--                </form>--}}
+{{--            </div>--}}
+{{--        </div>--}}
+{{--    </div>--}}
     <div class="table-responsive">
     <table id="tabelafiltro" align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>OS</td>
-            <td>Type</td>
-            <td>Status</td>
-            <td>TAG</td>
-            <td>Hostname</td>
-            <td>Domain suffix</td>
-            <td>Description</td>
-            <td>Obs</td>
-            <td>Chassis id</td>
-            <td>Monitoring</td>
-            <td>Enabled</td>
-            <td>Serial Number</td>
-            <td>Vendor</td>
-            <td colspan = 2>Actions</td>
+            <th>OS</th>
+            <th>Type</th>
+            <th>Status</th>
+            <th>TAG</th>
+            <th>Hostname</th>
+            <th>Domain suffix</th>
+            <th>Description</th>
+            <th>Obs</th>
+            <th>Chassis id</th>
+            <th>Monitoring</th>
+            <th>Enabled</th>
+            <th>Serial Number</th>
+            <th>Vendor</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
         @foreach($hosts as $host)
             <tr>
-                @foreach($operating_systems as $os)
-                    @if($os->id == $host->os_id)
-                        <td>{{$os->name}}</td>
-                    @endif
-                @endforeach
-                @foreach($host_types as $ht)
-                    @if($ht->id == $host->host_type_id)
-                        <td>{{$ht->name}}</td>
-                    @endif
-                @endforeach
-                @foreach($host_status as $hs)
-                    @if($hs->id == $host->status_id)
-                        <td>{{$hs->status}}</td>
-                    @endif
-                @endforeach
+                <td>{{$host->os_name}}</td>
+{{--                @foreach($operating_systems as $os)--}}
+{{--                    @if($os->id == $host->os_id)--}}
+{{--                        <td>{{$os->name}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+                <td>{{$host->type_name}}</td>
+{{--                @foreach($host_types as $ht)--}}
+{{--                    @if($ht->id == $host->host_type_id)--}}
+{{--                        <td>{{$ht->name}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+                <td>{{$host->status}}</td>
+{{--                @foreach($host_status as $hs)--}}
+{{--                    @if($hs->id == $host->status_id)--}}
+{{--                        <td>{{$hs->status}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
                 <td>{{$host->tag}}</td>
                 <td>{{$host->hostname}}</td>
                 <td>{{$host->domain_suffix}}</td>
@@ -90,15 +102,16 @@
                 <td>{{$host->monitoring}}</td>
                 <td>{{$host->enabled}}</td>
                 <td>{{$host->serial_number}}</td>
-                @if($host->aux_vendor_id != null)
-                    @foreach($aux_vendors as $av)
-                        @if($av->id == $host->aux_vendor_id)
-                            <td>{{$av->name}}</td>
-                        @endif
-                    @endforeach
-                @else
-                    <td></td>
-                @endif
+                <td>{{$host->vendor_name}}</td>
+{{--                @if($host->aux_vendor_id != null)--}}
+{{--                    @foreach($aux_vendors as $av)--}}
+{{--                        @if($av->id == $host->aux_vendor_id)--}}
+{{--                            <td>{{$av->name}}</td>--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
+{{--                @else--}}
+{{--                    <td></td>--}}
+{{--                @endif--}}
                 <td>
                     <a href="{{ route('host.edit',$host->id)}}" class="btn btn-primary">Edit</a>
                 </td>
@@ -129,5 +142,5 @@
 <script>
     $(function () {
         $('[data-toggle="popover"]').popover()
-    })
+    });
 </script>

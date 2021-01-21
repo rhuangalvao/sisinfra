@@ -8,16 +8,13 @@
 </head>
 
 @section('content')
-    @include('cabecalho',['tituloPagina'=>'Service dependency'])
-    <div class="container offset-sm-2">
-        <a style="margin: 19px;" href="{{ route('service_dependency.create')}}" class="btn btn-primary">New Service dependency</a>
-    </div>
+    @include('cabecalho',['tituloPagina'=>'Service dependency'],['variavel'=>'service_dependency'])
     <table align="center" class="table table-striped table-active table-sm table-bordered col-sm-8">
         <thead>
         <tr>
-            <td>Service instance</td>
-            <td>Service instance dep</td>
-            <td colspan = 2>Actions</td>
+            <th>Service instance</th>
+            <th>Service instance dep</th>
+            <th colspan = 2>Actions</th>
         </tr>
         </thead>
         <tbody>
@@ -48,7 +45,11 @@
         </tbody>
     </table>
     <br/>
-    {{$service_dependencies->links()}}
+    @if(isset($dataForm))
+        {{$service_dependencies->appends($dataForm)->links()}}
+    @else
+        {{$service_dependencies->links()}}
+    @endif
 @endsection
 
 @section('footer')
