@@ -81,7 +81,18 @@ class Controller extends BaseController
         $operating_system = OperatingSystem::all();
         $host_type = HostType::all();
         $host_status = HostStatus::all();
-        $infos = $request->infohost;
-        return view('infos', compact('hosts', 'operating_system', 'host_type', 'host_status', 'infos'));
+
+        $host_connection = HostConnection::all();
+        $host_ifjoin = DB::table('hosts')
+            ->join('host_interfaces', 'hosts.id', '=', 'host_interfaces.host_id')
+            ->select('hosts.host_type_id', 'hosts.tag', 'hosts.hostname', 'hosts.chassis_id', 'host_interfaces.id', 'host_interfaces.host_id', 'host_interfaces.portid','host_interfaces.ifalias')
+            ->where('host_interfaces.host_id','<','10')
+            ->get();
+
+        $info_host = null;
+        $info_connection = null;
+        $info_host = $request->infohost;
+        $info_connection = $request->infoconnection;
+        return view('infos', compact('host_ifjoin','host_connection','hosts', 'operating_system', 'host_type', 'host_status', 'info_host','info_connection'));
     }
 }

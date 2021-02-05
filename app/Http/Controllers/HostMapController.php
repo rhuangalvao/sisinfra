@@ -6,6 +6,7 @@ use App\Model\Host;
 use App\Model\HostMap;
 use App\Model\SnmpHost;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class HostMapController extends Controller
 {
@@ -15,10 +16,45 @@ class HostMapController extends Controller
         return view('host_map.create',compact('host','snmp_host'));
     }
     public function crud(){
-        $host_maps = HostMap::paginate(10);
-        $host = Host::all();
-        $snmp_host = SnmpHost::all();
-        return view('host_map.crud',compact('host_maps','host','snmp_host'));
+        $host_maps = DB::table('host_maps')
+            ->leftJoin('hosts', 'host_maps.host_id', '=', 'hosts.id')
+            ->leftJoin('snmp_hosts', 'host_maps.snmp_host_id', '=', 'snmp_hosts.id')
+            ->leftJoin('snmp_host_remotes', 'host_maps.snmp_host_remote_id', '=', 'snmp_host_remotes.id')
+            ->select('host_maps.*', 'hosts.hostname','snmp_hosts.sysname','snmp_host_remotes.sysname as host_remote')
+            ->paginate(10);
+        return view('host_map.crud',compact('host_maps'));
+    }
+    public function search(Request $request){
+        $dataForm = $request->except('_token');
+        if (isset($dataForm['pesquisa'])){
+
+            $host_maps = DB::table('host_maps')
+                ->leftJoin('hosts', 'host_maps.host_id', '=', 'hosts.id')
+                ->leftJoin('snmp_hosts', 'host_maps.snmp_host_id', '=', 'snmp_hosts.id')
+                ->leftJoin('snmp_host_remotes', 'host_maps.snmp_host_remote_id', '=', 'snmp_host_remotes.id')
+                ->select('host_maps.*', 'hosts.hostname','snmp_hosts.sysname','snmp_host_remotes.sysname as host_remote')
+                ->where('hosts.hostname',"ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('snmp_hosts.sysname', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->orWhere('snmp_host_remotes.sysname', "ilike", '%'.$dataForm['pesquisa'].'%')
+                ->paginate($dataForm['entradas']);
+
+        }elseif(isset($dataForm['entradas'])){
+            $host_maps = DB::table('host_maps')
+                ->leftJoin('hosts', 'host_maps.host_id', '=', 'hosts.id')
+                ->leftJoin('snmp_hosts', 'host_maps.snmp_host_id', '=', 'snmp_hosts.id')
+                ->leftJoin('snmp_host_remotes', 'host_maps.snmp_host_remote_id', '=', 'snmp_host_remotes.id')
+                ->select('host_maps.*', 'hosts.hostname','snmp_hosts.sysname','snmp_host_remotes.sysname as host_remote')
+                ->paginate($dataForm['entradas']);
+        }
+        else{
+            $host_maps = DB::table('host_maps')
+                ->leftJoin('hosts', 'host_maps.host_id', '=', 'hosts.id')
+                ->leftJoin('snmp_hosts', 'host_maps.snmp_host_id', '=', 'snmp_hosts.id')
+                ->leftJoin('snmp_host_remotes', 'host_maps.snmp_host_remote_id', '=', 'snmp_host_remotes.id')
+                ->select('host_maps.*', 'hosts.hostname','snmp_hosts.sysname','snmp_host_remotes.sysname as host_remote')
+                ->paginate(10);
+        }
+        return view('host_map.crud',compact('host_maps', 'dataForm'));
     }
     public function store(Request $request){
 

@@ -296,13 +296,13 @@
                                 "<h5>Connection:</h5>"
                                 + "<br><a>From: </a>"
                                 + "<br><a>Hostname: </a>" + hostfrom
-                                + "<br><a>Chassis: </a>" + chassisfrom
-                                + "<br><a>Port: </a>" + portfrom
+                                // + "<br><a>Chassis: </a>" + chassisfrom
+                                // + "<br><a>Port: </a>" + portfrom
                                 + "<br><a>To: </a>"
                                 + "<br><a>Hostname: </a>" + hostto
-                                + "<br><a>Chassis: </a>" + chassisto
-                                + "<br><a>Port: </a>" + portto ;
-                                {{--+"<br><button type='submit' name='infoconnection' value='{{$hm->id}}' class='btn btn-primary mt-2'>More</button>";--}}
+                                // + "<br><a>Chassis: </a>" + chassisto
+                                // + "<br><a>Port: </a>" + portto
+                                +"<br><button type='submit' name='infoconnection' value='{{$hc->id}}' class='btn btn-primary mt-2'>More</button>";
 
                         }
                     @endforeach

@@ -217,4 +217,3 @@ Route::get('/','Controller@welcome')->name('/');
 Route::post('/search', 'Controller@search')->name('search');
 Route::post('/infos', 'Controller@infos')->name('infos');
 
-

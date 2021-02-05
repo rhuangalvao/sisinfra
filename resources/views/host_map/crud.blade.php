@@ -21,25 +21,28 @@
         <tbody>
         @foreach($host_maps as $host_map)
             <tr>
-                @foreach($host as $h)
-                    @if($h->id == $host_map->host_id)
-                        <td>{{$h->hostname}}</td>
-                    @endif
-                @endforeach
-                @foreach($snmp_host as $sh)
-                    @if($sh->id == $host_map->snmp_host_id)
-                        <td>{{$sh->hostname}}</td>
-                    @endif
-                @endforeach
-                @if($host_map->snmp_host_remote_id != null)
-                    @foreach($snmp_host as $sh)
-                        @if($sh->id == $host_map->snmp_host_remote_id)
-                                <td>{{$sh->hostname}}</td>
-                        @endif
-                    @endforeach
-                @else
-                    <td></td>
-                @endif
+                <td>({{$host_map->host_id}}){{$host_map->hostname}}</td>
+                <td>({{$host_map->snmp_host_id}}){{$host_map->sysname}}</td>
+                <td>({{$host_map->snmp_host_remote_id}}){{$host_map->host_remote}}</td>
+{{--                @foreach($host as $h)--}}
+{{--                    @if($h->id == $host_map->host_id)--}}
+{{--                        <td>{{$h->hostname}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--                @foreach($snmp_host as $sh)--}}
+{{--                    @if($sh->id == $host_map->snmp_host_id)--}}
+{{--                        <td>{{$sh->hostname}}</td>--}}
+{{--                    @endif--}}
+{{--                @endforeach--}}
+{{--                @if($host_map->snmp_host_remote_id != null)--}}
+{{--                    @foreach($snmp_host as $sh)--}}
+{{--                        @if($sh->id == $host_map->snmp_host_remote_id)--}}
+{{--                                <td>{{$sh->hostname}}</td>--}}
+{{--                        @endif--}}
+{{--                    @endforeach--}}
+{{--                @else--}}
+{{--                    <td></td>--}}
+{{--                @endif--}}
                 <td>
                     <a href="{{ route('host_map.edit',$host_map->id)}}" class="btn btn-primary">Edit</a>
                 </td>
